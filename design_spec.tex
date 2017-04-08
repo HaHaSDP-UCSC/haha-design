@@ -1,0 +1,1127 @@
+\documentclass[journal]{IEEEtran}
+%
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[journal]{../sty/IEEEtran}
+
+
+\usepackage{listings}
+
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/pkg/ifpdf
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+%\usepackage{cite}
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of the IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off
+% such as if a citation ever needs to be enclosed in parenthesis.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 5.0 (2009-03-20) and later if using hyperref.sty.
+% The latest version can be obtained at:
+% http://www.ctan.org/pkg/cite
+% The documentation is contained in the cite.sty file itself.
+
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation
+% can be obtained at: 
+% http://www.ctan.org/pkg/graphicx
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found at:
+% http://www.ctan.org/pkg/epslatex
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics.
+%
+% Note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/amsmath
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/pkg/algorithms
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/pkg/algorithmicx
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/array
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\ifCLASSOPTIONcompsoc
+%  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+%\else
+%  \usepackage[caption=false,font=footnotesize]{subfig}
+%\fi
+% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
+% for subfigure.sty, the latter of which is no longer maintained and is
+% incompatible with some LaTeX packages including fixltx2e. However,
+% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
+% which will override IEEEtran.cls' handling of captions and this will result
+% in non-IEEE style figure/table captions. To prevent this problem, be sure
+% and invoke subfig.sty's "caption=false" package option (available since
+% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
+% handling of captions.
+% Note that the Computer Society format requires a larger sans serif font
+% than the serif footnote size font used in traditional IEEE formatting
+% and thus the need to invoke different subfig.sty package options depending
+% on whether compsoc mode has been enabled.
+%
+% The latest version and documentation of subfig.sty can be obtained at:
+% http://www.ctan.org/pkg/subfig
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure.
+% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
+% corrections already built into the system in which case a warning will
+% be issued if an attempt is made to load fixltx2e.sty as it is no longer
+% needed.
+% The latest version and documentation can be found at:
+% http://www.ctan.org/pkg/fixltx2e
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/stfloats
+% Do not use the stfloats baselinefloat ability as the IEEE does not allow
+% \baselineskip to stretch. Authors submitting work to the IEEE should note
+% that the IEEE rarely uses double column equations and that authors should try
+% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
+% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
+% such ways.
+% Do not attempt to use stfloats with fixltx2e as they are incompatible.
+% Instead, use Morten Hogholm'a dblfloatfix which combines the features
+% of both fixltx2e and stfloats:
+%
+% \usepackage{dblfloatfix}
+% The latest version can be found at:
+% http://www.ctan.org/pkg/dblfloatfix
+
+
+
+
+%\ifCLASSOPTIONcaptionsoff
+%  \usepackage[nomarkers]{endfloat}
+% \let\MYoriglatexcaption\caption
+% \renewcommand{\caption}[2][\relax]{\MYoriglatexcaption[#2]{#2}}
+%\fi
+% endfloat.sty was written by James Darrell McCauley, Jeff Goldberg and 
+% Axel Sommerfeldt. This package may be useful when used in conjunction with 
+% IEEEtran.cls'  captionsoff option. Some IEEE journals/societies require that
+% submissions have lists of figures/tables at the end of the paper and that
+% figures/tables without any captions are placed on a page by themselves at
+% the end of the document. If needed, the draftcls IEEEtran class option or
+% \CLASSINPUTbaselinestretch interface can be used to increase the line
+% spacing as well. Be sure and use the nomarkers option of endfloat to
+% prevent endfloat from "marking" where the figures would have been placed
+% in the text. The two hack lines of code above are a slight modification of
+% that suggested by in the endfloat docs (section 8.4.1) to ensure that
+% the full captions always appear in the list of figures/tables - even if
+% the user used the short optional argument of \caption[]{}.
+% IEEE papers do not typically make use of \caption[]'s optional argument,
+% so this should not be an issue. A similar trick can be used to disable
+% captions of packages such as subfig.sty that lack options to turn off
+% the subcaptions:
+% For subfig.sty:
+% \let\MYorigsubfloat\subfloat
+% \renewcommand{\subfloat}[2][\relax]{\MYorigsubfloat[]{#2}}
+% However, the above trick will not work if both optional arguments of
+% the \subfloat command are used. Furthermore, there needs to be a
+% description of each subfigure *somewhere* and endfloat does not add
+% subfigure captions to its list of figures. Thus, the best approach is to
+% avoid the use of subfigure captions (many IEEE journals avoid them anyway)
+% and instead reference/explain all the subfigures within the main caption.
+% The latest version of endfloat.sty and its documentation can obtained at:
+% http://www.ctan.org/pkg/endfloat
+%
+% The IEEEtran \ifCLASSOPTIONcaptionsoff conditional can also be used
+% later in the document, say, to conditionally put the References on a 
+% page by themselves.
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/url
+% Basically, \url{my_url_here}.
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
+\title{
+Home Assistance Help Alert (HaHa) Project \\
+Design Specification
+}
+%
+%
+% author names and IEEE memberships
+% note positions of commas and nonbreaking spaces ( ~ ) LaTeX will not break
+% a structure at a ~ so this keeps an author's name from being broken across
+% two lines.
+% use \thanks{} to gain access to the first footnote area
+% a separate \thanks must be used for each paragraph as LaTeX2e's \thanks
+% was not built to handle multiple paragraphs
+%
+
+\author{Jamielynne~Batugo, Marco~Carmona, Conrad~Christensen, Jake~Lee, Kevin~Lee, Brian~Nichols, Jesus~Soto, August~Valera, and Jeffrey~Zheng% <-this % stops a space
+\thanks{Jamielynne~Batugo, Marco~Carmona, Conrad~Christensen, Jake~Lee, Kevin~Lee, Brian~Nichols, Jesus~Soto, August~Valera, and Jeffrey~Zheng are students at the University of California, Santa Cruz}% <-this % stops a space
+\thanks{Ali Adabi, Patrick Mantey, Stephen Petersen, and Anujan Varma are professors at the University of California, Santa Cruz}% <-this % stops a space
+\thanks{Manuscript received \today}}
+
+% note the % following the last \IEEEmembership and also \thanks - 
+% these prevent an unwanted space from occurring between the last author name
+% and the end of the author line. i.e., if you had this:
+% 
+% \author{....lastname \thanks{...} \thanks{...} }
+%                     ^------------^------------^----Do not want these spaces!
+%
+% a space would be appended to the last name and could cause every name on that
+% line to be shifted left slightly. This is one of those "LaTeX things". For
+% instance, "\textbf{A} \textbf{B}" will typeset as "A B" not "AB". To get
+% "AB" then you have to do: "\textbf{A}\textbf{B}"
+% \thanks is no different in this regard, so shield the last } of each \thanks
+% that ends a line with a % and do not let a space in before the next \thanks.
+% Spaces after \IEEEmembership other than the last one are OK (and needed) as
+% you are supposed to have spaces between the names. For what it is worth,
+% this is a minor point as most people would not even notice if the said evil
+% space somehow managed to creep in.
+
+
+
+% The paper headers
+\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
+{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
+% The only time the second header will appear is for the odd numbered pages
+% after the title page when using the twoside option.
+% 
+% *** Note that you probably will NOT want to include the author's ***
+% *** name in the headers of peer review papers.                   ***
+% You can use \ifCLASSOPTIONpeerreview for conditional compilation here if
+% you desire.
+
+
+
+
+% If you want to put a publisher's ID mark on the page you can do it like
+% this:
+%\IEEEpubid{0000--0000/00\$00.00~\copyright~2015 IEEE}
+% Remember, if you use this you must call \IEEEpubidadjcol in the second
+% column for its text to clear the IEEEpubid mark.
+
+
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+
+
+% make the title area
+\maketitle
+
+% As a general rule, do not put math, special symbols or citations
+% in the abstract or keywords.
+\begin{abstract}
+The abstract goes here.
+\end{abstract}
+
+% Note that keywords are not normally used for peerreview papers.
+\begin{IEEEkeywords}
+IEEE, IEEEtran, journal, \LaTeX, paper, template.
+\end{IEEEkeywords}
+
+
+
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+
+\section{Introduction}
+\IEEEPARstart{T}{he} Home Assistance Help Alert system is composed of a base station and a wirelessly connected button.  The base station is wirelessly connected to other base stations to facilitate long-range communications over a mesh network, in order to forgo the requirement of having a pre-existing communications infrastructure.
+
+\subsection{Motivation}
+One of the primary principles driving this project is cost.  It needs be affordable and without subscription fees.  As a result, the hardware has been chosen primarily to comply with this cost constraint, which in turn required a sizable portion of Winter quarter to be dedicated in researching different hardware platforms.
+
+\subsection{Objectives}
+The fundamental idea behind the Home Assistance Help Alert System is to provide an affordable means of protecting the health, welfare, and safety of elderly people through an active ad-hoc wireless network estimated to have a working range of 300 feet, specifically for residents of the De Anza Santa Cruz Mobile Home Park.  The final design should consider environmental conditions of the location (interference, transmission range) and consist of parts which can be obtained or reproduced by a third party at scale.  The final design must also be affordable and have a form factor satisfactory to the end user.  A detailed design document shall be made publicly available for non-profit entities who would like to expand upon the project.
+
+\section{Hardware Selection}
+
+\subsection{Station}
+
+\subsubsection{Microcontroller}
+
+TODO: Missing table
+
+TODO: Missing figure
+
+\subsubsection{Base Station Interconnect}
+
+Wireless interconnection is a crucial component governing the performance of our system.  A communication link between the button and the base station allows for a help alert signal to be transmitted locally in a small home environment, while the link(s) between multiple base stations allows the signal to propagate further through a larger neighborhood.
+
+TODO: Missing Table
+
+Selection in broadcast frequency considers the limitations of transmitted power as well as form factors of potential antennas.  FCC regulations described in Title 47 Part 15 dictate the limitations of low-power, non-licensed, signal transmissions in the United States air space.  While most frequency bands are very limited for public use, there are several bands which are set aside as free for anyone to use under specific constraints; in comparison, broadcasts in “free” frequencies are allowed much greater transmission power to their restricted counterparts.  Additionally, electromagnetic waves are governed by an inverse relation between its frequency and length; a wave of increasing frequency has a decreasing wavelength and vice versa.  As a rule of thumb, an antenna’s size grows as the wavelength is increased for our signal of interest. Higher frequency signals also tend to have channels with larger bandwidths, allowing for more data to be sent with each transmission.  Due to the simple nature of the application, the high data rate is not critical.
+
+Communication between the button and base station is projected to be at least 50 feet, while distances between base stations should be able to reach at least 300 meters (approximately 1000 feet).  To meet these specifications while keeping within FCC regulations, the “free” frequency bands will be used. Two of the most popular frequency bands include the 915 MHz band and the 2.4 GHz band.
+
+The \textbf{2.4 GHz frequency band} will be used for the button-to-base communication. This band is hugely populated by many mainstream applications like WiFi and Bluetooth, but the small distance between the button and base will hopefully not be heavily affected by other traffic. Additionally, antennas in the 2.4 GHz range can be made compact, allowing the button to made into a small form factor.
+
+The \textbf{915 MHz frequency band} will be used for base-to-base communications.  Antennas in this band will generally be slightly larger than the corresponding 2.4 GHz antennas, but because base stations are designed to be stationary in a person’s home, antenna size is no longer a limiting factor.  Furthermore, air space in the 915 MHz band is not as congested to its 2.4 GHz counterpart so the reduction in potential interference allows for longer transmissions to be more attainable.
+
+TODO: Missing table
+
+Network Protocol Selection: DigiMesh
+
+DigiMesh features the following:
+\begin{itemize}
+\item Self-healing: any node may enter or leave the network at any time without causing the network as a whole to fail. 
+\item Peer-to-peer architecture: no hierarchy and no parent-child relationships are needed.
+\item Quiet Protocol: routing overhead will be reduced by using a reactive protocol similar to AODV. 
+\item Route Discovery: rather than maintaining a network map, routes will be discovered and created only when needed. 
+\item Selective acknowledgments: only the destination node will reply to route requests.
+\item Reliable delivery: reliable delivery of data is accomplished by means of acknowledgements. 
+\item Sleep Modes: low power sleep modes with synchronized wake up are supported, with variable sleep and wake up times.
+\end{itemize}
+
+The DigiMesh protocol is a proprietary protocol and uses a variant of the AODV routing algorithm. Routing tables are built only for the immediate destinations a node has a need for.  Like wirelessHART, all nodes can be routers and have the option to sleep and wake on a synchronized schedule[6]. 
+
+Routers for the network are determined as needed which results in routing table entries only for those routes in use. Unlike the other protocols there is no central coordinator and synchronization is accomplished through an election process.  Routing to nodes not directly connected to the sending node is accomplished by sending to destination specified in the routing table, which if does not exist the route is discovered through AODV and stored. 
+
+If a packet on its way to a destination encounters a node that was present in the routing table but no longer is failing at the time of sending, an AODV discovery is initiated and if the correct route if found through an alternate path the routing tables of all affected nodes will be updated and the packet will be delivered[6].  All packets are acknowledged with messages sent to the receiver.
+
+Because every node has the ability to be a sleeping node power can be saved in between routed packets[6].  AODV discoveries are only initiated when needed and so additional network traffic is not present.  This feature also presents a limitation causing high latency when changing network conditions cause routes to be invalidated and rediscovered. It also affects network throughput by limiting the amount of packets that can be sent when routes are not known.
+
+Digi International, the company behind DigiMesh claims that networks with around 500 nodes are possible and within the limitations of the standard.  Due to our limited network traffic needs this limit should not be a concern.  Any latency introduced by route discoveries on large networks would not be a concern because the time constraint for our product’s users is measured in minutes, and the network delay introduced being measured in hundreds of milliseconds.
+
+The power consumption of the Digi modules can be reduced by configuring the routing nodes to be sleeping.  This setting is configurable and each device will be synchronized to a automatically elected time coordinating node.  With our network measuring user response time in minutes, a sleeping schedule of 1/20 or 1/30 seconds would not likely cause problems.  Sleeping for these time scales would increase runtime by a nonlinear inverse of the fraction. Our estimates place a 1/20 seconds schedule at decreasing power by 57%.
+
+The DigiMesh protocol, while proprietary, meets all the requirements for our client device communication.  With claimed scalability to 500+ nodes it will provide the scalability we intend to support.  The 900 [MHz] frequency range is expected to provide the needed coverage range and allow for a network of connected routing-capable and self-healing end nodes to provide maximum coverage  by allowing distant end nodes to connect while within range of at least a single node.
+
+\subsection{Button}
+
+\subsubsection{Functional Considerations}
+The main design requirement of the button is fairly simple: to allow a user to press a button which will transmit a distress signal to a paired base station.  However, this signal should only be sent when the button is deliberately pressed or an accelerometer reads dangerous levels, and the button should have functionality to cancel this distress call fairly easily.  Aside from user input, distinct feedback is important in user interactive products and the button should relay useful information to/from the wearer via LED indicators, vibration, and/or other forms of low-power notification.  Price is also an important factor involved in the design of this button, and while peripherals like USB connectivity and more sophisticated energy storage solutions could improve user ease-of-use, additional features will be omitted until later prototype models.  The form factor must also be as small as possible, putting limits on battery, board, and antenna sizes.  As the brains of the button, we hunted for a low-powered, Bluetooth functional microcontroller to meet these functional requirements.
+
+\subsubsection{Microcontroller}
+Due to our desires to use Bluetooth Low Energy (BLE) and to accurately communicate ‘HELP’/’CANCEL’ signals between button and base-station, we selected a microcontroller that would optimize our size used, cost, and power efficiency.
+
+TODO: Missing table
+
+TODO: Missing figure
+
+The values given for average power consumption are based on a protocol initially agreed upon by our group, and average powers are presented as rough estimates for the power used by the button as a whole.  The maximum energy stored in a standard 3V coin cell battery is 1000mAh, which constrains us to a power budget of 3000 mWh/battery at most.  While these microcontrollers have similar characteristics of operation, the most power and cost efficient solution is the ST BlueNRG-1, so we decided to explore further button development with it.
+
+\section{General Specifications}
+
+\subsection{Evaluation of Available Components}
+
+\subsubsection{Button Microcontroller}
+
+Hardware: STMicroelectronics BlueNRG-1
+
+\begin{itemize}
+\item Core and Memory
+\begin{itemize}
+\item 16 or 32 MHz ARM Cortex-M0
+\item 160 KB Flash
+\item 24 KB RAM with retention (two 12 KB
+\item banks)
+\end{itemize}
+\item Bluetooth Low Energy Radio Features
+\begin{itemize}
+\item Bluetooth specification compliant master,
+\item slave and multiple roles simultaneously,
+\item single-mode Bluetooth low energy system-on-chip
+\item Battery voltage monitor and temperature sensor
+\end{itemize}
+\item Power
+\begin{itemize}
+\item Operating supply voltage: from 1.7 to 3.6 V
+\item Integrated linear regulator and DC-DC stepdown converter
+\item Operating temperature range: -40 °C to 105°C
+\item Down to 1 µA current consumption with active BLE stack (sleep mode) 
+\end{itemize}
+\item Interfaces
+\begin{itemize}
+\item 1 x UART interface
+\item 1 x SPI; 2 x I2C interface
+\item 14 or 15 GPIO
+\item 2 x multifunction timer
+\item 10-bit ADC
+\item Watchdog and RTC
+\item DMA controller
+\item PDM stream processor
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Base Station Microcontroller}
+
+Hardware: Atmel SAMB11
+
+\begin{itemize}
+\item Core and Memory
+\begin{itemize}
+\item 26 MHz ARM® Cortex®-M0+ core
+\item 256 KB Stacked Flash memory
+\item 128 KB Embedded ROM
+128 KB Embedded RAM
+\end{itemize}
+\item Low Power Consumption and Operating Voltage Ranges
+\begin{itemize}
+\item Nine low-power modes to provide power optimization based on application requirements
+\item Typical Rx/Tx Current (DC/DC Enabled): 6.8/6.1 mA
+\item 1.1μA sleep current (8K RAM retention and RTC running)
+\item 3.0mA peak TX current (0dBm, 3.6V)
+\item 4.2mA peak RX current (3.6V, -93dBm sensitivity)
+\item Bypass Voltage: 1.71V to 3.6V
+\item DCDC Converter Buck Configuration: 2.1V to 4.2V
+\item DCDC Converter Boost Configuration: 0.9V to 1.795V
+\item Analog modules
+\item 11-bit 4 Channel Analog-to-Digital (ADC)
+\item 6-bit High Speed Analog Comparator (CMP)
+\end{itemize}
+\item Bluetooth Low Energy Radio Features
+\begin{itemize}
+\item 2.4 GHz Bluetooth Low Energy version 4.2 Compliant
+\item Typical Receiver Sensitivity (BLE) = -95 dBm
+\item Programmable Transmitter Output Power up to +3.5 dBm
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Base Station Interconnect}
+
+Hardware: Digi XBee-PRO 900HP RF Module
+\begin{itemize}
+\item Transceiver Info
+\begin{itemize}
+\item North American ISM band from 902 to 928 MHz
+\item 3.3 V UART communication
+\item DigiMesh Mesh Network protocol with self-healing, auto-configuration of nodes, and synchronized sleep.
+\end{itemize}
+\item Spectrum and Data Rates
+\begin{itemize}
+\item RF Data Rate	10 Kbps or 200 Kbps
+\item Indoor/Urban Range	10 Kbps: up to 2000 ft (610 m); 200 Kbps: up to 1000 ft (305 m)
+\item Outdoor/ Line-Of-Sight Range	10 Kbps: up to 9 miles (14 km); 200 Kbps: up to 4 miles (6.5 km) ( w/ 2.1 dB dipole antennas)
+\item Transmit Power	Up to 24 dBm (250 mW) software selectable
+\item Receiver Sensitivity	-101 dBm @ 200 Kbps, -110 dBm @ 10 Kbps
+\end{itemize}
+\item Current Consumption
+\begin{itemize}
+\item SLEEP = 2.5µA
+\item IDLE/RX\_ON = 29mA typical at 3.3V (35mA max)
+\item BUSY\_TX = 215mA typical for +24dBm, 250mW (290mA max)
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Display}
+Crystalfontz CFAH1604A-TMI-JT Character LCD Module
+16x4 Parallel Character LCD with backlight
+
+\subsubsection{Buttons}
+TI LM8330 Keypad IC
+
+\subsubsection{Power Budget}
+
+TODO: Missing table
+
+This power budget is derived for a typical use case of the base station.  Each component is detailed with its individual power consumption, and in combination with the estimated on-time in an hour’s time, we estimate the total energy consumed by the system in one hour.  The peripherals needed for user interface can be seen as the most power hungry elements on the base station.  However, since our system is designed as a safety product that should hopefully go off no more than once every 6 months, the LED blinkers and audio speaker should contribute minimally to the power usage in the grand scheme of things.  The LCD display will most likely be used more often the other peripherals, as it will display more useful information, such as status updates and neighbor information.  Beyond the initial setup, the LCD should also not be in use for most of the time.
+
+Given the on-time percentage depicted in the table, the system uses about 128.5 mWh of energy in one hour. Assuming a 3000 mAh rechargeable backup battery, the base station can last about 23.3 hours without wall power, just shy of a full day. Because our percentages are generously estimated and software functionality has not yet been optimized for maximum power savings, an even better battery life could be achieved in future revisions.
+
+TODO: Missing table
+
+Our button power budget gives us a quantitative tool to better understand its energy storage requirements.  The values above are based off of theoretically agreed-upon (by the group) and reasonable estimates of a typical user case.
+
+\section{System Overview}
+
+\subsection{Product Perspective}
+The base station and button will be separate hardware devices which facilitate the communication of a “help request” when a user presses the button on either the base station or the remote button.  The base station will contain a priority list of contacts who will be contacted in an order set by the user.  Alerted users will respond to the help request through use of their own base station.  If a user does not respond to a help request, the next person on the list is contacted.  If none of the people on the help list respond, any station in the nearby vicinity is contacted. 
+
+\subsubsection{Design Method}
+The software design portion of the product will utilize the C-programming language.
+
+\subsubsection{User Interfaces}
+The user of this product will interface with the base station through a 16x4 LCD display and buttons located on the base station.  The remote button will feature one button (or possibly a button + switch) with LED indicators for periodic synchronization pulses, confirmations that the “HELP” message has been received, and to confirm another user has answered the distress call.
+
+\subsubsection{Hardware Interfaces}
+The hardware of the base station and the remote button will be designed and developed by the team.
+
+\subsubsection{Operations}
+The user of the base station will be required to setup a priority contact list.  The system will have the option of scanning for all available network nodes which will display the name of nearby users and their node number.  Configuring of a user to contact can also be done via a pre-shared ID number which each base station user can obtain through the user interface.
+
+When a help request is sent, the initiating user will be able to cancel the request by long-pressing the help button either on the base station or remote button.
+
+\subsection{Product Functions}
+
+\begin{LaTeXdescription}
+\item[Send Help Request] This function will send a help request beginning with the first base station in the user’s contact list.  Functionality for this will be present on both the remote button and the base station.
+\item[Cancel Help Request] This function cancels a help request alert.  In the event a user has already responded to a help request, an additional signal will be sent to the responder’s box informing them of the cancelled request.
+\item[Setup Contact List] This set of functions will facilitate configuring the user’s contact list.  Users can either enter ID numbers of the neighbors they wish to add or they can scan the network for them.
+\item[Scan Network] This function scans the network for available users and provides user contact details.  It will interface directly with the Setup Contact List.
+\end{LaTeXdescription}
+
+\subsubsection{Software}
+
+\subsubsection{Application Networking Protocols}
+
+This section is an overview of the networking protocols which must be determined.  Specific information such as packet design will be fleshed out in the next section, System Architecture.
+
+\begin{itemize}
+\item Button to Box
+\begin{itemize}
+\item Base station reads button battery level using Bluetooth API. (performed frequently)
+\item Button activates “Help Alert” state on the base station. (button pressed for 3 sec)
+\item Button activates “Immediate Help Alert” state on the base station. (button pressed for 6 sec)
+\end{itemize}
+\item Base Station to Base Station
+\begin{itemize}
+\item Discovering neighbors. (broadcast)
+\item Sends help request to specific and possibly distant neighbor. (ACK’d)
+\item Sends help alert received signal back to requester. (broadcast)
+\item Sends help alert resolved signal to all neighbors requested. (broadcast)
+\end{itemize}
+\end{itemize}
+
+\subsection{System Diagrams}
+
+\subsubsection{System Block Diagram}
+
+TODO: Missing figure
+
+\subsection{Network Simulation}
+
+NS3 is a discrete-event network simulator. A discrete-event are those events which occur in a sequence over time. Each event occurs at a particular instant in time and marks a change of state in the system. NS3 facilitates the defining of this system and mechanisms to view and record the state of every mechanism within the system.
+
+Our goal with NS3 is to simulate the network as closely as possible to the DigiMesh protocol using the AODV algorithm as a basis. Packet broadcasts that approximate our own application layer packets will be configured and the number of nodes scaled such that the network performance can be analyzed as the number of nodes or amount of network traffic increases. This will allow us to realize with some level of certainty the level at which our network will be deployable. It also will provide us with a basis for any future troubleshooting of the network that we might encounter a need for.
+
+In its current form, the simulator creates a configurable number of nodes a random x-y-z distance apart and has the two furthest nodes communicate packets. The communications regarding the AODV algorithm are traced and logged to the screen along with the communication packets. As state above, this will be modified in the coming quarter to be more representative of our system.
+
+Below is a sample output:
+
+\begin{lstlisting}
+Creating 10 nodes 100 m apart.
+x=80.7772, y=45.6102, z=0.458782
+x=48.6495, y=72.3938, z=0.448497
+x=22.2484, y=53.5658, z=0.513956
+x=26.1946, y=19.7807, z=0.446207
+x=68.3362, y=54.6383, z=0.830643
+x=92.0653, y=28.9132, z=0.773134
+x=54.4156, y=93.372, z=0.662756
+x=14.7075, y=19.3661, z=0.662903
+x=46.9031, y=68.3726, z=0.521647
+x=53.8059, y=83.5943, z=0.0441295
+Starting simulation for 10 s ...
+[node 0] Starting at time 36ms
+[node 1] Starting at time 32ms
+[node 2] Starting at time 73ms
+[node 3] Starting at time 53ms
+[node 4] Starting at time 95ms
+[node 5] Starting at time 95ms
+[node 6] Starting at time 99ms
+[node 7] Starting at time 22ms
+[node 8] Starting at time 11ms
+[node 9] Starting at time 27ms
+PING  10.0.0.10 56(84) bytes of data.
+[node 0] Valid Route not found
+[node 0] Send RREQ with id 1 to socket
+[node 6] Starting at time 99ms
+[node 7] Starting at time 22ms
+[node 8] Starting at time 11ms
+[node 9] Starting at time 27ms
+PING  10.0.0.10 56(84) bytes of data.
+[node 0] Valid Route not found
+[node 0] Send RREQ with id 1 to socket
+on 10.0.0.10
+[node 9] AODV node 0x1bf5760 received a AODV packet from 10.0.0.1 to 10.0.0.10
+[node 9] Send reply since I am the destination
+[node 9] Exist route to 10.0.0.1 from interface 10.0.0.10
+[node 9] Updating VALID route
+[node 9] Updating VALID route
+\end{lstlisting}
+
+\section{System Architecture}
+
+\subsection{Software}
+
+The button and base station are paired together to form a master/slave relationship where the button is the slave and the base station the master.  The button transmits signals to the base station in the form of packets.  After receiving a packet, the base station processes the information accordingly to either forward the message to other base stations or back to the button.  The button is usually in sleep mode and only wakes up if a button event occurs.  The following cases are envisioned requirements to be fulfilled by the respective hardware component’s libraries.
+
+\subsubsection{Button}
+
+\begin{LaTeXdescription}
+\item[Case 1]:  Initial connection established between button and base station.
+\begin{itemize}
+\item The button device is initially in standby mode waiting to be paired.  The button is pressed on the base station to establish the initial connection process.  The button on the button device is then pressed and held for a several seconds until a message appears on the base station confirming successful connection.  This initial process only occurs once when a single button device is registered to a base station.
+\end{itemize}
+\item[Case 2]:  The button is pressed within range of the base station.
+\begin{itemize}
+\item The button can either send a help alert signal or cancel a help alert packet.
+\item If the button is pressed and held down for 3 seconds, it will transmit a help alert packet to the base station.  After acknowledging a help alert packet was received, the base station will transmit the help alert to the contacts listed in the requester’s network list.  If the first person on the list does not respond within a certain timeframe, it will timeout and go to the next contact on the list.  If no one on the list responds, then the packet is sent to additional neighbors.  If none of these additional neighbors respond, the packet is then sent through a certain number of network hops which will be calculated according to the density of base stations existing base stations.  If no one still responds, then the packet is sent through the entire network of base stations as a final pass.
+\item If the button is pressed 3 times consecutively, then it will transmit a cancellation of the help request packet.  After receiving and acknowledging this type of packet was indeed received, it will cancel the help request.  There will be a help request cancellation message displayed on the base station.
+\end{itemize}
+\item[Case 3]:  The button is pressed when out of range of the base station.
+\begin{itemize}
+\item If the button is out of range of the base station, it will disconnect and won’t be able to transmit or receive any packets.  Once it is back within range of the base station, it will automatically connect to it and a successful connection message will be displayed on the base station.
+\end{itemize}
+\item[Case 4]:  The button is not pressed but wakes up to send notifications to the base stations within range.
+\begin{itemize}
+\item The base station continually polls information from the button.  The percentage of the button’s battery life is polled by the base station for a given amount of time.  Another query occurs every 6 hours to determine if the button is still connected to the base station.  If base station does not receive a signal from the button within 12 hours, it will notify the user there is an issue with the button by displaying this information on the base station.
+\item When the battery is drained under a certain percentage, it would notify the user the battery is low.  A message will be displayed on the base station informing the user to replace the button battery.  The LED on the button will also become a solid red color to signal the low battery life and it will eventually begin blinking if the battery life is critically low and in need of immediate replacement.
+\end{itemize}
+\item[Case 5]:  The button is not pressed but wakes up to send notifications to base stations not within range.
+\begin{itemize}
+\item Same conditions as Case 3.
+\end{itemize}
+\end{LaTeXdescription}
+
+\subsubsection{Base Station}
+
+TODO: Missing UML class diagram
+
+Application Modules
+As can be seen by the UML layout above, our application will be a series of modules meant to interconnect and provide the needed functionality. By creating modules for each portion of software it will be possible for modifications to be easily implemented by replacing the relevant modules. This project is being developed as an open-source project and as such it is our endeavor to allow modifying the system easy and straightforward.
+
+Chief amongst this modularity is the “network device” layer that we are developing to utilize a Digi XBee module. This layer and its modules will be responsible for receiving data in the form of a character string from the upper application and converting it as necessary to be sent as an XBee network frame. On the receiving end it will do the reverse operation and provide the upper layer with a character string. In the event that a different transceiver wished to be used, creating and implementing similar functions would allow the majority of the application layer to remain unmodified.
+
+User Interface
+The base station design is motivated by two primary goals: (1) easy and intuitive to use by elderly people in emergency situations, and (2) composed of inexpensive components to support wide adoption by the community.  These goals are somewhat contradictory: inexpensive components are often the most difficult to work with and better components are more expensive which will drive up the overall cost of the system.  Our sponsor, Professor Emeritus Don Wiberg, has given us a soft limit of approximately \$50 for the entire system’s components (not including packaging), which greatly limits which components are available for our project.
+
+Thus, it is our decision to make the base station’s interface as easy to use as possible, making it critical the user interface software be as simple as possible.  This requires minimizing the amount of input the user can provide, making it immediately obvious what is expected of them.  This has the additional effect of minimizing our state machine, which should make programming the device much easier.
+
+The base station will also be equipped with 5-6 buttons, which will serve the following purposes:
+
+\begin{LaTeXdescription}
+\item[Power] Turns the device on and off
+\item[Up] Move up in a list of menu items
+\item[Down] Move down in a list of menu items
+\item[Left/Back/Cancel] Cancel action and move back in the tree of menus
+\item[Right/Forward/Select] Select the current menu item at the top of the screen and move forward in the tree of menus
+\item[Help Request (Optional)] Trigger the emergency request system, performing the same functionality as pressing your Bluetooth button
+\end{LaTeXdescription}
+
+The LCD screen shall display a list of menu items for the current view, in standard operation.  These menu items can be thought of as (possibly selectable) options which the user can place their cursor on.  In the system, the cursor, or “currently selected item”, is the topmost item in the list.  Below the cursor is a variable length of other viable options which can be scrolled through using the up and down buttons.  Moving your cursor shifts the complete list up or down one space and the lists have currently been configured to wrap around at the end (but can be easily configured to not do so).  If the cursor is selectable, then the last character of the “it’s” line is the “>” character, to signify a right button press will select that item.  The rest of the items will have similar indicators as their last characters; the dash “-” character signifies the item is a parent of several submenus (example:  User Info has children {User Port, User Name, User Address, User Phone}), the tilde “~” character signifies the item performs some other operation such as deleting an entry from the contacts list.  The back arrow will navigate to the current item’s parent and exit the existing submenu.
+
+Network Application Layer
+The Application Layer between base station communications has several different commands which can be transmitted.  Most of these events are triggered by the user but since multiple users can contact any station at any time, we need a robust way to handle each request.
+
+TODO: Missing table
+
+Above is the packet structure for the base-to-base communications.  It is setup to take under 100 Bytes to transmit the entire payload for each packet type, which is the maximum payload of a ZigBee transmission using our transceiver.  Any size greater will cause fragmentation of the packet in which we would have to reassemble the packets at the destination.
+
+Each station will have a packet queue where it can send packets and expect to receive packets from the destinations in which they were sent.  These queues will have timeouts to protect the integrity of the device as well as allowing communication between devices.
+
+The packets which allow users to connect to one another include the FIND\_NEIGHBORS\_REQUEST, which polls the area for contacts.  This will allow the user to locate their individual friends who are nearby as well as individually connect to people who are not within range, providing they are on the same network.
+
+The FRIEND/UNFRIEND packet allows friends to connect to a base station and provides for help requests to be sent.
+
+The main packet driving the system's purpose is the HELP\_REQUEST packet.  If two devices are paired, they can send these packets to one another.  When a help request is sent, it is immediately acknowledged, flags are set within the paired system, and a call to action takes the form of various peripherals with flashing lights and generated noise to signal the friend has requested assistance.  The only way to turn it off is to wait for it to timeout or respond with an accept/reject acknowledgement.  If it does timeout, additional friends on the list are contacted until the list is exhausted.
+ 
+The HELP\_FROM\_ANYONE Request, which in conjunction with the FIND\_HOPS packet types, allows the base station to request help based on proximity to the station.  This is only used if no friends can answer the original alert request.
+
+\subsection{Hardware}
+
+\subsubsection{Button}
+
+Microcontroller
+
+TODO: Missing figure
+
+The microcontroller design layout was based on recommended considerations from relevant application notes and datasheets.  The BlueNRG-1 uses two external oscillators with ambiguous capacitor values in this first revision diagram to be clarified after further testing.  The microcontroller layout will be on a separate breakout board with an attached antenna [as well as all other components displayed above] to allow for faster, more consistent prototyping.  However, our early revisions connect to antennas via an edge-mounted SMA connector.  This layout must allow for flexibility of GPIO assignments, so the majority of the pins are mapped to corresponding headers on the attached power/peripheral board even if currently out of use.
+
+Programming will be completed over 5 JTAG-specified pins.  During layout, great considerations have been taken to minimize the distances between high-speed components, particularly the bypass capacitors.
+
+Power:
+
+TODO: Missing figure
+
+The basic power system for the button needs to be stable and immune to noisy environments.  Our next revision will aim to add complexity and at least include a forward-biased diode at the cathode of the battery.
+
+Peripherals:
+
+TODO: Missing figure
+
+Currently, only the button and LED indicator will be added to the button.  After functionality is proven, we will reconsider adding an accelerometer.
+
+Connectors:
+
+TODO: Missing figure
+
+Connectors have been added to allow for connection to the microcontroller’s separate breakout board.  Other connectors include JTAG links and test points (not shown here).
+
+Parts List
+\begin{itemize}
+\item ST BlueNRG-1 microcontroller
+\item 1 x 1000mAh, 3V Coin cell battery
+\item 1 x Push-button
+\item 300 x Female headers
+\item 300 x Male headers
+\item 500 x Assorted surface mount resistors and capacitors
+\end{itemize}
+
+\subsubsection{Base Station}
+
+TODO: Missing Figure
+
+TODO: Missing Figure
+
+Parts List
+\begin{itemize}
+\item 1 x Atmel SAMB11 microcontroller
+\item 1 x ZigBee-Pro 915 MHz module
+\item 1 x 26 MHz crystal
+\item 1 x 32.768 kHz crystal
+\item 1 x SMA female jack
+\item male/female pin headers
+\item Assorted surface-mount resistors/capacitors/inductors
+\end{itemize}
+
+Layout
+
+The base station layout requires careful consideration due to the number of components packed into a smaller sized board.  The first board revision for the base station adopts a mother-daughter format as an attempt to reuse many of the tiny expensive components, primarily from the SAMB11 microcontroller.  Analog signal and power components must be placed close to the microcontroller on the daughterboard.  Plated drill holes placed around this section will allow for the daughterboard to be shared and reused.  Future revisions will only include the motherboard, with circuitry outside the microcontroller and its closest components, whereas the older revision using the daughterboard can be mounted directly on the plated drill holes through pin headers.
+
+Component placement is obviously important to reduce the amount of unnecessary electromagnetic interference.  The first point of interest are the two RF signals, where a separate antenna is required for each signal due to their different frequencies.  Since an antenna’s behavior changes according to its environment, it’s important to place these two antennas as far away from each other as possible.  For the SAMB11 2.4 GHz analog signal, the traces leading to the impedance-matching circuit and the antenna should be as short as possible to reduce the effects of stray inductances and capacitances.  The 915 MHz signal is generated by the ZigBee Pro, where data flows through UART pins.  The signals between the SAMB11 and ZigBee stay in the digital domain before being modulated by the ZigBee;  therefore, the transceiver module’s proximity to the microcontroller is of no immediate concern.
+
+Another significant source of noise comes from the crystal oscillator.  The SAMB11 can generate two of its clocks using external crystals: a 26 MHz control clock and a 32.768 kHz real-time clock.  The oscillating currents flowing through the crystal classify it as a heavy noise source.  At the same time, crystals should provide spectrally pure clock frequency for the microcontroller to function optimally and are equally susceptible to external noise.  Important signal traces should avoid the crystal’s vicinity on all copper layers to avoid data contamination from the oscillator.  Additionally, any ground pads on the crystal should have a low impedance ground return path to the microcontroller’s ground pin to ensure as small of a current loop as possible.  This helps reduce the amount of noise which can be seen by other components.
+
+Power Supply 
+
+The power supply for the base station requires three different output voltages.  The first is 12V, the second 5V, and lastly the third one is 3.3V.  According to our power budget we need to supply 4067.3mW at the most with a maximum current of 663.5mA.  The idea is to connect to the power grid with a 120 VAC outlet.  The first stage is to step-down the 120 VAC, which can be done using a transformer of "N" turns.  Then a full-wave rectifier can be used to convert AC to DC.  At this point we have DC voltage with ripples.  A classic wall-wart can then be used to step-down the AC and convert it to DC.
+ 
+Our base station has an alert system when the button is pressed for help.  The alert system consists of a speaker and an array of 18.5 mm clear blue LEDs.  The Kinetis microcontroller will drive the speaker in case of such event.  Therefore, the signal from the Kinetis must be amplified.  This can be done by using a LM386 low-voltage audio amplifier.  The appnotes for the LM386 suggest using a Vcc of 12V so the rails are at 0V and 12V.  The LED array is implemented with 6 rows of 3 LEDs each, and one resistor per row.  Each LED has a forward voltage of 3.2V, which determines the number of LEDs per row with a 12V input voltage.  The LEDs and speaker consume the most power a wall-wart which outputs 12V with a maximum current of 1A is necessary.  This output also has two bypass capacitors to reduce the effect of the voltage ripple.
+ 
+The SAMB11 microcontroller at the base station has an input voltage of 3.3V, which is the same for the 2.4GHz antenna and the Atmel 900MHz antenna.  Additionally, the display controller for the base station uses 3.3V.  These components pull 158.55mA from the 3.3V output and use 178.5mW.  The solution for this is to use a switching power supply to step-down the 12V input to 3.3V.  The switching power supply is a buck-converter, which is implemented using a LM2574, which is a buck-converter IC with a fixed voltage of 3.3V.  The design of the buck converter was obtained from its appnotes.  The maximum output current of the buck-converter is 500mA.  Therefore, a 300mA fuse is included after the buck converter to protect the 3.3V components.  Bypass capacitors were also included.
+ 
+Last, the background light for the display requires an input voltage of 5V.  This output was implemented using a LM317H, which is an adjustable voltage regulator.  The backlight uses 220 mA at 5V, meaning the output power is 1100mW.  In this case, the input power of the voltage regulator is 2640 mW which means the voltage regulator dissipates 1540 mW by itself.  The schematic for the power supply shows a jumper cable before the LM317H voltage regulator.  The purpose of this is to drive the display with a source from lab and see how much power it consumes.  The jumper cable will then be removed and a voltage divider will be implemented at the 12V output to achieve 5V.  This will be done to verify which method is more efficient and most cost effective, which is the purpose of this power supply.
+
+TODO: Missing figure
+
+Peripherals
+
+Audio Amplifier for Alert System
+
+TODO: Missing figure
+
+The audio amplifier was designed using the LM386 as shown above.  The gain can be controlled through pins 1 and 8.  To get maximum gain, a polarized capacitor of 10uF must be included in series to create a connection between pins 1 and 8.  Note that the positive side of the polarized capacitor is connected to pin 1.  Since the maximum gain is 200, a resistor can be placed in series with the polarized capacitor to decrease the gain.
+ 
+There is also a jumper cable between pins 1 and 5.  Note that fs the jumper cable is connected it creates a physical path between pins 1 and 5 with a capacitor of 0.033 uF and a 10kΩ resistor.  This gives a bass boost to the amplifier but it decreases the gain.  The purpose of the jumper cable is to see how much the gain is affected with and without the bass boost.  The bass boost can be convenient because the alert system will consist of audio with vibrations, but it will only be implemented in the final design if it does not affect the gain significantly.
+
+LED Array for Alert System
+
+TODO: Missing figure
+
+The LED array contains eighteen 5mm clear blue LEDs so that it can be as bright as possible for the alert system.  This array contains six rows and each row has three LEDs and a 120Ω resistor.  The forward voltage for these LEDs is 3.8V with a forward current of 20 mA.  The input voltage for the array is 12V, which means that only three LEDs can be connected in series.  The 120Ω resistor must be included to limit the current going through the LEDs, otherwise they won’t last for long.  In total the array dissipates 1440 mW, which includes the resistors.
+
+Antennas
+
+Button
+
+The antenna for the button will operate in the 2.4 GHz frequency band and it must have a small form factor so it can be worn as a pendant, either for a necklace or a bracelet.  This size constraint requires careful consideration in order to produce the optimum performance.  It must have a range of at least 50 feet and be capable of communicating with the base station in a home environment.  Therefore, it must be able to communicate through walls and despite other types of interference, such as microwaves.
+
+We created nine different PCB antenna layouts for testing based on proven working models, utilizing appnotes and datasheets to guide the designs.  For lab testing purposes, we are using a high-speed network analyzer, spectrum analyzer, signal generator, and a proven 2.4 GHz quarter-length tripod antenna as a reference, to measure the performance of each antenna topology.  We have collected the base-level impedance measurements and once we setup the portable high-speed spectrum analyzer, we will be able to test the far-field performance of each antenna.  We will make the appropriate improvements and once we have the second button antenna revisions, we will then be able to actually test them in the field at the De Anza Senior Citizen Mobile Home Community.
+
+Base Station
+
+The base station antenna will operate in the 900 MHz frequency band primarily since it must be able to communicate over a longer range of at least 300 feet, from one user’s base station to another.  This lower frequency band is more suitable for long distance radio links since the attenuation suffered by radio waves through free space decreases along with the operating frequency.  The base station antenna must also be capable of handling atmospheric loss due to gases and be able to navigate through outdoor environments, such as trees and other obstructions.  One of the biggest advantages of this frequency band is that it’s “Near Line of Sight”, meaning better range can be achieved in this band than other ISM bands given the same obstructions.  Since there isn’t as much of a size constraint as with the button antenna, the base station antenna can be larger and external.  At this point we have created two different PCB base station antenna layouts and have a proven whip antenna as a reference, and we will have those soon for testing.
+
+TODO: Missing table
+
+\subsection{Button to Base Application}
+Up to this point, the button-to-base station communication is programmed using the General Access Profile (GAP) layer.  Accessing the API’s listed in bluenrg1\_api.h allows for the utilization of advertising packets over the air according to Bluetooth standards.  The GAP layer defines the basic requirement of a Bluetooth device.  It describes the devices role, its different modes, and its procedures for its mode to enable a connection between Master and Slave devices.  Once the GAP has been initialized with its role, it is desired to advertise the BlueNRG-1.  To do this repeatedly, the call is placed in a forever loop where it sends a packet every time it is scanned, which occurs on channels 37, 38, and 39.  At the same time the BlueNRG-1 is advertising, the device is set to ADV\_IND enabling other devices to receive the data packet if desired.  Setting the device using ADV\_IND indicates it is generally in discoverable mode and any central device can connect to it.  When the BlueNRG-1 is not advertising it is listening for a connection request, but for now no connection request is needed to just advertise a press of a button. To summarize the BlueNRG-1’s role has been set to peripheral, it is discoverable and any central device can connect to it.  With this configuration, it is now possible to send packets through the link layer.
+ 
+To send two different packets, a GPIO tied to a button on the BlueNRG-1 development board is set to be triggered on an interrupt, which occurs when the button is pressed enabling it to send a help request advertising packet.  Since the advertising function is set in a forever loop, once the button is no longer pressed, the program resumes sending the original packet in the queue.  There is a difference between the packet sent when the button is pressed versus when the button is not being pressed.  The difference is in the Manufacturer’s Specific Data sent in the packet.  Changing this data is allowed since no necessary information such as flags or data types are being changed in the process.  The Atmel SAMB11 must then distinguish between the two different packets sent by the BlueNRG-1.
+ 
+The Atmel SAMB11’s GAP layer must also be initialized.  Its role is set as a central device so its responsibility will be to scan, while the BlueNRG-1’s responsibility will be to advertise.  Its mode is set to AT\_BLE\_ADV\_LIM\_DISCOVERABLE to limit its scanning.  This mode in conjunction with adding the BlueNRG-1’s address to the whitelist allows for a quick detection of the BlueNRG-1’s sent packet.  The SAMB11’s whitelist filters out any other address not specified in the whitelist.  Since the AT\_BLE\_ADV\_LIM\_DISCOVERABLE mode allows for a maximum of 180 seconds of scanning, it is necessary to continue calling the function which initiates the scanning.  This allows for quick repetitive detection of the packets sent by the BlueNRG-1.  Every time the SAMB11 scans, it parses the data coming after the Manufacturing Specific Data, which is where the help request packet is parsed.  This then allows for an LED tied to a GPIO to light on.  This GPIO goes low for any other packet detected.  To summarize once more, the BlueNRG-1 sends packets and the SAMB11 scans the 2.4 GHz band, while filtering out any other advertising device sending packets.
+
+\subsection{Application Layer (Linux Base-to-Base Emulation)}
+Our intentions in creating the Linux base-to-base emulation of our system was due to not having access to the hardware in a timely fashion.  The application layer was divided into different files for simplicity and organizational purposes.  It emulates the menu items displayed on the screen (as would be seen by a user) and it emulates a network in which a device is connected.  This Linux version of the system simulates sending a help packet to the contacts listed in a user’s friends list.  A packet will be sent to the first contact on the list, it will timeout if the help request is not acknowledged as received, at which time it will be sent to the next contact on the list.
+
+% An example of a floating figure using the graphicx package.
+% Note that \label must occur AFTER (or within) \caption.
+% For figures, \caption should occur after the \includegraphics.
+% Note that IEEEtran v1.7 and later has special internal code that
+% is designed to preserve the operation of \label within \caption
+% even when the captionsoff option is in effect. However, because
+% of issues like this, it may be the safest practice to put all your
+% \label just after \caption rather than within \caption{}.
+%
+% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
+% option should be used if it is desired that the figures are to be
+% displayed while in draft mode.
+%
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure}
+
+% Note that the IEEE typically puts floats only at the top, even when this
+% results in a large percentage of a column being occupied by floats.
+
+
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command,
+% and the \label for the overall figure must come after \caption.
+% \hfil is used as a separator to get equal spacing.
+% Watch out that the combined width of all the subfigures on a 
+% line do not exceed the text width or a line break will occur.
+%
+%\begin{figure*}[!t]
+%\centering
+%\subfloat[Case I]{\includegraphics[width=2.5in]{box}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{box}%
+%\label{fig_second_case}}
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure*}
+%
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat[]), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
+% Be aware that for subfig.sty to generate the (a), (b), etc., subfigure
+% labels, the optional argument to \subfloat must be present. If a
+% subcaption is not desired, just leave its contents blank,
+% e.g., \subfloat[].
+
+
+% An example of a floating table. Note that, for IEEE style tables, the
+% \caption command should come BEFORE the table and, given that table
+% captions serve much like titles, are usually capitalized except for words
+% such as a, an, and, as, at, but, by, for, in, nor, of, on, or, the, to
+% and up, which are usually not capitalized unless they are the first or
+% last word of the caption. Table text will default to \footnotesize as
+% the IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+
+
+% Note that the IEEE does not put floats in the very first column
+% - or typically anywhere on the first page for that matter. Also,
+% in-text middle ("here") positioning is typically not used, but it
+% is allowed and encouraged for Computer Society conferences (but
+% not Computer Society journals). Most IEEE journals/conferences use
+% top floats exclusively. 
+% Note that, LaTeX2e, unlike IEEE journals/conferences, places
+% footnotes above bottom floats. This can be corrected via the
+% \fnbelowfloat command of the stfloats package.
+
+
+
+
+\section{Conclusion}
+The conclusion goes here.
+
+
+
+
+
+% if have a single appendix:
+%\appendix[Proof of the Zonklar Equations]
+% or
+%\appendix  % for no appendix heading
+% do not use \section anymore after \appendix, only \section*
+% is possibly needed
+
+% use appendices with more than one appendix
+% then use \section to start each appendix
+% you must declare a \section before using any
+% \subsection or using \label (\appendices by itself
+% starts a section numbered zero.)
+
+
+
+\appendices
+\section{Proof of the First Zonklar Equation}
+Appendix one text goes here.
+
+% you can choose not to have a title for an appendix
+% if you want by leaving the argument blank
+\section{}
+Appendix two text goes here.
+
+
+% use section* for acknowledgment
+\section*{Acknowledgment}
+
+
+The authors would like to thank...
+
+
+% Can use something like this to put references on a page
+% by themselves when using endfloat and the captionsoff option.
+\ifCLASSOPTIONcaptionsoff
+  \newpage
+\fi
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://mirror.ctan.org/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+\begin{thebibliography}{1}
+
+\bibitem{IEEEhowto:kopka}
+H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+
+\end{thebibliography}
+
+% biography section
+% 
+% If you have an EPS/PDF photo (graphicx package needed) extra braces are
+% needed around the contents of the optional argument to biography to prevent
+% the LaTeX parser from getting confused when it sees the complicated
+% \includegraphics command within an optional argument. (You could create
+% your own custom macro containing the \includegraphics command to make things
+% simpler here.)
+%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
+% or if you just want to reserve a space for a photo:
+
+\begin{IEEEbiography}{Michael Shell}
+Biography text here.
+\end{IEEEbiography}
+
+% if you will not have a photo at all:
+\begin{IEEEbiographynophoto}{John Doe}
+Biography text here.
+\end{IEEEbiographynophoto}
+
+% insert where needed to balance the two columns on the last page with
+% biographies
+%\newpage
+
+\begin{IEEEbiographynophoto}{Jane Doe}
+Biography text here.
+\end{IEEEbiographynophoto}
+
+% You can push biographies down or up by placing
+% a \vfill before or after them. The appropriate
+% use of \vfill depends on what kind of text is
+% on the last page and whether or not the columns
+% are being equalized.
+
+%\vfill
+
+% Can be used to pull up biographies so that the bottom of the last one
+% is flush with the other column.
+%\enlargethispage{-5in}
+
+
+
+% that's all folks
+\end{document}
+
+
