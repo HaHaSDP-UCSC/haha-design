@@ -1,4 +1,4 @@
-\documentclass[journal]{IEEEtran}
+\documentclass[journal,compsoc]{IEEEtran}
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
 % manually specify the path to it like:
@@ -410,10 +410,10 @@
 \IEEEPARstart{T}{he} Home Assistance Help Alert system is composed of a base station and a wirelessly connected button.  The base station is wirelessly connected to other base stations to facilitate long-range communications over a mesh network, in order to forgo the requirement of having a pre-existing communications infrastructure.
 
 \subsection{Motivation}
-\noindent One of the primary principles driving this project is cost.  It needs be affordable and without subscription fees.  As a result, the hardware has been chosen primarily to comply with this cost constraint, which in turn required a sizable portion of Winter quarter to be dedicated in researching different hardware platforms.
+One of the primary principles driving this project is cost.  It needs be affordable and without subscription fees.  As a result, the hardware has been chosen primarily to comply with this cost constraint, which in turn required a sizable portion of Winter quarter to be dedicated in researching different hardware platforms.
 
 \subsection{Objectives}
-\noindent The fundamental idea behind the Home Assistance Help Alert System is to provide an affordable means of protecting the health, welfare, and safety of elderly people through an active ad-hoc wireless network estimated to have a working range of 300 feet, specifically for residents of the De Anza Santa Cruz Mobile Home Park.  The final design should consider environmental conditions of the location (interference, transmission range) and consist of parts which can be obtained or reproduced by a third party at scale.  The final design must also be affordable and have a form factor satisfactory to the end user.  A detailed design document shall be made publicly available for non-profit entities who would like to expand upon the project.
+The fundamental idea behind the Home Assistance Help Alert System is to provide an affordable means of protecting the health, welfare, and safety of elderly people through an active ad-hoc wireless network estimated to have a working range of 300 feet, specifically for residents of the De Anza Santa Cruz Mobile Home Park.  The final design should consider environmental conditions of the location (interference, transmission range) and consist of parts which can be obtained or reproduced by a third party at scale.  The final design must also be affordable and have a form factor satisfactory to the end user.  A detailed design document shall be made publicly available for non-profit entities who would like to expand upon the project.
 
 \section{Hardware Selection}
 
@@ -442,7 +442,7 @@ TODO: Missing figure
 
 \subsubsection{Base Station Interconnect}
 
-\noindent \\ Wireless interconnection is a crucial component governing the performance of our system.  A communication link between the button and the base station allows for a help alert signal to be transmitted locally in a small home environment, while the link(s) between multiple base stations allows the signal to propagate further through a larger neighborhood.\\
+Wireless interconnection is a crucial component governing the performance of our system.  A communication link between the button and the base station allows for a help alert signal to be transmitted locally in a small home environment, while the link(s) between multiple base stations allows the signal to propagate further through a larger neighborhood.
 
 \begin{table*}[t]
   \centering
@@ -456,17 +456,19 @@ TODO: Missing figure
   \caption{Frequency Band Options}
 \end{table*}
 
-\noindent Selection in broadcast frequency considers the limitations of transmitted power as well as form factors of potential antennas.  FCC regulations described in Title 47 Part 15 dictate the limitations of low-power, non-licensed, signal transmissions in the United States air space.  While most frequency bands are very limited for public use, there are several bands which are set aside as free for anyone to use under specific constraints; in comparison, broadcasts in “free” frequencies are allowed much greater transmission power to their restricted counterparts.  Additionally, electromagnetic waves are governed by an inverse relation between its frequency and length; a wave of increasing frequency has a decreasing wavelength and vice versa.  As a rule of thumb, an antenna’s size grows as the wavelength is increased for our signal of interest. Higher frequency signals also tend to have channels with larger bandwidths, allowing for more data to be sent with each transmission.  Due to the simple nature of the application, the high data rate is not critical.\\
+Selection in broadcast frequency considers the limitations of transmitted power as well as form factors of potential antennas.  FCC regulations described in Title 47 Part 15 dictate the limitations of low-power, non-licensed, signal transmissions in the United States air space.  While most frequency bands are very limited for public use, there are several bands which are set aside as free for anyone to use under specific constraints; in comparison, broadcasts in “free” frequencies are allowed much greater transmission power to their restricted counterparts.  Additionally, electromagnetic waves are governed by an inverse relation between its frequency and length; a wave of increasing frequency has a decreasing wavelength and vice versa.  As a rule of thumb, an antenna’s size grows as the wavelength is increased for our signal of interest. Higher frequency signals also tend to have channels with larger bandwidths, allowing for more data to be sent with each transmission.  Due to the simple nature of the application, the high data rate is not critical.
 
-\noindent Communication between the button and base station is projected to be at least 50 feet, while distances between base stations should be able to reach at least 300 meters (approximately 1000 feet).  To meet these specifications while keeping within FCC regulations, the “free” frequency bands will be used. Two of the most popular frequency bands include the 915 MHz band and the 2.4 GHz band.\\
+Communication between the button and base station is projected to be at least 50 feet, while distances between base stations should be able to reach at least 300 meters (approximately 1000 feet).  To meet these specifications while keeping within FCC regulations, the “free” frequency bands will be used. Two of the most popular frequency bands include the 915 MHz band and the 2.4 GHz band.
 
-\noindent Frequencies:
+Frequencies:
+
 \begin{LaTeXdescription}
   \item [2.4 GHz] will be used for the button-to-base communication. This band is hugely populated by many mainstream applications like WiFi and Bluetooth, but the small distance between the button and base will hopefully not be heavily affected by other traffic. Additionally, antennas in the 2.4 GHz range can be made compact, allowing the button to made into a small form factor.\\
   \item[915 MHz] will be used for base-to-base communications.  Antennas in this band will generally be slightly larger than the corresponding 2.4 GHz antennas, but because base stations are designed to be stationary in a person’s home, antenna size is no longer a limiting factor.  Furthermore, air space in the 915 MHz band is not as congested to its 2.4 GHz counterpart so the reduction in potential interference allows for longer transmissions to be more attainable.
 \end{LaTeXdescription}
 
 Base-to-base protocols:
+
 \begin{LaTeXdescription}
   \item [DigiMesh] DigiMesh is a proprietary protocol that implements a variant of the AODV routing algorithm. Includes network self-configuration, self-healing, and sleep synchronization.
   \item [802.15.4  (Custom Protocol)] Writing our own mesh protocol on top of the 802.15.4 standard, which on its own only provides point to point connections (possibly with reliability, depending on implementation). This choice would be difficult and take significant amounts of time to accomplish in the time that we have.
@@ -475,6 +477,7 @@ Base-to-base protocols:
 \end{LaTeXdescription}
 
 DigiMesh features the following:
+
 \begin{LaTeXdescription}
   \item[Self-healing] any node may enter or leave the network at any time without causing the network as a whole to fail.
   \item[Peer-to-peer architecture] no hierarchy and no parent-child relationships are needed.
@@ -485,27 +488,29 @@ DigiMesh features the following:
   \item[Sleep Modes] low power sleep modes with synchronized wake up are supported, with variable sleep and wake up times.
 \end{LaTeXdescription}
 
-\noindent The DigiMesh protocol is a proprietary protocol and uses a variant of the AODV routing algorithm. Routing tables are built only for the immediate destinations a node has a need for.  Like wirelessHART, all nodes can be routers and have the option to sleep and wake on a synchronized schedule[6].\\
+The DigiMesh protocol is a proprietary protocol and uses a variant of the AODV routing algorithm. Routing tables are built only for the immediate destinations a node has a need for.  Like wirelessHART, all nodes can be routers and have the option to sleep and wake on a synchronized schedule[6].
 
-\noindent Routers for the network are determined as needed which results in routing table entries only for those routes in use. Unlike the other protocols there is no central coordinator and synchronization is accomplished through an election process.  Routing to nodes not directly connected to the sending node is accomplished by sending to destination specified in the routing table, which if does not exist the route is discovered through AODV and stored.\\
+Routers for the network are determined as needed which results in routing table entries only for those routes in use. Unlike the other protocols there is no central coordinator and synchronization is accomplished through an election process.  Routing to nodes not directly connected to the sending node is accomplished by sending to destination specified in the routing table, which if does not exist the route is discovered through AODV and stored.
 
-\noindent If a packet on its way to a destination encounters a node that was present in the routing table but no longer is failing at the time of sending, an AODV discovery is initiated and if the correct route if found through an alternate path the routing tables of all affected nodes will be updated and the packet will be delivered[6].  All packets are acknowledged with messages sent to the receiver.\\
+If a packet on its way to a destination encounters a node that was present in the routing table but no longer is failing at the time of sending, an AODV discovery is initiated and if the correct route if found through an alternate path the routing tables of all affected nodes will be updated and the packet will be delivered[6].  All packets are acknowledged with messages sent to the receiver.
 
-\noindent Because every node has the ability to be a sleeping node power can be saved in between routed packets[6].  AODV discoveries are only initiated when needed and so additional network traffic is not present.  This feature also presents a limitation causing high latency when changing network conditions cause routes to be invalidated and rediscovered. It also affects network throughput by limiting the amount of packets that can be sent when routes are not known.\\
+Because every node has the ability to be a sleeping node power can be saved in between routed packets[6].  AODV discoveries are only initiated when needed and so additional network traffic is not present.  This feature also presents a limitation causing high latency when changing network conditions cause routes to be invalidated and rediscovered. It also affects network throughput by limiting the amount of packets that can be sent when routes are not known.
 
-\noindent Digi International, the company behind DigiMesh claims that networks with around 500 nodes are possible and within the limitations of the standard.  Due to our limited network traffic needs this limit should not be a concern.  Any latency introduced by route discoveries on large networks would not be a concern because the time constraint for our product’s users is measured in minutes, and the network delay introduced being measured in hundreds of milliseconds.\\
+Digi International, the company behind DigiMesh claims that networks with around 500 nodes are possible and within the limitations of the standard.  Due to our limited network traffic needs this limit should not be a concern.  Any latency introduced by route discoveries on large networks would not be a concern because the time constraint for our product’s users is measured in minutes, and the network delay introduced being measured in hundreds of milliseconds.
 
-\noindent The power consumption of the Digi modules can be reduced by configuring the routing nodes to be sleeping.  This setting is configurable and each device will be synchronized to a automatically elected time coordinating node.  With our network measuring user response time in minutes, a sleeping schedule of 1/20 or 1/30 seconds would not likely cause problems.  Sleeping for these time scales would increase runtime by a nonlinear inverse of the fraction. Our estimates place a 1/20 seconds schedule at decreasing power by 57\%.\\
+The power consumption of the Digi modules can be reduced by configuring the routing nodes to be sleeping.  This setting is configurable and each device will be synchronized to a automatically elected time coordinating node.  With our network measuring user response time in minutes, a sleeping schedule of 1/20 or 1/30 seconds would not likely cause problems.  Sleeping for these time scales would increase runtime by a nonlinear inverse of the fraction. Our estimates place a 1/20 seconds schedule at decreasing power by 57\%.
 
-\noindent The DigiMesh protocol, while proprietary, meets all the requirements for our client device communication.  With claimed scalability to 500+ nodes it will provide the scalability we intend to support.  The 900 [MHz] frequency range is expected to provide the needed coverage range and allow for a network of connected routing-capable and self-healing end nodes to provide maximum coverage  by allowing distant end nodes to connect while within range of at least a single node.
+The DigiMesh protocol, while proprietary, meets all the requirements for our client device communication.  With claimed scalability to 500+ nodes it will provide the scalability we intend to support.  The 900 [MHz] frequency range is expected to provide the needed coverage range and allow for a network of connected routing-capable and self-healing end nodes to provide maximum coverage  by allowing distant end nodes to connect while within range of at least a single node.
 
 \subsection{Button}
 
 \subsubsection{Functional Considerations}
-\noindent \\ The main design requirement of the button is fairly simple: to allow a user to press a button which will transmit a distress signal to a paired base station.  However, this signal should only be sent when the button is deliberately pressed or an accelerometer reads dangerous levels, and the button should have functionality to cancel this distress call fairly easily.  Aside from user input, distinct feedback is important in user interactive products and the button should relay useful information to/from the wearer via LED indicators, vibration, and/or other forms of low-power notification.  Price is also an important factor involved in the design of this button, and while peripherals like USB connectivity and more sophisticated energy storage solutions could improve user ease-of-use, additional features will be omitted until later prototype models.  The form factor must also be as small as possible, putting limits on battery, board, and antenna sizes.  As the brains of the button, we hunted for a low-powered, Bluetooth functional microcontroller to meet these functional requirements.\\
+
+The main design requirement of the button is fairly simple: to allow a user to press a button which will transmit a distress signal to a paired base station.  However, this signal should only be sent when the button is deliberately pressed or an accelerometer reads dangerous levels, and the button should have functionality to cancel this distress call fairly easily.  Aside from user input, distinct feedback is important in user interactive products and the button should relay useful information to/from the wearer via LED indicators, vibration, and/or other forms of low-power notification.  Price is also an important factor involved in the design of this button, and while peripherals like USB connectivity and more sophisticated energy storage solutions could improve user ease-of-use, additional features will be omitted until later prototype models.  The form factor must also be as small as possible, putting limits on battery, board, and antenna sizes.  As the brains of the button, we hunted for a low-powered, Bluetooth functional microcontroller to meet these functional requirements.\\
 
 \subsubsection{Microcontroller}
-\noindent \\ Due to our desires to use Bluetooth Low Energy (BLE) and to accurately communicate ‘HELP’/’CANCEL’ signals between button and base-station, we selected a microcontroller that would optimize our size used, cost, and power efficiency.
+
+Due to our desires to use Bluetooth Low Energy (BLE) and to accurately communicate ‘HELP’/’CANCEL’ signals between button and base-station, we selected a microcontroller that would optimize our size used, cost, and power efficiency.
 
 \begin{table*}[t]
   \centering
@@ -608,6 +613,7 @@ Hardware: Atmel SAMB11
 \subsubsection{Base Station Interconnect}
 
 Hardware: Digi XBee-PRO 900HP RF Module
+
 \begin{itemize}
   \item Transceiver Info
     \begin{itemize}
@@ -632,7 +638,9 @@ Hardware: Digi XBee-PRO 900HP RF Module
 \end{itemize}
 
 \subsubsection{Display}
+
 Crystalfontz CFAH1604A-TMI-JT Character LCD Module
+
 16x4 Parallel Character LCD with backlight
 
 \subsubsection{Buttons}
@@ -692,7 +700,7 @@ Our button power budget gives us a quantitative tool to better understand its en
 \section{System Overview}
 
 \subsection{Product Perspective}
-The base station and button will be separate hardware devices which facilitate the communication of a “help request” when a user presses the button on either the base station or the remote button.  The base station will contain a priority list of contacts who will be contacted in an order set by the user.  Alerted users will respond to the help request through use of their own base station.  If a user does not respond to a help request, the next person on the list is contacted.  If none of the people on the help list respond, any station in the nearby vicinity is contacted.
+The base station and button will be separate hardware devices which facilitate the communication of a “help request” when a user presses the button on either the base station or the remote button. The base station will contain a priority list of contacts who will be contacted in an order set by the user. Alerted users will respond to the help request through use of their own base station.  If a user does not respond to a help request, the next person on the list is contacted. If none of the people on the help list respond, any station in the nearby vicinity is contacted.
 
 \subsubsection{Design Method}
 The software design portion of the product will utilize the C-programming language.
@@ -711,10 +719,10 @@ When a help request is sent, the initiating user will be able to cancel the requ
 \subsection{Product Functions}
 
 \begin{LaTeXdescription}
-\item[Send Help Request] This function will send a help request beginning with the first base station in the user’s contact list.  Functionality for this will be present on both the remote button and the base station.
-\item[Cancel Help Request] This function cancels a help request alert.  In the event a user has already responded to a help request, an additional signal will be sent to the responder’s box informing them of the cancelled request.
+\item[Send Help Request] This function will send a help request beginning with the first base station in the user’s contact list. Functionality for this will be present on both the remote button and the base station.
+\item[Cancel Help Request] This function cancels a help request alert. In the event a user has already responded to a help request, an additional signal will be sent to the responder’s box informing them of the cancelled request.
 \item[Setup Contact List] This set of functions will facilitate configuring the user’s contact list.  Users can either enter ID numbers of the neighbors they wish to add or they can scan the network for them.
-\item[Scan Network] This function scans the network for available users and provides user contact details.  It will interface directly with the Setup Contact List.
+\item[Scan Network] This function scans the network for available users and provides user contact details. It will interface directly with the Setup Contact List.
 \end{LaTeXdescription}
 
 \subsubsection{Software}
@@ -1220,22 +1228,42 @@ The authors would like to thank...
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
 
-\begin{IEEEbiography}{Michael Shell}
-  Biography text here.
+\begin{IEEEbiography}{Jamielynne~Batugo}
+  Student at UC Santa Cruz.
 \end{IEEEbiography}
 
 % if you will not have a photo at all:
-\begin{IEEEbiographynophoto}{John Doe}
+\begin{IEEEbiography}{Marco~Carmona}
   Biography text here.
-\end{IEEEbiographynophoto}
+\end{IEEEbiography}
 
-% insert where needed to balance the two columns on the last page with
-% biographies
-%\newpage
+\begin{IEEEbiography}{Conrad~Christensen}
+  Student at UC Santa Cruz.
+\end{IEEEbiography}
 
-\begin{IEEEbiographynophoto}{Jane Doe}
-  Biography text here.
-\end{IEEEbiographynophoto}
+\begin{IEEEbiography}{Jake~Lee}
+  Student at UC Santa Cruz.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}{Kevin~Lee}
+  Student at UC Santa Cruz.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}{Brian~Nichols}
+  Student at UC Santa Cruz.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}{Jesus~Soto}
+  Student at UC Santa Cruz.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}{August~Valera}
+  Student at UC Santa Cruz.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}{Jeffrey~Zheng}
+  Student at UC Santa Cruz.
+\end{IEEEbiography}
 
 % You can push biographies down or up by placing
 % a \vfill before or after them. The appropriate
