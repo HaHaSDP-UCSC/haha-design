@@ -308,7 +308,7 @@
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
 \title{
-  Home Assistance Help Alert (HaHa) Project \\
+  Home Assistance Help Alert (HA-HA) Project \\
   Design Specification
 }
 %
@@ -348,7 +348,7 @@
 
 
 % The paper headers
-\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
+\markboth{University of California, Santa Cruz --- Senior Design Project, Winter 2017}%
 {Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
 % The only time the second header will appear is for the odd numbered pages
 % after the title page when using the twoside option.
@@ -410,10 +410,10 @@
 \IEEEPARstart{T}{he} Home Assistance Help Alert system is composed of a base station and a wirelessly connected button.  The base station is wirelessly connected to other base stations to facilitate long-range communications over a mesh network, in order to forgo the requirement of having a pre-existing communications infrastructure.
 
 \subsection{Motivation}
-One of the primary principles driving this project is cost.  It needs be affordable and without subscription fees.  As a result, the hardware has been chosen primarily to comply with this cost constraint, which in turn required a sizable portion of Winter quarter to be dedicated in researching different hardware platforms.
+\noindent One of the primary principles driving this project is cost.  It needs be affordable and without subscription fees.  As a result, the hardware has been chosen primarily to comply with this cost constraint, which in turn required a sizable portion of Winter quarter to be dedicated in researching different hardware platforms.
 
 \subsection{Objectives}
-The fundamental idea behind the Home Assistance Help Alert System is to provide an affordable means of protecting the health, welfare, and safety of elderly people through an active ad-hoc wireless network estimated to have a working range of 300 feet, specifically for residents of the De Anza Santa Cruz Mobile Home Park.  The final design should consider environmental conditions of the location (interference, transmission range) and consist of parts which can be obtained or reproduced by a third party at scale.  The final design must also be affordable and have a form factor satisfactory to the end user.  A detailed design document shall be made publicly available for non-profit entities who would like to expand upon the project.
+\noindent The fundamental idea behind the Home Assistance Help Alert System is to provide an affordable means of protecting the health, welfare, and safety of elderly people through an active ad-hoc wireless network estimated to have a working range of 300 feet, specifically for residents of the De Anza Santa Cruz Mobile Home Park.  The final design should consider environmental conditions of the location (interference, transmission range) and consist of parts which can be obtained or reproduced by a third party at scale.  The final design must also be affordable and have a form factor satisfactory to the end user.  A detailed design document shall be made publicly available for non-profit entities who would like to expand upon the project.
 
 \section{Hardware Selection}
 
@@ -442,7 +442,7 @@ TODO: Missing figure
 
 \subsubsection{Base Station Interconnect}
 
-Wireless interconnection is a crucial component governing the performance of our system.  A communication link between the button and the base station allows for a help alert signal to be transmitted locally in a small home environment, while the link(s) between multiple base stations allows the signal to propagate further through a larger neighborhood.
+\noindent \\ Wireless interconnection is a crucial component governing the performance of our system.  A communication link between the button and the base station allows for a help alert signal to be transmitted locally in a small home environment, while the link(s) between multiple base stations allows the signal to propagate further through a larger neighborhood.\\
 
 \begin{table*}[t]
   \centering
@@ -456,13 +456,13 @@ Wireless interconnection is a crucial component governing the performance of our
   \caption{Frequency Band Options}
 \end{table*}
 
-Selection in broadcast frequency considers the limitations of transmitted power as well as form factors of potential antennas.  FCC regulations described in Title 47 Part 15 dictate the limitations of low-power, non-licensed, signal transmissions in the United States air space.  While most frequency bands are very limited for public use, there are several bands which are set aside as free for anyone to use under specific constraints; in comparison, broadcasts in “free” frequencies are allowed much greater transmission power to their restricted counterparts.  Additionally, electromagnetic waves are governed by an inverse relation between its frequency and length; a wave of increasing frequency has a decreasing wavelength and vice versa.  As a rule of thumb, an antenna’s size grows as the wavelength is increased for our signal of interest. Higher frequency signals also tend to have channels with larger bandwidths, allowing for more data to be sent with each transmission.  Due to the simple nature of the application, the high data rate is not critical.
+\noindent Selection in broadcast frequency considers the limitations of transmitted power as well as form factors of potential antennas.  FCC regulations described in Title 47 Part 15 dictate the limitations of low-power, non-licensed, signal transmissions in the United States air space.  While most frequency bands are very limited for public use, there are several bands which are set aside as free for anyone to use under specific constraints; in comparison, broadcasts in “free” frequencies are allowed much greater transmission power to their restricted counterparts.  Additionally, electromagnetic waves are governed by an inverse relation between its frequency and length; a wave of increasing frequency has a decreasing wavelength and vice versa.  As a rule of thumb, an antenna’s size grows as the wavelength is increased for our signal of interest. Higher frequency signals also tend to have channels with larger bandwidths, allowing for more data to be sent with each transmission.  Due to the simple nature of the application, the high data rate is not critical.\\
 
-Communication between the button and base station is projected to be at least 50 feet, while distances between base stations should be able to reach at least 300 meters (approximately 1000 feet).  To meet these specifications while keeping within FCC regulations, the “free” frequency bands will be used. Two of the most popular frequency bands include the 915 MHz band and the 2.4 GHz band.
+\noindent Communication between the button and base station is projected to be at least 50 feet, while distances between base stations should be able to reach at least 300 meters (approximately 1000 feet).  To meet these specifications while keeping within FCC regulations, the “free” frequency bands will be used. Two of the most popular frequency bands include the 915 MHz band and the 2.4 GHz band.\\
 
-Frequencies:
+\noindent Frequencies:
 \begin{LaTeXdescription}
-  \item [2.4 GHz] will be used for the button-to-base communication. This band is hugely populated by many mainstream applications like WiFi and Bluetooth, but the small distance between the button and base will hopefully not be heavily affected by other traffic. Additionally, antennas in the 2.4 GHz range can be made compact, allowing the button to made into a small form factor.
+  \item [2.4 GHz] will be used for the button-to-base communication. This band is hugely populated by many mainstream applications like WiFi and Bluetooth, but the small distance between the button and base will hopefully not be heavily affected by other traffic. Additionally, antennas in the 2.4 GHz range can be made compact, allowing the button to made into a small form factor.\\
   \item[915 MHz] will be used for base-to-base communications.  Antennas in this band will generally be slightly larger than the corresponding 2.4 GHz antennas, but because base stations are designed to be stationary in a person’s home, antenna size is no longer a limiting factor.  Furthermore, air space in the 915 MHz band is not as congested to its 2.4 GHz counterpart so the reduction in potential interference allows for longer transmissions to be more attainable.
 \end{LaTeXdescription}
 
@@ -485,29 +485,44 @@ DigiMesh features the following:
   \item[Sleep Modes] low power sleep modes with synchronized wake up are supported, with variable sleep and wake up times.
 \end{LaTeXdescription}
 
-The DigiMesh protocol is a proprietary protocol and uses a variant of the AODV routing algorithm. Routing tables are built only for the immediate destinations a node has a need for.  Like wirelessHART, all nodes can be routers and have the option to sleep and wake on a synchronized schedule[6].
+\noindent The DigiMesh protocol is a proprietary protocol and uses a variant of the AODV routing algorithm. Routing tables are built only for the immediate destinations a node has a need for.  Like wirelessHART, all nodes can be routers and have the option to sleep and wake on a synchronized schedule[6].\\
 
-Routers for the network are determined as needed which results in routing table entries only for those routes in use. Unlike the other protocols there is no central coordinator and synchronization is accomplished through an election process.  Routing to nodes not directly connected to the sending node is accomplished by sending to destination specified in the routing table, which if does not exist the route is discovered through AODV and stored.
+\noindent Routers for the network are determined as needed which results in routing table entries only for those routes in use. Unlike the other protocols there is no central coordinator and synchronization is accomplished through an election process.  Routing to nodes not directly connected to the sending node is accomplished by sending to destination specified in the routing table, which if does not exist the route is discovered through AODV and stored.\\
 
-If a packet on its way to a destination encounters a node that was present in the routing table but no longer is failing at the time of sending, an AODV discovery is initiated and if the correct route if found through an alternate path the routing tables of all affected nodes will be updated and the packet will be delivered[6].  All packets are acknowledged with messages sent to the receiver.
+\noindent If a packet on its way to a destination encounters a node that was present in the routing table but no longer is failing at the time of sending, an AODV discovery is initiated and if the correct route if found through an alternate path the routing tables of all affected nodes will be updated and the packet will be delivered[6].  All packets are acknowledged with messages sent to the receiver.\\
 
-Because every node has the ability to be a sleeping node power can be saved in between routed packets[6].  AODV discoveries are only initiated when needed and so additional network traffic is not present.  This feature also presents a limitation causing high latency when changing network conditions cause routes to be invalidated and rediscovered. It also affects network throughput by limiting the amount of packets that can be sent when routes are not known.
+\noindent Because every node has the ability to be a sleeping node power can be saved in between routed packets[6].  AODV discoveries are only initiated when needed and so additional network traffic is not present.  This feature also presents a limitation causing high latency when changing network conditions cause routes to be invalidated and rediscovered. It also affects network throughput by limiting the amount of packets that can be sent when routes are not known.\\
 
-Digi International, the company behind DigiMesh claims that networks with around 500 nodes are possible and within the limitations of the standard.  Due to our limited network traffic needs this limit should not be a concern.  Any latency introduced by route discoveries on large networks would not be a concern because the time constraint for our product’s users is measured in minutes, and the network delay introduced being measured in hundreds of milliseconds.
+\noindent Digi International, the company behind DigiMesh claims that networks with around 500 nodes are possible and within the limitations of the standard.  Due to our limited network traffic needs this limit should not be a concern.  Any latency introduced by route discoveries on large networks would not be a concern because the time constraint for our product’s users is measured in minutes, and the network delay introduced being measured in hundreds of milliseconds.\\
 
-The power consumption of the Digi modules can be reduced by configuring the routing nodes to be sleeping.  This setting is configurable and each device will be synchronized to a automatically elected time coordinating node.  With our network measuring user response time in minutes, a sleeping schedule of 1/20 or 1/30 seconds would not likely cause problems.  Sleeping for these time scales would increase runtime by a nonlinear inverse of the fraction. Our estimates place a 1/20 seconds schedule at decreasing power by 57%.
+\noindent The power consumption of the Digi modules can be reduced by configuring the routing nodes to be sleeping.  This setting is configurable and each device will be synchronized to a automatically elected time coordinating node.  With our network measuring user response time in minutes, a sleeping schedule of 1/20 or 1/30 seconds would not likely cause problems.  Sleeping for these time scales would increase runtime by a nonlinear inverse of the fraction. Our estimates place a 1/20 seconds schedule at decreasing power by 57\%.\\
 
-The DigiMesh protocol, while proprietary, meets all the requirements for our client device communication.  With claimed scalability to 500+ nodes it will provide the scalability we intend to support.  The 900 [MHz] frequency range is expected to provide the needed coverage range and allow for a network of connected routing-capable and self-healing end nodes to provide maximum coverage  by allowing distant end nodes to connect while within range of at least a single node.
+\noindent The DigiMesh protocol, while proprietary, meets all the requirements for our client device communication.  With claimed scalability to 500+ nodes it will provide the scalability we intend to support.  The 900 [MHz] frequency range is expected to provide the needed coverage range and allow for a network of connected routing-capable and self-healing end nodes to provide maximum coverage  by allowing distant end nodes to connect while within range of at least a single node.
 
 \subsection{Button}
 
 \subsubsection{Functional Considerations}
-The main design requirement of the button is fairly simple: to allow a user to press a button which will transmit a distress signal to a paired base station.  However, this signal should only be sent when the button is deliberately pressed or an accelerometer reads dangerous levels, and the button should have functionality to cancel this distress call fairly easily.  Aside from user input, distinct feedback is important in user interactive products and the button should relay useful information to/from the wearer via LED indicators, vibration, and/or other forms of low-power notification.  Price is also an important factor involved in the design of this button, and while peripherals like USB connectivity and more sophisticated energy storage solutions could improve user ease-of-use, additional features will be omitted until later prototype models.  The form factor must also be as small as possible, putting limits on battery, board, and antenna sizes.  As the brains of the button, we hunted for a low-powered, Bluetooth functional microcontroller to meet these functional requirements.
+\noindent \\ The main design requirement of the button is fairly simple: to allow a user to press a button which will transmit a distress signal to a paired base station.  However, this signal should only be sent when the button is deliberately pressed or an accelerometer reads dangerous levels, and the button should have functionality to cancel this distress call fairly easily.  Aside from user input, distinct feedback is important in user interactive products and the button should relay useful information to/from the wearer via LED indicators, vibration, and/or other forms of low-power notification.  Price is also an important factor involved in the design of this button, and while peripherals like USB connectivity and more sophisticated energy storage solutions could improve user ease-of-use, additional features will be omitted until later prototype models.  The form factor must also be as small as possible, putting limits on battery, board, and antenna sizes.  As the brains of the button, we hunted for a low-powered, Bluetooth functional microcontroller to meet these functional requirements.\\
 
 \subsubsection{Microcontroller}
-Due to our desires to use Bluetooth Low Energy (BLE) and to accurately communicate ‘HELP’/’CANCEL’ signals between button and base-station, we selected a microcontroller that would optimize our size used, cost, and power efficiency.
+\noindent \\ Due to our desires to use Bluetooth Low Energy (BLE) and to accurately communicate ‘HELP’/’CANCEL’ signals between button and base-station, we selected a microcontroller that would optimize our size used, cost, and power efficiency.
 
-TODO: Missing table
+\begin{table*}[t]
+  \centering
+  \begin{tabular}{>{\bfseries}l|l l l}
+    Device & ST BlueNRG-1 & Kinetis KW30Z & Atmel SAMB11 \\
+    \hline
+    Datasheet & Link & Link & Link \\
+    DevBoard Price & \$111.25 & \$145 for 2 & \\
+    Chip Price & \$3.37 with 10 & \$4.72 with 50 & \$3.51 \\
+    2.4 GHz Antenna & No & Yes (Bluetooth, Zigbee) & No \\
+    Flash & 160 kB & 128-512 kB & 256 kB \\
+    RAM & 24 kB & 64 kB & 128 kB \\
+    Supply & 1.7-3.6 V & 3.6 V & 2.3-3.6 V \\
+    Power Consumption (avg) & 0.174 mWh & 0.596 mWh & 0.544 mWh
+  \end{tabular}
+  \caption{Button Microcontroller Costs and Specifications}
+\end{table*}
 
 TODO: Missing figure
 
@@ -625,13 +640,52 @@ TI LM8330 Keypad IC
 
 \subsubsection{Power Budget}
 
-TODO: Missing table
+\begin{table*}[t]
+  \centering
+  \begin{tabular}{>{\bfseries}l|l l l l l}
+    Device & $V_{CC} (V)$ & $I_{CC}$ (mA) & $P$ (mW) & Duty Cycle & Energy (mWh) \\
+    \hline
+    Atmel SAMB11 uC only & 3.3 & 0.85 & 2.805 & 0.6 & 1.683 \\
+    Atmel SAMB11 RX & 3.3 & 4.5 & 14.85 & 0.2 & 2.97 \\
+    Atmel SAMB11 TX & 3.3 & 3 & 9.9 & 0.2 & 1.98 \\
+    Atmel SAMB11 Standby & 3.3 & 0.00125 & 0.004125 & 0 & 0 \\
+    XBee-Pro 900HP 900MHz Antenna RX & 3.3 & 29 & 95.7 & 0.1 & 9.57 \\
+    XBee-Pro 900HP 900MHz Antenna TX & 3.3 & 120 & 396 & 0.1 & 39.6 \\
+    XBee-Pro 900HP 900MHz Antenna Standby & 3.3 & 0.0025 & 0.00825 & 0.8 & 0.0066 \\
+    TI LM8330 Keypad & 1.8 & 0.03 & 0.054 & 0.05 & 0.0027 \\
+    Crystalfontz CFAH1604A-YYH-JT LCD Controller & 3.3 & 1.2 & 3.96 & 0.05 & 0.198 \\
+    Crystalfontz CFAH1604A-YYH-JT LCD Backlight & 4.2 & 220 & 924 & 0.05 & 46.2 \\
+    LED Lights & 12 & 160 & 1920 & 0.01 & 19.2 \\
+    Audio Speaker & 125 & 700 & 0.01 & 7 \\
+    \hline
+    Max & & 663.58375 & & & \\
+    Total & & & 4067.281375 & & 128.4103
+  \end{tabular}
+  \caption{Base Station Power Budget}
+\end{table*}
 
 This power budget is derived for a typical use case of the base station.  Each component is detailed with its individual power consumption, and in combination with the estimated on-time in an hour’s time, we estimate the total energy consumed by the system in one hour.  The peripherals needed for user interface can be seen as the most power hungry elements on the base station.  However, since our system is designed as a safety product that should hopefully go off no more than once every 6 months, the LED blinkers and audio speaker should contribute minimally to the power usage in the grand scheme of things.  The LCD display will most likely be used more often the other peripherals, as it will display more useful information, such as status updates and neighbor information.  Beyond the initial setup, the LCD should also not be in use for most of the time.
 
 Given the on-time percentage depicted in the table, the system uses about 128.5 mWh of energy in one hour. Assuming a 3000 mAh rechargeable backup battery, the base station can last about 23.3 hours without wall power, just shy of a full day. Because our percentages are generously estimated and software functionality has not yet been optimized for maximum power savings, an even better battery life could be achieved in future revisions.
 
-TODO: Missing table
+\begin{table*}[t]
+  \centering
+  \begin{tabular}{>{\bfseries}l|l l l l l}
+    Device & $V_{CC} (V)$ & $I_{CC}$ (mA) & $P$ (mW) & Duty Cycle & Energy (mWh) \\
+    \hline
+    2.4GHz BTLE Tx & 3 & 15.1 & 45.3 & 0.00028 & 0.0127 \\
+    2.4GHz BTLE Rx & 3 & 7.7 & 23.1 & 0.00028 & 0.00647 \\
+    GPIO Driving LEDs [x2] & 3 & 4.4 & 13.2 & 0.00056 & 0.00739 \\
+    CPU, Flash, and RAM & 3 & 1.9 & 5.7 & 0.00056 & 0.00319 \\
+    24KB RAM retention \& LFO RO ON & 3 & 0.0021 & 0.0063 & 0.994 & 0.00626 \\
+    Peripheral GPIO [x2] (for push-button and accelerometer) & 3 & 0.04 & 0.12 & 1.00 & 0.12 \\
+    ST Accelerometer (LIS2DE12) & 3 & 0.006 & 0.018 & 1.00 & 0.018 \\
+    \hline
+    Max & & 21.4 & & & \\
+    Total & & & & & 0.174
+  \end{tabular}
+  \caption{Button Power Budget}
+\end{table*}
 
 Our button power budget gives us a quantitative tool to better understand its energy storage requirements.  The values above are based off of theoretically agreed-upon (by the group) and reasonable estimates of a typical user case.
 
@@ -806,7 +860,35 @@ The LCD screen shall display a list of menu items for the current view, in stand
 Network Application Layer
 The Application Layer between base station communications has several different commands which can be transmitted.  Most of these events are triggered by the user but since multiple users can contact any station at any time, we need a robust way to handle each request.
 
-TODO: Missing table
+\begin{table*}[t]
+  \centering
+  \begin{tabular}{>{\bfseries}l|l l l}
+    Name & OPCODE (1 byte) & Flags (1 Byte, 8 flags) & Data (2-98 Bytes) \\
+    \hline
+    PING\_REQUEST & 0x01 & ACK & DESTUID \\
+    ACK PING\_REQUEST & PING\_REQUEST & ACK & SRCUID, SRCNAME \\
+    HELP\_REQUEST & 0x02 & ACK|CANCEL|IMM & SRCUID, SRCHOMEADDR, SRCPHONE \\
+    ACK HELP\_REQUEST & HELP\_REQUEST & ACK|CANCEL|IMM & SRCUID \\
+    HELP\_RESPONSE & 0x03 & ACK|ACCEPT & SRCUID \\
+    ACK HELP\_RESPONSE & HELP\_RESPONSE & ACK|ACCEPT & SRCUID \\
+    HELP\_FROM\_ANYONE (BRDCST) & 0x04 & CANCEL|IMM & SRCUID, TTL, SRCNAME \\
+    HELP\_FROM\_ANYONE\_RESP & etc... & ACK|ACCEPT & SRCUID, DESTUID, SRCNAME \\
+    ACK HELP\_FROM\_ANYONE\_RESPONSE & HELP\_FROM\_ANYONE\_RESPONSE & ACK & SRCUID, DESTUID, SRCHOMEADDR, SRCPHONE \\
+    FIND\_HOPS\_REQUEST (BRDCST) & N/A & ORIGINUID, TTL \\
+    FIND\_HOPS\_RESPONSE & ACK & SRCUID, ORIGINUID, TTL \\
+    ACK FIND\_HOPS\_RESPONSE & FIND\_HOPS\_RESPONSE & ACK & SRCUID, DESTUID \\
+    FIND\_NEIGHBORS\_REQUEST (BRDCST) & N/A & ORIGINUID, TTL \\
+    FIND\_NEIGHBORS\_RESPONSE & ACK & SRCUID, ORIGINUID, TTL, SRCNAME \\
+    ACK FIND\_NEIGHBORS\_RESPONSE & FIND\_NEIGHBORS\_RESPONSE & ACK & SRCUID, DESTUID \\
+    FRIEND\_REQUEST & ACK & SRCUID, DESTUID, SRCNAME \\
+    ACK FRIEND\_REQUEST & FRIEND\_REQUEST & ACK & SRCUID, DESTUID, SRCNAME \\
+    FRIEND\_RESPONSE & ACK|ACCEPT & SRCUID, DESTUID \\
+    ACK FRIEND\_RESPONSE & FRIEND\_RESPONSE & ACK & SRCUID, DESTUID \\
+    UNFRIEND\_REQUEST & ACK & SRCUID, DESTUID \\
+    ACK UNFRIEND\_REQUEST & UNFRIEND\_REQUEST & ACK & SRCUID, DESTUID
+  \end{tabular}
+  \caption{Base to Base Packet Structure}
+\end{table*}
 
 Above is the packet structure for the base-to-base communications.  It is setup to take under 100 Bytes to transmit the entire payload for each packet type, which is the maximum payload of a ZigBee transmission using our transceiver.  Any size greater will cause fragmentation of the packet in which we would have to reassemble the packets at the destination.
 
@@ -846,7 +928,23 @@ Currently, only the button and LED indicator will be added to the button.  After
 
 Connectors:
 
-TODO: Missing figure
+\begin{table*}[t]
+  \centering
+  \begin{tabular}{>{\bfseries}l|l l l l}
+    Topology & 2.39 (GHz) & 2.43 (GHz) & 2.46 (GHz) & 2.50 (GHz) \\
+    \hline
+    MIFA (Slanted Feedline, Small) & 42.92 - j4.2, 16.7 pF & 34.1 - j13.8, 5.1 pF & 27.6 - j15.1, 4.4 pF & 22.5 - j16.4, 3.8 pF \\
+    MIFA (Small) & 44.2 + j26.9, 1.8 pF & 67.3 + j29.8, 1.9 pF & 88.6 + j11.9, 745 pH & 89.4 - j9.6, 7.7 pF \\
+    MIFA (Slanted Feedline, Large) & 39.1 + j8.5, 555 pH & 30.0 + j13.1, 857 pH & 27.5 + j13.7, 896 pH & 22.4 + j13.9, 880 pH \\
+    MIFA & 27.9 + j6.1, 411 pH & 20.6 + j8.2, 532 pH & 18.0 + j8.8, 567 pH & 10.5 + j11.1, 692 pH \\
+    IFA (Left Turn) & 17.7 - j36.0, 1.84 pF & 18.1 - j36.0, 1.81 pF & 18.2 - j36.2, 1.78 pF & 18.6 - j36.7, 1.73 pF \\
+    IFA (Right Turn) & 33.9 + j27.9, 1.86 pH & 32.8 + j37.5, 2.46 pH & 43.5 + j49.3, 3.19 pH & 83.2 + j47.9, 3.01 pH \\
+    Patch & 157 + j540, 36.7 nH & 723 + j463, 29.2 nH & 716 - j37.0, 2.1 pF & 420 - j196, 332 fF \\
+    RUFA (Antenova) w/out impedance matching & 107.1 - j46.8, 1.2 pF & 76.1 - j60.8, 1.07 pF & 58.4 - j58.6, 1.1 pF & 44.6 - j53.1, 1.2 pF \\
+    Chip (Johanson) w/out impedance matching & 32.6 - j43.2, 1.53 pF & 31.2 - j39.6, 1.65 pF & 30.2 - j37.2, 1.73 pF & 28.6 - j34.7, 1.83 pF
+  \end{tabular}
+  \caption{2.4 GHz Bluetooth Antenna Impedance Results}
+\end{table*}
 
 Connectors have been added to allow for connection to the microcontroller’s separate breakout board.  Other connectors include JTAG links and test points (not shown here).
 
