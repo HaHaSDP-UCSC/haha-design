@@ -442,7 +442,7 @@ TODO: Missing figure
 
 \subsubsection{Base Station Interconnect}
 
-Wireless interconnection is a crucial component governing the performance of our system.  A communication link between the button and the base station allows for a help alert signal to be transmitted locally in a small home environment, while the link(s) between multiple base stations allows the signal to propagate further through a larger neighborhood.
+Wireless interconnection is a crucial component governing the performance of our system.  A communication link between the button and the base station allows for a help alert signal to be transmitted locally in a small home environment, while the link(s) between multiple base stations allows the signal to propagate further through a larger neighborhood.\\
 
 \begin{table*}[t]
   \centering
@@ -456,51 +456,51 @@ Wireless interconnection is a crucial component governing the performance of our
   \caption{Frequency Band Options}
 \end{table*}
 
-Selection in broadcast frequency considers the limitations of transmitted power as well as form factors of potential antennas.  FCC regulations described in Title 47 Part 15 dictate the limitations of low-power, non-licensed, signal transmissions in the United States air space.  While most frequency bands are very limited for public use, there are several bands which are set aside as free for anyone to use under specific constraints; in comparison, broadcasts in “free” frequencies are allowed much greater transmission power to their restricted counterparts.  Additionally, electromagnetic waves are governed by an inverse relation between its frequency and length; a wave of increasing frequency has a decreasing wavelength and vice versa.  As a rule of thumb, an antenna’s size grows as the wavelength is increased for our signal of interest. Higher frequency signals also tend to have channels with larger bandwidths, allowing for more data to be sent with each transmission.  Due to the simple nature of the application, the high data rate is not critical.
+\noindent Selection in broadcast frequency considers the limitations of transmitted power as well as form factors of potential antennas.  FCC regulations described in Title 47 Part 15 dictate the limitations of low-power, non-licensed, signal transmissions in the United States air space.  While most frequency bands are very limited for public use, there are several bands which are set aside as free for anyone to use under specific constraints; in comparison, broadcasts in “free” frequencies are allowed much greater transmission power to their restricted counterparts.  Additionally, electromagnetic waves are governed by an inverse relation between its frequency and length; a wave of increasing frequency has a decreasing wavelength and vice versa.  As a rule of thumb, an antenna’s size grows as the wavelength is increased for our signal of interest. Higher frequency signals also tend to have channels with larger bandwidths, allowing for more data to be sent with each transmission.  Due to the simple nature of the application, the high data rate is not critical.\\
 
-Communication between the button and base station is projected to be at least 50 feet, while distances between base stations should be able to reach at least 300 meters (approximately 1000 feet).  To meet these specifications while keeping within FCC regulations, the “free” frequency bands will be used. Two of the most popular frequency bands include the 915 MHz band and the 2.4 GHz band.
+\noindent Communication between the button and base station is projected to be at least 50 feet, while distances between base stations should be able to reach at least 300 meters (approximately 1000 feet).  To meet these specifications while keeping within FCC regulations, the “free” frequency bands will be used. Two of the most popular frequency bands include the 915 MHz band and the 2.4 GHz band.\\
 
-Frequencies:
+\noindent \textbf {Radio Frequencies:}
 
 \begin{LaTeXdescription}
   \item [2.4 GHz] will be used for the button-to-base communication. This band is hugely populated by many mainstream applications like WiFi and Bluetooth, but the small distance between the button and base will hopefully not be heavily affected by other traffic. Additionally, antennas in the 2.4 GHz range can be made compact, allowing the button to made into a small form factor.\\
-  \item[915 MHz] will be used for base-to-base communications.  Antennas in this band will generally be slightly larger than the corresponding 2.4 GHz antennas, but because base stations are designed to be stationary in a person’s home, antenna size is no longer a limiting factor.  Furthermore, air space in the 915 MHz band is not as congested to its 2.4 GHz counterpart so the reduction in potential interference allows for longer transmissions to be more attainable.
+  \item[915 MHz] will be used for base-to-base communications.  Antennas in this band will generally be slightly larger than the corresponding 2.4 GHz antennas, but because base stations are designed to be stationary in a person’s home, antenna size is no longer a limiting factor.  Furthermore, air space in the 915 MHz band is not as congested to its 2.4 GHz counterpart so the reduction in potential interference allows for longer transmissions to be more attainable.\\
 \end{LaTeXdescription}
 
-Base-to-base protocols:
+\noindent \textbf {Base-to-Base Protocols:}\\
 
 \begin{LaTeXdescription}
-  \item [DigiMesh] DigiMesh is a proprietary protocol that implements a variant of the AODV routing algorithm. Includes network self-configuration, self-healing, and sleep synchronization.
-  \item [802.15.4  (Custom Protocol)] Writing our own mesh protocol on top of the 802.15.4 standard, which on its own only provides point to point connections (possibly with reliability, depending on implementation). This choice would be difficult and take significant amounts of time to accomplish in the time that we have.
-  \item [ZigBee] A ZigBee device will come with a full stack implementation of a mesh networking protocol which will allow us to concentrate on the implementation of the actual device. It will also allow us to have the time to extensively test the platform to see the limits of the protocol.
-  \item [Bluetooth Low Energy] Bluetooth Low Energy (BLE) is a point-to-point wireless communication technology.  Its power efficiency allows the user to implement a variety of services, making feedback possible such as when the button’s battery is low or detecting if the button is located near the base station.  These services allow the button to be smart and flexible when communicating.
+  \item [DigiMesh] DigiMesh is a proprietary protocol that implements a variant of the AODV routing algorithm. Includes network self-configuration, self-healing, and sleep synchronization.\\
+  \item [802.15.4  (Custom Protocol)] Writing our own mesh protocol on top of the 802.15.4 standard, which on its own only provides point to point connections (possibly with reliability, depending on implementation). This choice would be difficult and take significant amounts of time to accomplish in the time that we have.\\
+  \item [ZigBee] A ZigBee device will come with a full stack implementation of a mesh networking protocol which will allow us to concentrate on the implementation of the actual device. It will also allow us to have the time to extensively test the platform to see the limits of the protocol.\\
+  \item [Bluetooth Low Energy] Bluetooth Low Energy (BLE) is a point-to-point wireless communication technology.  Its power efficiency allows the user to implement a variety of services, making feedback possible such as when the button’s battery is low or detecting if the button is located near the base station.  These services allow the button to be smart and flexible when communicating.\\
 \end{LaTeXdescription}
 
-DigiMesh features the following:
+\textbf {DigiMesh features the following:}
 
 \begin{LaTeXdescription}
-  \item[Self-healing] any node may enter or leave the network at any time without causing the network as a whole to fail.
-  \item[Peer-to-peer architecture] no hierarchy and no parent-child relationships are needed.
-  \item[Quiet Protocol] routing overhead will be reduced by using a reactive protocol similar to AODV.
-  \item[Route Discovery] rather than maintaining a network map, routes will be discovered and created only when needed.
-  \item[Selective acknowledgments] only the destination node will reply to route requests.
-  \item[Reliable delivery] reliable delivery of data is accomplished by means of acknowledgements.
-  \item[Sleep Modes] low power sleep modes with synchronized wake up are supported, with variable sleep and wake up times.
+  \item[Self-healing] any node may enter or leave the network at any time without causing the network as a whole to fail.\\
+  \item[Peer-to-peer architecture] no hierarchy and no parent-child relationships are needed.\\
+  \item[Quiet Protocol] routing overhead will be reduced by using a reactive protocol similar to AODV.\\
+  \item[Route Discovery] rather than maintaining a network map, routes will be discovered and created only when needed.\\
+  \item[Selective acknowledgments] only the destination node will reply to route requests.\\
+  \item[Reliable delivery] reliable delivery of data is accomplished by means of acknowledgements.\\
+  \item[Sleep Modes] low power sleep modes with synchronized wake up are supported, with variable sleep and wake up times.\\
 \end{LaTeXdescription}
 
-The DigiMesh protocol is a proprietary protocol and uses a variant of the AODV routing algorithm. Routing tables are built only for the immediate destinations a node has a need for.  Like wirelessHART, all nodes can be routers and have the option to sleep and wake on a synchronized schedule[6].
+\noindent The DigiMesh protocol is a proprietary protocol and uses a variant of the AODV routing algorithm. Routing tables are built only for the immediate destinations a node has a need for.  Like wirelessHART, all nodes can be routers and have the option to sleep and wake on a synchronized schedule[6].\\
 
-Routers for the network are determined as needed which results in routing table entries only for those routes in use. Unlike the other protocols there is no central coordinator and synchronization is accomplished through an election process.  Routing to nodes not directly connected to the sending node is accomplished by sending to destination specified in the routing table, which if does not exist the route is discovered through AODV and stored.
+\noindent Routers for the network are determined as needed which results in routing table entries only for those routes in use. Unlike the other protocols there is no central coordinator and synchronization is accomplished through an election process.  Routing to nodes not directly connected to the sending node is accomplished by sending to destination specified in the routing table, which if does not exist the route is discovered through AODV and stored.\\
 
-If a packet on its way to a destination encounters a node that was present in the routing table but no longer is failing at the time of sending, an AODV discovery is initiated and if the correct route if found through an alternate path the routing tables of all affected nodes will be updated and the packet will be delivered[6].  All packets are acknowledged with messages sent to the receiver.
+\noindent If a packet on its way to a destination encounters a node that was present in the routing table but no longer is failing at the time of sending, an AODV discovery is initiated and if the correct route if found through an alternate path the routing tables of all affected nodes will be updated and the packet will be delivered[6].  All packets are acknowledged with messages sent to the receiver.\\
 
-Because every node has the ability to be a sleeping node power can be saved in between routed packets[6].  AODV discoveries are only initiated when needed and so additional network traffic is not present.  This feature also presents a limitation causing high latency when changing network conditions cause routes to be invalidated and rediscovered. It also affects network throughput by limiting the amount of packets that can be sent when routes are not known.
+\noindent Because every node has the ability to be a sleeping node power can be saved in between routed packets[6].  AODV discoveries are only initiated when needed and so additional network traffic is not present.  This feature also presents a limitation causing high latency when changing network conditions cause routes to be invalidated and rediscovered. It also affects network throughput by limiting the amount of packets that can be sent when routes are not known.\\
 
-Digi International, the company behind DigiMesh claims that networks with around 500 nodes are possible and within the limitations of the standard.  Due to our limited network traffic needs this limit should not be a concern.  Any latency introduced by route discoveries on large networks would not be a concern because the time constraint for our product’s users is measured in minutes, and the network delay introduced being measured in hundreds of milliseconds.
+\noindent Digi International, the company behind DigiMesh claims that networks with around 500 nodes are possible and within the limitations of the standard.  Due to our limited network traffic needs this limit should not be a concern.  Any latency introduced by route discoveries on large networks would not be a concern because the time constraint for our product’s users is measured in minutes, and the network delay introduced being measured in hundreds of milliseconds.\\
 
-The power consumption of the Digi modules can be reduced by configuring the routing nodes to be sleeping.  This setting is configurable and each device will be synchronized to a automatically elected time coordinating node.  With our network measuring user response time in minutes, a sleeping schedule of 1/20 or 1/30 seconds would not likely cause problems.  Sleeping for these time scales would increase runtime by a nonlinear inverse of the fraction. Our estimates place a 1/20 seconds schedule at decreasing power by 57\%.
+\noindent The power consumption of the Digi modules can be reduced by configuring the routing nodes to be sleeping.  This setting is configurable and each device will be synchronized to a automatically elected time coordinating node.  With our network measuring user response time in minutes, a sleeping schedule of 1/20 or 1/30 seconds would not likely cause problems.  Sleeping for these time scales would increase runtime by a nonlinear inverse of the fraction. Our estimates place a 1/20 seconds schedule at decreasing power by 57\%.\\
 
-The DigiMesh protocol, while proprietary, meets all the requirements for our client device communication.  With claimed scalability to 500+ nodes it will provide the scalability we intend to support.  The 900 [MHz] frequency range is expected to provide the needed coverage range and allow for a network of connected routing-capable and self-healing end nodes to provide maximum coverage  by allowing distant end nodes to connect while within range of at least a single node.
+\noindent The DigiMesh protocol, while proprietary, meets all the requirements for our client device communication.  With claimed scalability to 500+ nodes it will provide the scalability we intend to support.  The 900 MHz frequency range is expected to provide the needed coverage range and allow for a network of connected routing-capable and self-healing end nodes to provide maximum coverage  by allowing distant end nodes to connect while within range of at least a single node.
 
 \subsection{Button}
 
@@ -510,7 +510,7 @@ The main design requirement of the button is fairly simple: to allow a user to p
 
 \subsubsection{Microcontroller}
 
-Due to our desires to use Bluetooth Low Energy (BLE) and to accurately communicate ‘HELP’/’CANCEL’ signals between button and base-station, we selected a microcontroller that would optimize our size used, cost, and power efficiency.
+Due to our desires to use Bluetooth Low Energy (BLE) and to accurately communicate ‘HELP’/’CANCEL’ signals between button and base-station, we selected a microcontroller that would optimize our size used, cost, and power efficiency.\\
 
 \begin{table*}[t]
   \centering
@@ -531,7 +531,7 @@ Due to our desires to use Bluetooth Low Energy (BLE) and to accurately communica
 
 TODO: Missing figure
 
-The values given for average power consumption are based on a protocol initially agreed upon by our group, and average powers are presented as rough estimates for the power used by the button as a whole.  The maximum energy stored in a standard 3V coin cell battery is 1000mAh, which constrains us to a power budget of 3000 mWh/battery at most.  While these microcontrollers have similar characteristics of operation, the most power and cost efficient solution is the ST BlueNRG-1, so we decided to explore further button development with it.
+\noindent The values given for average power consumption are based on a protocol initially agreed upon by our group, and average powers are presented as rough estimates for the power used by the button as a whole.  The maximum energy stored in a standard 3V coin cell battery is 1000mAh, which constrains us to a power budget of 3000 mWh/battery at most.  While these microcontrollers have similar characteristics of operation, the most power and cost efficient solution is the ST BlueNRG-1, so we decided to explore further button development with it.
 
 \section{General Specifications}
 
@@ -539,7 +539,7 @@ The values given for average power consumption are based on a protocol initially
 
 \subsubsection{Button Microcontroller}
 
-Hardware: STMicroelectronics BlueNRG-1
+\textbf {Hardware:} STMicroelectronics BlueNRG-1
 
 \begin{itemize}
   \item Core and Memory
@@ -578,7 +578,7 @@ Hardware: STMicroelectronics BlueNRG-1
 
 \subsubsection{Base Station Microcontroller}
 
-Hardware: Atmel SAMB11
+\textbf {Hardware:} Atmel SAMB11
 
 \begin{itemize}
   \item Core and Memory
@@ -612,7 +612,7 @@ Hardware: Atmel SAMB11
 
 \subsubsection{Base Station Interconnect}
 
-Hardware: Digi XBee-PRO 900HP RF Module
+\textbf {Hardware:} Digi ZigBee-PRO 900HP RF Module
 
 \begin{itemize}
   \item Transceiver Info
@@ -626,14 +626,14 @@ Hardware: Digi XBee-PRO 900HP RF Module
       \item RF Data Rate  10 Kbps or 200 Kbps
       \item Indoor/Urban Range  10 Kbps: up to 2000 ft (610 m); 200 Kbps: up to 1000 ft (305 m)
       \item Outdoor/ Line-Of-Sight Range  10 Kbps: up to 9 miles (14 km); 200 Kbps: up to 4 miles (6.5 km) ( w/ 2.1 dB dipole antennas)
-      \item Transmit Power  Up to 24 dBm (250 mW) software selectable
+      \item Transmit Power up to 24 dBm (250 mW) software selectable
       \item Receiver Sensitivity  -101 dBm @ 200 Kbps, -110 dBm @ 10 Kbps
     \end{itemize}
   \item Current Consumption
     \begin{itemize}
-      \item SLEEP = 2.5µA
-      \item IDLE/RX\_ON = 29mA typical at 3.3V (35mA max)
-      \item BUSY\_TX = 215mA typical for +24dBm, 250mW (290mA max)
+      \item SLEEP = 2.5 µA
+      \item IDLE/RX\_ON = 29 mA typical at 3.3 V (35 mA max)
+      \item BUSY\_TX = 215 mA typical for +24 dBm, 250 mW (290 mA max)
     \end{itemize}
 \end{itemize}
 
@@ -672,9 +672,9 @@ TI LM8330 Keypad IC
   \caption{Base Station Power Budget}
 \end{table*}
 
-This power budget is derived for a typical use case of the base station.  Each component is detailed with its individual power consumption, and in combination with the estimated on-time in an hour’s time, we estimate the total energy consumed by the system in one hour.  The peripherals needed for user interface can be seen as the most power hungry elements on the base station.  However, since our system is designed as a safety product that should hopefully go off no more than once every 6 months, the LED blinkers and audio speaker should contribute minimally to the power usage in the grand scheme of things.  The LCD display will most likely be used more often the other peripherals, as it will display more useful information, such as status updates and neighbor information.  Beyond the initial setup, the LCD should also not be in use for most of the time.
+This power budget is derived for a typical use case of the base station.  Each component is detailed with its individual power consumption, and in combination with the estimated on-time in an hour’s time, we estimate the total energy consumed by the system in one hour.  The peripherals needed for user interface can be seen as the most power hungry elements on the base station.  However, since our system is designed as a safety product that should hopefully go off no more than once every 6 months, the LED blinkers and audio speaker should contribute minimally to the power usage in the grand scheme of things.  The LCD display will most likely be used more often the other peripherals, as it will display more useful information, such as status updates and neighbor information.  Beyond the initial setup, the LCD should also not be in use for most of the time.\\
 
-Given the on-time percentage depicted in the table, the system uses about 128.5 mWh of energy in one hour. Assuming a 3000 mAh rechargeable backup battery, the base station can last about 23.3 hours without wall power, just shy of a full day. Because our percentages are generously estimated and software functionality has not yet been optimized for maximum power savings, an even better battery life could be achieved in future revisions.
+\noindent Given the on-time percentage depicted in the table, the system uses about 128.5 mWh of energy in one hour. Assuming a 3000 mAh rechargeable backup battery, the base station can last about 23.3 hours without wall power, just shy of a full day. Because our percentages are generously estimated and software functionality has not yet been optimized for maximum power savings, an even better battery life could be achieved in future revisions.
 
 \begin{table*}[t]
   \centering
@@ -695,7 +695,7 @@ Given the on-time percentage depicted in the table, the system uses about 128.5 
   \caption{Button Power Budget}
 \end{table*}
 
-Our button power budget gives us a quantitative tool to better understand its energy storage requirements.  The values above are based off of theoretically agreed-upon (by the group) and reasonable estimates of a typical user case.
+\noindent Our button power budget gives us a quantitative tool to better understand its energy storage requirements.  The values above are based off of theoretically agreed-upon (by the group) and reasonable estimates of a typical user case.
 
 \section{System Overview}
 
@@ -712,16 +712,16 @@ The user of this product will interface with the base station through a 16x4 LCD
 The hardware of the base station and the remote button will be designed and developed by the team.
 
 \subsubsection{Operations}
-The user of the base station will be required to setup a priority contact list.  The system will have the option of scanning for all available network nodes which will display the name of nearby users and their node number.  Configuring of a user to contact can also be done via a pre-shared ID number which each base station user can obtain through the user interface.
+The user of the base station will be required to setup a priority contact list.  The system will have the option of scanning for all available network nodes which will display the name of nearby users and their node number.  Configuring of a user to contact can also be done via a pre-shared ID number which each base station user can obtain through the user interface.\\
 
-When a help request is sent, the initiating user will be able to cancel the request by long-pressing the help button either on the base station or remote button.
+\noindent When a help request is sent, the initiating user will be able to cancel the request by long-pressing the help button either on the base station or remote button.
 
 \subsection{Product Functions}
 
 \begin{LaTeXdescription}
-\item[Send Help Request] This function will send a help request beginning with the first base station in the user’s contact list. Functionality for this will be present on both the remote button and the base station.
-\item[Cancel Help Request] This function cancels a help request alert. In the event a user has already responded to a help request, an additional signal will be sent to the responder’s box informing them of the cancelled request.
-\item[Setup Contact List] This set of functions will facilitate configuring the user’s contact list.  Users can either enter ID numbers of the neighbors they wish to add or they can scan the network for them.
+\item[Send Help Request] This function will send a help request beginning with the first base station in the user’s contact list. Functionality for this will be present on both the remote button and the base station.\\
+\item[Cancel Help Request] This function cancels a help request alert. In the event a user has already responded to a help request, an additional signal will be sent to the responder’s box informing them of the cancelled request.\\
+\item[Setup Contact List] This set of functions will facilitate configuring the user’s contact list.  Users can either enter ID numbers of the neighbors they wish to add or they can scan the network for them.\\
 \item[Scan Network] This function scans the network for available users and provides user contact details. It will interface directly with the Setup Contact List.
 \end{LaTeXdescription}
 
@@ -755,13 +755,13 @@ TODO: Missing figure
 
 \subsection{Network Simulation}
 
-NS3 is a discrete-event network simulator. A discrete-event are those events which occur in a sequence over time. Each event occurs at a particular instant in time and marks a change of state in the system. NS3 facilitates the defining of this system and mechanisms to view and record the state of every mechanism within the system.
+NS3 is a discrete-event network simulator. A discrete-event are those events which occur in a sequence over time. Each event occurs at a particular instant in time and marks a change of state in the system. NS3 facilitates the defining of this system and mechanisms to view and record the state of every mechanism within the system.\\
 
-Our goal with NS3 is to simulate the network as closely as possible to the DigiMesh protocol using the AODV algorithm as a basis. Packet broadcasts that approximate our own application layer packets will be configured and the number of nodes scaled such that the network performance can be analyzed as the number of nodes or amount of network traffic increases. This will allow us to realize with some level of certainty the level at which our network will be deployable. It also will provide us with a basis for any future troubleshooting of the network that we might encounter a need for.
+\noindent Our goal with NS3 is to simulate the network as closely as possible to the DigiMesh protocol using the AODV algorithm as a basis. Packet broadcasts that approximate our own application layer packets will be configured and the number of nodes scaled such that the network performance can be analyzed as the number of nodes or amount of network traffic increases. This will allow us to realize with some level of certainty the level at which our network will be deployable. It also will provide us with a basis for any future troubleshooting of the network that we might encounter a need for.\\
 
-In its current form, the simulator creates a configurable number of nodes a random x-y-z distance apart and has the two furthest nodes communicate packets. The communications regarding the AODV algorithm are traced and logged to the screen along with the communication packets. As state above, this will be modified in the coming quarter to be more representative of our system.
+\noindent In its current form, the simulator creates a configurable number of nodes a random x-y-z distance apart and has the two furthest nodes communicate packets. The communications regarding the AODV algorithm are traced and logged to the screen along with the communication packets. As state above, this will be modified in the coming quarter to be more representative of our system.\\
 
-Below is a sample output:
+\noindent Below is a sample output:
 
 \begin{lstlisting}
 Creating 10 nodes 100 m apart.
@@ -797,9 +797,12 @@ PING  10.0.0.10 56(84) bytes of data.
 [node 0] Valid Route not found
 [node 0] Send RREQ with id 1 to socket
 on 10.0.0.10
-[node 9] AODV node 0x1bf5760 received a AODV packet from 10.0.0.1 to 10.0.0.10
-[node 9] Send reply since I am the destination
-[node 9] Exist route to 10.0.0.1 from interface 10.0.0.10
+[node 9] AODV node 0x1bf5760 received 
+a AODV packet from 10.0.0.1 to 10.0.0.10
+[node 9] Send reply since I am the 
+destination
+[node 9] Exist route to 10.0.0.1 from 
+interface 10.0.0.10
 [node 9] Updating VALID route
 [node 9] Updating VALID route
 \end{lstlisting}
@@ -813,17 +816,17 @@ The button and base station are paired together to form a master/slave relations
 \subsubsection{Button}
 
 \begin{LaTeXdescription}
-\item[Case 1]:  Initial connection established between button and base station.
+\item[Case 1]: Initial connection established between button and base station.
   \begin{itemize}
     \item The button device is initially in standby mode waiting to be paired.  The button is pressed on the base station to establish the initial connection process.  The button on the button device is then pressed and held for a several seconds until a message appears on the base station confirming successful connection.  This initial process only occurs once when a single button device is registered to a base station.
   \end{itemize}
-\item[Case 2]:  The button is pressed within range of the base station.
+\item[Case 2]: The button is pressed within range of the base station.
   \begin{itemize}
     \item The button can either send a help alert signal or cancel a help alert packet.
     \item If the button is pressed and held down for 3 seconds, it will transmit a help alert packet to the base station.  After acknowledging a help alert packet was received, the base station will transmit the help alert to the contacts listed in the requester’s network list.  If the first person on the list does not respond within a certain timeframe, it will timeout and go to the next contact on the list.  If no one on the list responds, then the packet is sent to additional neighbors.  If none of these additional neighbors respond, the packet is then sent through a certain number of network hops which will be calculated according to the density of base stations existing base stations.  If no one still responds, then the packet is sent through the entire network of base stations as a final pass.
     \item If the button is pressed 3 times consecutively, then it will transmit a cancellation of the help request packet.  After receiving and acknowledging this type of packet was indeed received, it will cancel the help request.  There will be a help request cancellation message displayed on the base station.
   \end{itemize}
-\item[Case 3]:  The button is pressed when out of range of the base station.
+\item[Case 3]: The button is pressed when out of range of the base station.
   \begin{itemize}
     \item If the button is out of range of the base station, it will disconnect and won’t be able to transmit or receive any packets.  Once it is back within range of the base station, it will automatically connect to it and a successful connection message will be displayed on the base station.
   \end{itemize}
@@ -832,7 +835,7 @@ The button and base station are paired together to form a master/slave relations
     \item The base station continually polls information from the button.  The percentage of the button’s battery life is polled by the base station for a given amount of time.  Another query occurs every 6 hours to determine if the button is still connected to the base station.  If base station does not receive a signal from the button within 12 hours, it will notify the user there is an issue with the button by displaying this information on the base station.
     \item When the battery is drained under a certain percentage, it would notify the user the battery is low.  A message will be displayed on the base station informing the user to replace the button battery.  The LED on the button will also become a solid red color to signal the low battery life and it will eventually begin blinking if the battery life is critically low and in need of immediate replacement.
   \end{itemize}
-\item[Case 5]:  The button is not pressed but wakes up to send notifications to base stations not within range.
+\item[Case 5]: The button is not pressed but wakes up to send notifications to base stations not within range.
   \begin{itemize}
     \item Same conditions as Case 3.
   \end{itemize}
@@ -842,17 +845,17 @@ The button and base station are paired together to form a master/slave relations
 
 TODO: Missing UML class diagram
 
-Application Modules
-As can be seen by the UML layout above, our application will be a series of modules meant to interconnect and provide the needed functionality. By creating modules for each portion of software it will be possible for modifications to be easily implemented by replacing the relevant modules. This project is being developed as an open-source project and as such it is our endeavor to allow modifying the system easy and straightforward.
+\noindent \textbf {Application Modules}\\
+As can be seen by the UML layout above, our application will be a series of modules meant to interconnect and provide the needed functionality. By creating modules for each portion of software it will be possible for modifications to be easily implemented by replacing the relevant modules. This project is being developed as an open-source project and as such it is our endeavor to allow modifying the system easy and straightforward.\\
 
-Chief amongst this modularity is the “network device” layer that we are developing to utilize a Digi XBee module. This layer and its modules will be responsible for receiving data in the form of a character string from the upper application and converting it as necessary to be sent as an XBee network frame. On the receiving end it will do the reverse operation and provide the upper layer with a character string. In the event that a different transceiver wished to be used, creating and implementing similar functions would allow the majority of the application layer to remain unmodified.
+\noindent Chief among this modularity is the “network device” layer we are developing to utilize a Digi ZigBee module. This layer and its modules will be responsible for receiving data in the form of a character string from the upper application and converting it as necessary to be sent as an XBee network frame. On the receiving end it will do the reverse operation and provide the upper layer with a character string. In the event that a different transceiver wished to be used, creating and implementing similar functions would allow the majority of the application layer to remain unmodified.\\
 
-User Interface
-The base station design is motivated by two primary goals: (1) easy and intuitive to use by elderly people in emergency situations, and (2) composed of inexpensive components to support wide adoption by the community.  These goals are somewhat contradictory: inexpensive components are often the most difficult to work with and better components are more expensive which will drive up the overall cost of the system.  Our sponsor, Professor Emeritus Don Wiberg, has given us a soft limit of approximately \$50 for the entire system’s components (not including packaging), which greatly limits which components are available for our project.
+\noindent \textbf {User Interface}\\
+The base station design is motivated by two primary goals: (1) easy and intuitive to use by elderly people in emergency situations, and (2) composed of inexpensive components to support wide adoption by the community.  These goals are somewhat contradictory: inexpensive components are often the most difficult to work with and better components are more expensive which will drive up the overall cost of the system.  Our sponsor, Professor Emeritus Don Wiberg, has given us a soft limit of approximately \$50 for the entire system’s components (not including packaging), which greatly limits which components are available for our project.\\
 
-Thus, it is our decision to make the base station’s interface as easy to use as possible, making it critical the user interface software be as simple as possible.  This requires minimizing the amount of input the user can provide, making it immediately obvious what is expected of them.  This has the additional effect of minimizing our state machine, which should make programming the device much easier.
+\noindent Thus, it is our decision to make the base station’s interface as easy to use as possible, making it critical the user interface software be as simple as possible.  This requires minimizing the amount of input the user can provide, making it immediately obvious what is expected of them.  This has the additional effect of minimizing our state machine, which should make programming the device much easier.\\
 
-The base station will also be equipped with 5-6 buttons, which will serve the following purposes:
+\noindent The base station will also be equipped with 5-6 buttons, which will serve the following purposes:\\
 
 \begin{LaTeXdescription}
 \item[Power] Turns the device on and off
@@ -860,13 +863,13 @@ The base station will also be equipped with 5-6 buttons, which will serve the fo
 \item[Down] Move down in a list of menu items
 \item[Left/Back/Cancel] Cancel action and move back in the tree of menus
 \item[Right/Forward/Select] Select the current menu item at the top of the screen and move forward in the tree of menus
-\item[Help Request (Optional)] Trigger the emergency request system, performing the same functionality as pressing your Bluetooth button
+\item[Help Request (Optional)] Trigger the emergency request system, performing the same functionality as pressing your Bluetooth button\\
 \end{LaTeXdescription}
 
-The LCD screen shall display a list of menu items for the current view, in standard operation.  These menu items can be thought of as (possibly selectable) options which the user can place their cursor on.  In the system, the cursor, or “currently selected item”, is the topmost item in the list.  Below the cursor is a variable length of other viable options which can be scrolled through using the up and down buttons.  Moving your cursor shifts the complete list up or down one space and the lists have currently been configured to wrap around at the end (but can be easily configured to not do so).  If the cursor is selectable, then the last character of the “it’s” line is the “>” character, to signify a right button press will select that item.  The rest of the items will have similar indicators as their last characters; the dash “-” character signifies the item is a parent of several submenus (example:  User Info has children {User Port, User Name, User Address, User Phone}), the tilde “~” character signifies the item performs some other operation such as deleting an entry from the contacts list.  The back arrow will navigate to the current item’s parent and exit the existing submenu.
+\noindent The LCD screen will display a list of menu items for the current view, in standard operation.  These menu items can be thought of as (possibly selectable) options which the user can place their cursor on.  In the system, the cursor, or “currently selected item”, is the topmost item in the list.  Below the cursor is a variable length of other viable options which can be scrolled through using the up and down buttons.  Moving your cursor shifts the complete list up or down one space and the lists have currently been configured to wrap around at the end (but can be easily configured to not do so).  If the cursor is selectable, then the last character of the “it’s” line is the “>” character, to signify a right button press will select that item.  The rest of the items will have similar indicators as their last characters; the dash “-” character signifies the item is a parent of several submenus (example:  User Info has children {User Port, User Name, User Address, User Phone}), the tilde “~” character signifies the item performs some other operation such as deleting an entry from the contacts list.  The back arrow will navigate to the current item’s parent and exit the existing submenu.\\
 
-Network Application Layer
-The Application Layer between base station communications has several different commands which can be transmitted.  Most of these events are triggered by the user but since multiple users can contact any station at any time, we need a robust way to handle each request.
+\noindent \textbf {Network Application Layer}\\
+The Application Layer between base station communications has several different commands which can be transmitted.  Most of these events are triggered by the user but since multiple users can contact any station at any time, we need a robust way to handle each request.\\
 
 \begin{table*}[t]
   \centering
@@ -894,69 +897,70 @@ The Application Layer between base station communications has several different 
     ACK FRIEND\_RESPONSE & FRIEND\_RESPONSE & ACK & SRCUID, DESTUID \\
     UNFRIEND\_REQUEST & ACK & SRCUID, DESTUID \\
     ACK UNFRIEND\_REQUEST & UNFRIEND\_REQUEST & ACK & SRCUID, DESTUID
-  \end{tabular}
-  \caption{Base to Base Packet Structure}
+  \end{tabular} \linebreak
+  \caption {Base-to-Base Packet Structure}
 \end{table*}
 
-Above is the packet structure for the base-to-base communications.  It is setup to take under 100 Bytes to transmit the entire payload for each packet type, which is the maximum payload of a ZigBee transmission using our transceiver.  Any size greater will cause fragmentation of the packet in which we would have to reassemble the packets at the destination.
+\noindent Above is the packet structure for the base-to-base communications.  It is setup to take under 100 Bytes to transmit the entire payload for each packet type, which is the maximum payload of a ZigBee transmission using our transceiver.  Any size greater will cause fragmentation of the packet in which we would have to reassemble the packets at the destination.\\
 
-Each station will have a packet queue where it can send packets and expect to receive packets from the destinations in which they were sent.  These queues will have timeouts to protect the integrity of the device as well as allowing communication between devices.
+\noindent Each station will have a packet queue where it can send packets and expect to receive packets from the destinations in which they were sent.  These queues will have timeouts to protect the integrity of the device as well as allowing communication between devices.\\
 
-The packets which allow users to connect to one another include the FIND\_NEIGHBORS\_REQUEST, which polls the area for contacts.  This will allow the user to locate their individual friends who are nearby as well as individually connect to people who are not within range, providing they are on the same network.
+\noindent The packets which allow users to connect to one another include the FIND\_NEIGHBORS\_REQUEST, which polls the area for contacts.  This will allow the user to locate their individual friends who are nearby as well as individually connect to people who are not within range, providing they are on the same network.\\
 
-The FRIEND/UNFRIEND packet allows friends to connect to a base station and provides for help requests to be sent.
+\noindent The FRIEND/UNFRIEND packet allows friends to connect to a base station and provides for help requests to be sent.
 
-The main packet driving the system's purpose is the HELP\_REQUEST packet.  If two devices are paired, they can send these packets to one another.  When a help request is sent, it is immediately acknowledged, flags are set within the paired system, and a call to action takes the form of various peripherals with flashing lights and generated noise to signal the friend has requested assistance.  The only way to turn it off is to wait for it to timeout or respond with an accept/reject acknowledgement.  If it does timeout, additional friends on the list are contacted until the list is exhausted.
+\noindent The main packet driving the system's purpose is the HELP\_REQUEST packet.  If two devices are paired, they can send these packets to one another.  When a help request is sent, it is immediately acknowledged, flags are set within the paired system, and a call to action takes the form of various peripherals with flashing lights and generated noise to signal the friend has requested assistance.  The only way to turn it off is to wait for it to timeout or respond with an accept/reject acknowledgement.  If it does timeout, additional friends on the list are contacted until the list is exhausted.\\
 
-The HELP\_FROM\_ANYONE Request, which in conjunction with the FIND\_HOPS packet types, allows the base station to request help based on proximity to the station.  This is only used if no friends can answer the original alert request.
+\noindent The HELP\_FROM\_ANYONE Request, which in conjunction with the FIND\_HOPS packet types, allows the base station to request help based on proximity to the station.  This is only used if no friends can answer the original alert request.
 
 \subsection{Hardware}
 
 \subsubsection{Button}
 
-Microcontroller
+\textbf {Microcontroller}
 
 TODO: Missing figure
 
-The microcontroller design layout was based on recommended considerations from relevant application notes and datasheets.  The BlueNRG-1 uses two external oscillators with ambiguous capacitor values in this first revision diagram to be clarified after further testing.  The microcontroller layout will be on a separate breakout board with an attached antenna [as well as all other components displayed above] to allow for faster, more consistent prototyping.  However, our early revisions connect to antennas via an edge-mounted SMA connector.  This layout must allow for flexibility of GPIO assignments, so the majority of the pins are mapped to corresponding headers on the attached power/peripheral board even if currently out of use.
+\noindent The microcontroller design layout was based on recommended considerations from relevant application notes and datasheets.  The BlueNRG-1 uses two external oscillators with ambiguous capacitor values in this first revision diagram to be clarified after further testing.  The microcontroller layout will be on a separate breakout board with an attached antenna [as well as all other components displayed above] to allow for faster, more consistent prototyping.  However, our early revisions connect to antennas via an edge-mounted SMA connector.  This layout must allow for flexibility of GPIO assignments, so the majority of the pins are mapped to corresponding headers on the attached power/peripheral board even if currently out of use.\\
 
-Programming will be completed over 5 JTAG-specified pins.  During layout, great considerations have been taken to minimize the distances between high-speed components, particularly the bypass capacitors.
+\noindent Programming will be completed over 5 JTAG-specified pins.  During layout, great considerations have been taken to minimize the distances between high-speed components, particularly the bypass capacitors.\\
 
-Power:
-
-TODO: Missing figure
-
-The basic power system for the button needs to be stable and immune to noisy environments.  Our next revision will aim to add complexity and at least include a forward-biased diode at the cathode of the battery.
-
-Peripherals:
+\noindent \textbf {Power:}
 
 TODO: Missing figure
 
-Currently, only the button and LED indicator will be added to the button.  After functionality is proven, we will reconsider adding an accelerometer.
+\noindent The basic power system for the button needs to be stable and immune to noisy environments.  Our next revision will aim to add complexity and at least include a forward-biased diode at the cathode of the battery.\\
 
-Connectors:
+\noindent \textbf {Peripherals:}
+
+TODO: Missing figure
+
+\noindent Currently, only the button and LED indicator will be added to the button.  After functionality is proven, we will reconsider adding an accelerometer.\\
+
+\noindent \textbf {Connectors:}
 
 \begin{table*}[t]
   \centering
   \begin{tabular}{>{\bfseries}l|l l l l}
-    Topology & 2.39 (GHz) & 2.43 (GHz) & 2.46 (GHz) & 2.50 (GHz) \\
+  \hline
+    Topology & \multicolumn{1}{|c|}{2.39 GHz} & \multicolumn{1}{|c|}{2.43 GHz} & \multicolumn{1}{|c|}{2.46 GHz} & \multicolumn{1}{|c|}{2.50 GHz} \\
     \hline
-    MIFA (Slanted Feedline, Small) & 42.92 - j4.2, 16.7 pF & 34.1 - j13.8, 5.1 pF & 27.6 - j15.1, 4.4 pF & 22.5 - j16.4, 3.8 pF \\
-    MIFA (Small) & 44.2 + j26.9, 1.8 pF & 67.3 + j29.8, 1.9 pF & 88.6 + j11.9, 745 pH & 89.4 - j9.6, 7.7 pF \\
-    MIFA (Slanted Feedline, Large) & 39.1 + j8.5, 555 pH & 30.0 + j13.1, 857 pH & 27.5 + j13.7, 896 pH & 22.4 + j13.9, 880 pH \\
-    MIFA & 27.9 + j6.1, 411 pH & 20.6 + j8.2, 532 pH & 18.0 + j8.8, 567 pH & 10.5 + j11.1, 692 pH \\
-    IFA (Left Turn) & 17.7 - j36.0, 1.84 pF & 18.1 - j36.0, 1.81 pF & 18.2 - j36.2, 1.78 pF & 18.6 - j36.7, 1.73 pF \\
-    IFA (Right Turn) & 33.9 + j27.9, 1.86 pH & 32.8 + j37.5, 2.46 pH & 43.5 + j49.3, 3.19 pH & 83.2 + j47.9, 3.01 pH \\
-    Patch & 157 + j540, 36.7 nH & 723 + j463, 29.2 nH & 716 - j37.0, 2.1 pF & 420 - j196, 332 fF \\
-    RUFA (Antenova) w/out impedance matching & 107.1 - j46.8, 1.2 pF & 76.1 - j60.8, 1.07 pF & 58.4 - j58.6, 1.1 pF & 44.6 - j53.1, 1.2 pF \\
-    Chip (Johanson) w/out impedance matching & 32.6 - j43.2, 1.53 pF & 31.2 - j39.6, 1.65 pF & 30.2 - j37.2, 1.73 pF & 28.6 - j34.7, 1.83 pF
-  \end{tabular}
+    MIFA (Slanted Feedline, Small) & \multicolumn{1}{|r|}{42.92 - j4.2, 16.7 pF} & \multicolumn{1}{|r|}{34.1 - j13.8, 5.1 pF} & \multicolumn{1}{|r|}{27.6 - j15.1, 4.4 pF} & \multicolumn{1}{|r|}{22.5 - j16.4, 3.8 pF} \\
+    MIFA (Small) & \multicolumn{1}{|r|}{44.2 + j26.9, 1.8 pF} & \multicolumn{1}{|r|}{67.3 + j29.8, 1.9 pF} & \multicolumn{1}{|r|}{88.6 + j11.9, 745 pH} & \multicolumn{1}{|r|}{89.4 - j9.6, 7.7 pF} \\
+    MIFA (Slanted Feedline, Large) & \multicolumn{1}{|r|}{39.1 + j8.5, 555 pH} & \multicolumn{1}{|r|}{30.0 + j13.1, 857 pH} & \multicolumn{1}{|r|}{27.5 + j13.7, 896 pH} & \multicolumn{1}{|r|}{22.4 + j13.9, 880 pH} \\
+    MIFA & \multicolumn{1}{|r|}{27.9 + j6.1, 411 pH} & \multicolumn{1}{|r|}{20.6 + j8.2, 532 pH} & \multicolumn{1}{|r|}{18.0 + j8.8, 567 pH} & \multicolumn{1}{|r|}{10.5 + j11.1, 692 pH} \\
+    IFA (Left Turn) & \multicolumn{1}{|r|}{17.7 - j36.0, 1.84 pF} & \multicolumn{1}{|r|}{18.1 - j36.0, 1.81 pF} & \multicolumn{1}{|r|}{18.2 - j36.2, 1.78 pF} & \multicolumn{1}{|r|}{18.6 - j36.7, 1.73 pF} \\
+    IFA (Right Turn) & \multicolumn{1}{|r|}{33.9 + j27.9, 1.86 pH} & \multicolumn{1}{|r|}{32.8 + j37.5, 2.46 pH} & \multicolumn{1}{|r|}{43.5 + j49.3, 3.19 pH} & \multicolumn{1}{|r|}{83.2 + j47.9, 3.01 pH} \\
+    Patch & \multicolumn{1}{|r|}{157 + j540, 36.7 nH} & \multicolumn{1}{|r|}{723 + j463, 29.2 nH} & \multicolumn{1}{|r|}{716 - j37.0, 2.1 pF} & \multicolumn{1}{|r|}{420 - j196, 332 fF} \\
+    RUFA (Antenova) w/out impedance matching & \multicolumn{1}{|r|}{107.1 - j46.8, 1.2 pF} & \multicolumn{1}{|r|}{76.1 - j60.8, 1.07 pF} & \multicolumn{1}{|r|}{58.4 - j58.6, 1.1 pF} & \multicolumn{1}{|r|}{44.6 - j53.1, 1.2 pF} \\
+    Chip (Johanson) w/out impedance matching & \multicolumn{1}{|r|}{32.6 - j43.2, 1.53 pF} & \multicolumn{1}{|r|}{31.2 - j39.6, 1.65 pF} & \multicolumn{1}{|r|}{30.2 - j37.2, 1.73 pF} & \multicolumn{1}{|r|}{28.6 - j34.7, 1.83 pF} \\ \hline
+  \end{tabular} \linebreak
   \caption{2.4 GHz Bluetooth Antenna Impedance Results}
 \end{table*}
 
-Connectors have been added to allow for connection to the microcontroller’s separate breakout board.  Other connectors include JTAG links and test points (not shown here).
+\noindent Connectors have been added to allow for connection to the microcontroller’s separate breakout board.  Other connectors include JTAG links and test points (not shown here).\\
 
-Parts List
+\noindent \textbf {Parts List}
 \begin{itemize}
   \item ST BlueNRG-1 microcontroller
   \item 1 x 1000mAh, 3V Coin cell battery
@@ -983,62 +987,62 @@ Parts List
   \item Assorted surface-mount resistors/capacitors/inductors
 \end{itemize}
 
-Layout
+\noindent \textbf {Layout}
 
-The base station layout requires careful consideration due to the number of components packed into a smaller sized board.  The first board revision for the base station adopts a mother-daughter format as an attempt to reuse many of the tiny expensive components, primarily from the SAMB11 microcontroller.  Analog signal and power components must be placed close to the microcontroller on the daughterboard.  Plated drill holes placed around this section will allow for the daughterboard to be shared and reused.  Future revisions will only include the motherboard, with circuitry outside the microcontroller and its closest components, whereas the older revision using the daughterboard can be mounted directly on the plated drill holes through pin headers.
+\noindent The base station layout requires careful consideration due to the number of components packed into a smaller sized board.  The first board revision for the base station adopts a mother-daughter format as an attempt to reuse many of the tiny expensive components, primarily from the SAMB11 microcontroller.  Analog signal and power components must be placed close to the microcontroller on the daughterboard.  Plated drill holes placed around this section will allow for the daughterboard to be shared and reused.  Future revisions will only include the motherboard, with circuitry outside the microcontroller and its closest components, whereas the older revision using the daughterboard can be mounted directly on the plated drill holes through pin headers.
 
-Component placement is obviously important to reduce the amount of unnecessary electromagnetic interference.  The first point of interest are the two RF signals, where a separate antenna is required for each signal due to their different frequencies.  Since an antenna’s behavior changes according to its environment, it’s important to place these two antennas as far away from each other as possible.  For the SAMB11 2.4 GHz analog signal, the traces leading to the impedance-matching circuit and the antenna should be as short as possible to reduce the effects of stray inductances and capacitances.  The 915 MHz signal is generated by the ZigBee Pro, where data flows through UART pins.  The signals between the SAMB11 and ZigBee stay in the digital domain before being modulated by the ZigBee;  therefore, the transceiver module’s proximity to the microcontroller is of no immediate concern.
+\noindent Component placement is obviously important to reduce the amount of unnecessary electromagnetic interference.  The first point of interest are the two RF signals, where a separate antenna is required for each signal due to their different frequencies.  Since an antenna’s behavior changes according to its environment, it’s important to place these two antennas as far away from each other as possible.  For the SAMB11 2.4 GHz analog signal, the traces leading to the impedance-matching circuit and the antenna should be as short as possible to reduce the effects of stray inductances and capacitances.  The 915 MHz signal is generated by the ZigBee Pro, where data flows through UART pins.  The signals between the SAMB11 and ZigBee stay in the digital domain before being modulated by the ZigBee;  therefore, the transceiver module’s proximity to the microcontroller is of no immediate concern.\\
 
-Another significant source of noise comes from the crystal oscillator.  The SAMB11 can generate two of its clocks using external crystals: a 26 MHz control clock and a 32.768 kHz real-time clock.  The oscillating currents flowing through the crystal classify it as a heavy noise source.  At the same time, crystals should provide spectrally pure clock frequency for the microcontroller to function optimally and are equally susceptible to external noise.  Important signal traces should avoid the crystal’s vicinity on all copper layers to avoid data contamination from the oscillator.  Additionally, any ground pads on the crystal should have a low impedance ground return path to the microcontroller’s ground pin to ensure as small of a current loop as possible.  This helps reduce the amount of noise which can be seen by other components.
+\noindent Another significant source of noise comes from the crystal oscillator.  The SAMB11 can generate two of its clocks using external crystals: a 26 MHz control clock and a 32.768 kHz real-time clock.  The oscillating currents flowing through the crystal classify it as a heavy noise source.  At the same time, crystals should provide spectrally pure clock frequency for the microcontroller to function optimally and are equally susceptible to external noise.  Important signal traces should avoid the crystal’s vicinity on all copper layers to avoid data contamination from the oscillator.  Additionally, any ground pads on the crystal should have a low impedance ground return path to the microcontroller’s ground pin to ensure as small of a current loop as possible.  This helps reduce the amount of noise which can be seen by other components.\\
 
-Power Supply
+\noindent \textbf {Power Supply}
 
-The power supply for the base station requires three different output voltages.  The first is 12V, the second 5V, and lastly the third one is 3.3V.  According to our power budget we need to supply 4067.3mW at the most with a maximum current of 663.5mA.  The idea is to connect to the power grid with a 120 VAC outlet.  The first stage is to step-down the 120 VAC, which can be done using a transformer of "N" turns.  Then a full-wave rectifier can be used to convert AC to DC.  At this point we have DC voltage with ripples.  A classic wall-wart can then be used to step-down the AC and convert it to DC.
+\noindent The power supply for the base station requires three different output voltages.  The first is 12V, the second 5V, and lastly the third one is 3.3V.  According to our power budget we need to supply 4067.3mW at the most with a maximum current of 663.5mA.  The idea is to connect to the power grid with a 120 VAC outlet.  The first stage is to step-down the 120 VAC, which can be done using a transformer of "N" turns.  Then a full-wave rectifier can be used to convert AC to DC.  At this point we have DC voltage with ripples.  A classic wall-wart can then be used to step-down the AC and convert it to DC.\\
 
-Our base station has an alert system when the button is pressed for help.  The alert system consists of a speaker and an array of 18.5 mm clear blue LEDs.  The Kinetis microcontroller will drive the speaker in case of such event.  Therefore, the signal from the Kinetis must be amplified.  This can be done by using a LM386 low-voltage audio amplifier.  The appnotes for the LM386 suggest using a Vcc of 12V so the rails are at 0V and 12V.  The LED array is implemented with 6 rows of 3 LEDs each, and one resistor per row.  Each LED has a forward voltage of 3.2V, which determines the number of LEDs per row with a 12V input voltage.  The LEDs and speaker consume the most power a wall-wart which outputs 12V with a maximum current of 1A is necessary.  This output also has two bypass capacitors to reduce the effect of the voltage ripple.
+\noindent Our base station has an alert system when the button is pressed for help.  The alert system consists of a speaker and an array of 18.5 mm clear blue LEDs.  The Kinetis microcontroller will drive the speaker in case of such event.  Therefore, the signal from the Kinetis must be amplified.  This can be done by using a LM386 low-voltage audio amplifier.  The appnotes for the LM386 suggest using a Vcc of 12V so the rails are at 0V and 12V.  The LED array is implemented with 6 rows of 3 LEDs each, and one resistor per row.  Each LED has a forward voltage of 3.2V, which determines the number of LEDs per row with a 12V input voltage.  The LEDs and speaker consume the most power a wall-wart which outputs 12V with a maximum current of 1A is necessary.  This output also has two bypass capacitors to reduce the effect of the voltage ripple.\\
 
-The SAMB11 microcontroller at the base station has an input voltage of 3.3V, which is the same for the 2.4GHz antenna and the Atmel 900MHz antenna.  Additionally, the display controller for the base station uses 3.3V.  These components pull 158.55mA from the 3.3V output and use 178.5mW.  The solution for this is to use a switching power supply to step-down the 12V input to 3.3V.  The switching power supply is a buck-converter, which is implemented using a LM2574, which is a buck-converter IC with a fixed voltage of 3.3V.  The design of the buck converter was obtained from its appnotes.  The maximum output current of the buck-converter is 500mA.  Therefore, a 300mA fuse is included after the buck converter to protect the 3.3V components.  Bypass capacitors were also included.
+\noindent The SAMB11 microcontroller at the base station has an input voltage of 3.3V, which is the same for the 2.4GHz antenna and the Atmel 900MHz antenna.  Additionally, the display controller for the base station uses 3.3V.  These components pull 158.55mA from the 3.3V output and use 178.5mW.  The solution for this is to use a switching power supply to step-down the 12V input to 3.3V.  The switching power supply is a buck-converter, which is implemented using a LM2574, which is a buck-converter IC with a fixed voltage of 3.3V.  The design of the buck converter was obtained from its appnotes.  The maximum output current of the buck-converter is 500mA.  Therefore, a 300mA fuse is included after the buck converter to protect the 3.3V components.  Bypass capacitors were also included.\\
 
-Last, the background light for the display requires an input voltage of 5V.  This output was implemented using a LM317H, which is an adjustable voltage regulator.  The backlight uses 220 mA at 5V, meaning the output power is 1100mW.  In this case, the input power of the voltage regulator is 2640 mW which means the voltage regulator dissipates 1540 mW by itself.  The schematic for the power supply shows a jumper cable before the LM317H voltage regulator.  The purpose of this is to drive the display with a source from lab and see how much power it consumes.  The jumper cable will then be removed and a voltage divider will be implemented at the 12V output to achieve 5V.  This will be done to verify which method is more efficient and most cost effective, which is the purpose of this power supply.
-
-TODO: Missing figure
-
-Peripherals
-
-Audio Amplifier for Alert System
+\noindent Last, the background light for the display requires an input voltage of 5V.  This output was implemented using a LM317H, which is an adjustable voltage regulator.  The backlight uses 220 mA at 5V, meaning the output power is 1100mW.  In this case, the input power of the voltage regulator is 2640 mW which means the voltage regulator dissipates 1540 mW by itself.  The schematic for the power supply shows a jumper cable before the LM317H voltage regulator.  The purpose of this is to drive the display with a source from lab and see how much power it consumes.  The jumper cable will then be removed and a voltage divider will be implemented at the 12V output to achieve 5V.  This will be done to verify which method is more efficient and most cost effective, which is the purpose of this power supply.\\
 
 TODO: Missing figure
 
-The audio amplifier was designed using the LM386 as shown above.  The gain can be controlled through pins 1 and 8.  To get maximum gain, a polarized capacitor of 10uF must be included in series to create a connection between pins 1 and 8.  Note that the positive side of the polarized capacitor is connected to pin 1.  Since the maximum gain is 200, a resistor can be placed in series with the polarized capacitor to decrease the gain.
+\noindent \textbf {Peripherals}\\
 
-There is also a jumper cable between pins 1 and 5.  Note that fs the jumper cable is connected it creates a physical path between pins 1 and 5 with a capacitor of 0.033 uF and a 10kΩ resistor.  This gives a bass boost to the amplifier but it decreases the gain.  The purpose of the jumper cable is to see how much the gain is affected with and without the bass boost.  The bass boost can be convenient because the alert system will consist of audio with vibrations, but it will only be implemented in the final design if it does not affect the gain significantly.
-
-LED Array for Alert System
+\noindent \textbf {Audio Amplifier for Alert System}
 
 TODO: Missing figure
 
-The LED array contains eighteen 5mm clear blue LEDs so that it can be as bright as possible for the alert system.  This array contains six rows and each row has three LEDs and a 120Ω resistor.  The forward voltage for these LEDs is 3.8V with a forward current of 20 mA.  The input voltage for the array is 12V, which means that only three LEDs can be connected in series.  The 120Ω resistor must be included to limit the current going through the LEDs, otherwise they won’t last for long.  In total the array dissipates 1440 mW, which includes the resistors.
+\noindent The audio amplifier was designed using the LM386 as shown above.  The gain can be controlled through pins 1 and 8.  To get maximum gain, a polarized capacitor of 10uF must be included in series to create a connection between pins 1 and 8.  Note that the positive side of the polarized capacitor is connected to pin 1.  Since the maximum gain is 200, a resistor can be placed in series with the polarized capacitor to decrease the gain.\\
 
-Antennas
+\noindent There is also a jumper cable between pins 1 and 5.  Note that fs the jumper cable is connected it creates a physical path between pins 1 and 5 with a capacitor of 0.033 uF and a 10kΩ resistor.  This gives a bass boost to the amplifier but it decreases the gain.  The purpose of the jumper cable is to see how much the gain is affected with and without the bass boost.  The bass boost can be convenient because the alert system will consist of audio with vibrations, but it will only be implemented in the final design if it does not affect the gain significantly.\\
 
-Button
+\noindent \textbf {LED Array for Alert System}
 
-The antenna for the button will operate in the 2.4 GHz frequency band and it must have a small form factor so it can be worn as a pendant, either for a necklace or a bracelet.  This size constraint requires careful consideration in order to produce the optimum performance.  It must have a range of at least 50 feet and be capable of communicating with the base station in a home environment.  Therefore, it must be able to communicate through walls and despite other types of interference, such as microwaves.
+TODO: Missing figure
 
-We created nine different PCB antenna layouts for testing based on proven working models, utilizing appnotes and datasheets to guide the designs.  For lab testing purposes, we are using a high-speed network analyzer, spectrum analyzer, signal generator, and a proven 2.4 GHz quarter-length tripod antenna as a reference, to measure the performance of each antenna topology.  We have collected the base-level impedance measurements and once we setup the portable high-speed spectrum analyzer, we will be able to test the far-field performance of each antenna.  We will make the appropriate improvements and once we have the second button antenna revisions, we will then be able to actually test them in the field at the De Anza Senior Citizen Mobile Home Community.
+\noindent The LED array contains eighteen 5mm clear blue LEDs so that it can be as bright as possible for the alert system.  This array contains six rows and each row has three LEDs and a 120Ω resistor.  The forward voltage for these LEDs is 3.8V with a forward current of 20 mA.  The input voltage for the array is 12V, which means that only three LEDs can be connected in series.  The 120Ω resistor must be included to limit the current going through the LEDs, otherwise they won’t last for long.  In total the array dissipates 1440 mW, which includes the resistors.\\
 
-Base Station
+\noindent \textbf {Antennas}\\
 
-The base station antenna will operate in the 900 MHz frequency band primarily since it must be able to communicate over a longer range of at least 300 feet, from one user’s base station to another.  This lower frequency band is more suitable for long distance radio links since the attenuation suffered by radio waves through free space decreases along with the operating frequency.  The base station antenna must also be capable of handling atmospheric loss due to gases and be able to navigate through outdoor environments, such as trees and other obstructions.  One of the biggest advantages of this frequency band is that it’s “Near Line of Sight”, meaning better range can be achieved in this band than other ISM bands given the same obstructions.  Since there isn’t as much of a size constraint as with the button antenna, the base station antenna can be larger and external.  At this point we have created two different PCB base station antenna layouts and have a proven whip antenna as a reference, and we will have those soon for testing.
+\noindent \textbf {Button}
+
+\noindent The antenna for the button will operate in the 2.4 GHz frequency band and it must have a small form factor so it can be worn as a pendant, either for a necklace or a bracelet.  This size constraint requires careful consideration in order to produce the optimum performance.  It must have a range of at least 50 feet and be capable of communicating with the base station in a home environment.  Therefore, it must be able to communicate through walls and despite other types of interference, such as microwaves.\\
+
+\noindent We created nine different PCB antenna layouts for testing based on proven working models, utilizing appnotes and datasheets to guide the designs.  For lab testing purposes, we are using a high-speed network analyzer, spectrum analyzer, signal generator, and a proven 2.4 GHz quarter-length tripod antenna as a reference, to measure the performance of each antenna topology.  We have collected the base-level impedance measurements and once we setup the portable high-speed spectrum analyzer, we will be able to test the far-field performance of each antenna.  We will make the appropriate improvements and once we have the second button antenna revisions, we will then be able to actually test them in the field at the De Anza Senior Citizen Mobile Home Community.\\
+
+\noindent \textbf {Base Station}
+
+\noindent The base station antenna will operate in the 900 MHz frequency band primarily since it must be able to communicate over a longer range of at least 300 feet, from one user’s base station to another.  This lower frequency band is more suitable for long distance radio links since the attenuation suffered by radio waves through free space decreases along with the operating frequency.  The base station antenna must also be capable of handling atmospheric loss due to gases and be able to navigate through outdoor environments, such as trees and other obstructions.  One of the biggest advantages of this frequency band is that it’s “Near Line of Sight”, meaning better range can be achieved in this band than other ISM bands given the same obstructions.  Since there isn’t as much of a size constraint as with the button antenna, the base station antenna can be larger and external.  At this point we have created two different PCB base station antenna layouts and have a proven whip antenna as a reference, and we will have those soon for testing.
 
 TODO: Missing table
 
 \subsection{Button to Base Application}
-Up to this point, the button-to-base station communication is programmed using the General Access Profile (GAP) layer.  Accessing the API’s listed in bluenrg1\_api.h allows for the utilization of advertising packets over the air according to Bluetooth standards.  The GAP layer defines the basic requirement of a Bluetooth device.  It describes the devices role, its different modes, and its procedures for its mode to enable a connection between Master and Slave devices.  Once the GAP has been initialized with its role, it is desired to advertise the BlueNRG-1.  To do this repeatedly, the call is placed in a forever loop where it sends a packet every time it is scanned, which occurs on channels 37, 38, and 39.  At the same time the BlueNRG-1 is advertising, the device is set to ADV\_IND enabling other devices to receive the data packet if desired.  Setting the device using ADV\_IND indicates it is generally in discoverable mode and any central device can connect to it.  When the BlueNRG-1 is not advertising it is listening for a connection request, but for now no connection request is needed to just advertise a press of a button. To summarize the BlueNRG-1’s role has been set to peripheral, it is discoverable and any central device can connect to it.  With this configuration, it is now possible to send packets through the link layer.
+Up to this point, the button-to-base station communication is programmed using the General Access Profile (GAP) layer.  Accessing the API’s listed in bluenrg1\_api.h allows for the utilization of advertising packets over the air according to Bluetooth standards.  The GAP layer defines the basic requirement of a Bluetooth device.  It describes the devices role, its different modes, and its procedures for its mode to enable a connection between Master and Slave devices.  Once the GAP has been initialized with its role, it is desired to advertise the BlueNRG-1.  To do this repeatedly, the call is placed in a forever loop where it sends a packet every time it is scanned, which occurs on channels 37, 38, and 39.  At the same time the BlueNRG-1 is advertising, the device is set to ADV\_IND enabling other devices to receive the data packet if desired.  Setting the device using ADV\_IND indicates it is generally in discoverable mode and any central device can connect to it.  When the BlueNRG-1 is not advertising it is listening for a connection request, but for now no connection request is needed to just advertise a press of a button. To summarize the BlueNRG-1’s role has been set to peripheral, it is discoverable and any central device can connect to it.  With this configuration, it is now possible to send packets through the link layer.\\
 
-To send two different packets, a GPIO tied to a button on the BlueNRG-1 development board is set to be triggered on an interrupt, which occurs when the button is pressed enabling it to send a help request advertising packet.  Since the advertising function is set in a forever loop, once the button is no longer pressed, the program resumes sending the original packet in the queue.  There is a difference between the packet sent when the button is pressed versus when the button is not being pressed.  The difference is in the Manufacturer’s Specific Data sent in the packet.  Changing this data is allowed since no necessary information such as flags or data types are being changed in the process.  The Atmel SAMB11 must then distinguish between the two different packets sent by the BlueNRG-1.
+\noindent To send two different packets, a GPIO tied to a button on the BlueNRG-1 development board is set to be triggered on an interrupt, which occurs when the button is pressed enabling it to send a help request advertising packet.  Since the advertising function is set in a forever loop, once the button is no longer pressed, the program resumes sending the original packet in the queue.  There is a difference between the packet sent when the button is pressed versus when the button is not being pressed.  The difference is in the Manufacturer’s Specific Data sent in the packet.  Changing this data is allowed since no necessary information such as flags or data types are being changed in the process.  The Atmel SAMB11 must then distinguish between the two different packets sent by the BlueNRG-1.\\
 
-The Atmel SAMB11’s GAP layer must also be initialized.  Its role is set as a central device so its responsibility will be to scan, while the BlueNRG-1’s responsibility will be to advertise.  Its mode is set to AT\_BLE\_ADV\_LIM\_DISCOVERABLE to limit its scanning.  This mode in conjunction with adding the BlueNRG-1’s address to the whitelist allows for a quick detection of the BlueNRG-1’s sent packet.  The SAMB11’s whitelist filters out any other address not specified in the whitelist.  Since the AT\_BLE\_ADV\_LIM\_DISCOVERABLE mode allows for a maximum of 180 seconds of scanning, it is necessary to continue calling the function which initiates the scanning.  This allows for quick repetitive detection of the packets sent by the BlueNRG-1.  Every time the SAMB11 scans, it parses the data coming after the Manufacturing Specific Data, which is where the help request packet is parsed.  This then allows for an LED tied to a GPIO to light on.  This GPIO goes low for any other packet detected.  To summarize once more, the BlueNRG-1 sends packets and the SAMB11 scans the 2.4 GHz band, while filtering out any other advertising device sending packets.
+\noindent The Atmel SAMB11’s GAP layer must also be initialized.  Its role is set as a central device so its responsibility will be to scan, while the BlueNRG-1’s responsibility will be to advertise.  Its mode is set to AT\_BLE\_ADV\_LIM\_DISCOVERABLE to limit its scanning.  This mode in conjunction with adding the BlueNRG-1’s address to the whitelist allows for a quick detection of the BlueNRG-1’s sent packet.  The SAMB11’s whitelist filters out any other address not specified in the whitelist.  Since the AT\_BLE\_ADV\_LIM\_DISCOVERABLE mode allows for a maximum of 180 seconds of scanning, it is necessary to continue calling the function which initiates the scanning.  This allows for quick repetitive detection of the packets sent by the BlueNRG-1.  Every time the SAMB11 scans, it parses the data coming after the Manufacturing Specific Data, which is where the help request packet is parsed.  This then allows for an LED tied to a GPIO to light on.  This GPIO goes low for any other packet detected.  To summarize once more, the BlueNRG-1 sends packets and the SAMB11 scans the 2.4 GHz band, while filtering out any other advertising device sending packets.
 
 \subsection{Application Layer (Linux Base-to-Base Emulation)}
 Our intentions in creating the Linux base-to-base emulation of our system was due to not having access to the hardware in a timely fashion.  The application layer was divided into different files for simplicity and organizational purposes.  It emulates the menu items displayed on the screen (as would be seen by a user) and it emulates a network in which a device is connected.  This Linux version of the system simulates sending a help packet to the contacts listed in a user’s friends list.  A packet will be sent to the first contact on the list, it will timeout if the help request is not acknowledged as received, at which time it will be sent to the next contact on the list.
