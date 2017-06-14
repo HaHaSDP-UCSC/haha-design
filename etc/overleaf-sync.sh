@@ -12,7 +12,7 @@
 Exe=$(basename $0)
 Dir=$(mktemp -d) # Temporary folder for git repo
 OverleafRepo=https://git.overleaf.com/8969825rcwztghppwqg
-GitRepo=ssh://git@cruzikin.hopto.org:62062/haha_sdp/HaHaDesign.git
+GitRepo=git@github.com:HaHaSDP-UCSC/haha-design.git
 
 echo "$Exe running with directory $Dir"
 cd $Dir
