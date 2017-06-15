@@ -327,14 +327,14 @@
 % was not built to handle multiple paragraphs
 %
 
-\author{Jamielynne~Batugo, Marco~Carmona, Conrad~Christensen, Jake~Lee, Kevin~Lee, Brian~Nichols, Jesus~Soto, August~Valera, and Jeffrey~Zheng% <-this % stops a space
+\author{Jamielynne~Batugo, Marco~Carmona, Conrad~Christensen, Jake~Lee, Kevin~Lee, Brian~Nichols, Jesus~Soto, August~Valera, and Jeffrey~Zheng}% <-this % stops a space
 
 \begin{comment}
 \thanks{Jamielynne~Batugo, Marco~Carmona, Conrad~Christensen, Jake~Lee, Kevin~Lee, Brian~Nichols, Jesus~Soto, August~Valera, and Jeffrey~Zheng were students at the University of California, Santa Cruz}% <-this % stops a space
 \thanks{Ali Adabi, Patrick Mantey, Stephen Petersen, and Anujan Varma were professors and mentors at the University of California, Santa Cruz}% <-this % stops a space
 \end{comment}
-\thanks{The full source of this project is released under the BSD 2-Clause Licence.}
-\thanks{Manuscript received \today}}
+\thanks{The full source of this project is released under the BSD 2-Clause Licence.}%
+\thanks{Manuscript received \today}
 
 % note the % following the last \IEEEmembership and also \thanks -
 % these prevent an unwanted space from occurring between the last author name
@@ -414,7 +414,7 @@
 \IEEEpeerreviewmaketitle
 
 \section{Introduction}
-\IEEEPARstart{T}{he} Home Assistance Help Alert system is composed of a base station and a wirelessly connected button.  The base station is wirelessly connected to other base stations to facilitate long-range communications over a mesh network, in order to forgo the requirement of having a pre-existing communications infrastructure.
+\IEEEPARstart{T}{he} Help Alert --- Home Assistance system is composed of a base station and a wirelessly connected button.  The base station is wirelessly connected to other base stations to facilitate long-range communications over a mesh network, in order to forgo the requirement of having a pre-existing communications infrastructure.
 
 \subsection{Motivation}
 One of the primary principles driving this project is cost.  It needs be affordable and without subscription fees.  As a result, the hardware has been chosen primarily to comply with this cost constraint, which in turn required a sizable portion of Winter quarter to be dedicated in researching different hardware platforms.
@@ -1276,6 +1276,9 @@ The analog signal through RFIO is the Bluetooth data signal that is handled by o
 \label{base-lay-full}
 \end{figure}
 
+Because the base station operates on two different frequency bands, the 2.4GHz and the 900MHz, the layout must include sections for the antennas. Placement of these elements should be as far away as possible to avoid any unnecessary couplilng, as antenna behavior is heavily affected by its surroundings. The patch antenna is used for broadcasts in the 2.4GHz domain, and it has a shorted transmission line stub to match the input impedance of the microcontroller's RF end with the antenna's characteristic impedance. On the other side, the Digi XBee module is used for broadcasts in the 900MHz range. The XBee takes digital UART signals from the microcontroller before passing through its own onboard gain and modulation stage for the mesh network signals. As a result, we do not have to strictly follow the same analog isolation rules as the 2.4GHz signal. The XBee has an onbard SMA receptacle that allows us to place an external antenna, which can be routed to a better reception position and angle. Initial prototypes used an off-the-shelf half-wave dipole connected via a coaxial cable. Future models may replace this component with a cheaper, more sustainable antenna.
+
+The 16x4 LCD display is connected via 16 pin headers. We place the same 16 pin headers in female form so that we may reduce the required land space for placement by instead stacking the LCD right above the XBee module. The extra female headers provide the air space needed to avoid any component collision.
 
 \begin{figure}[ht] 	% There are several different modifiers that can be used in [].
 \centering
@@ -1283,6 +1286,8 @@ The analog signal through RFIO is the Bluetooth data signal that is handled by o
 \caption{ \space Base Station Layout: Interface}
 \label{base-lay-btn}
 \end{figure}
+
+
 
 The base station layout requires careful consideration due to the number of components packed into a smaller sized board.  The first board revision for the base station adopts a mother-daughter format as an attempt to reuse many of the tiny expensive components, primarily from the SAMB11 microcontroller.  Analog signal and power components must be placed close to the microcontroller on the daughterboard.  Plated drill holes placed around this section will allow for the daughterboard to be shared and reused.  Future revisions will only include the motherboard, with circuitry outside the microcontroller and its closest components, whereas the older revision using the daughterboard can be mounted directly on the plated drill holes through pin headers.
 
@@ -1444,7 +1449,7 @@ The Server is the device that has updated data to send and the Client is the dev
 A Bluetooth Profile may consist of the many services, characteristics, and attributes. In the profile created for the button to base communication only one service is created that contains three characteristics.  The handles give order to the table in organization of service, characteristic, and attribute order. Each characteristic has a description of itself and it identifies itself through the UUID. The UUIDs in the button to base profile are all custom characteristics therefore, they all must be 128-bits.  Generic characteristics are 16-bits. Each characteristic must also have a property that gives both devices the ability to send and receive data that modifies their respective attribute values.\\
 
 Now in the GATT layer, to be able to chat back and forth between the BlueNRG-1 and SAMB11 the "TX Characteristic" and "RX Characteristic" were made. These are just names of course to what actually allows the transactions of data to take place. The BlueNRG-1 exposes the characteristics shown in Table 8. The SAMB11 then goes through the discovery process of these characteristics. Once discovered, both devices have the same characteristics with the same handles stored. The SAMB11 will discover that the TX characteristic contains the Client Characteristic Configuration Descriptor (CCCD) that comes when the notification property is initiated by the Server. The CCCD attribute value will only take a 0 or 1. The Client will write a 1 to the Server to enable Notifications from the Server. Writing a value of 0 disables Notifications from the Server. When the Client enables Notifications the Server will now be able to send data to the Client through its attribute handle without the need for acknowledgement from the Client. The Client will discover the RX Characteristic, which comes with the Write Property, the handle, and the attribute value. Once discovered the Client would then be able to write to this handle and the Server would then receive the data sent. Lastly, the Client discovers the "Battery Characteristic" along with its Read Property, its handle, and attribute value. The Client could now on command inquire to the Server for some information designated by the Server. In this projects case it would be the battery voltage level being inquired about. Fig. \ref{ble} will help with the visualization of the sequence of events between the Master\textbackslash Slave and the Server\textbackslash Client.
-\begin{figure}[ht] 	% There are several different modifiers that can be used in [].
+\begin{figure}[H] 	% There are several different modifiers that can be used in [].
 \centering
 \includegraphics[width=0.4\textwidth]{Bluetooth.png}
 \caption{ \space Bluetooth LE sequence of events}
