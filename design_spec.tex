@@ -9,7 +9,12 @@
 \usepackage{parskip} % Disable indentation, adds spacing
 \usepackage{rotating} % for sideways table
 \usepackage{float}
-\usepackage{comment}
+\usepackage{comment} % for block commenting
+\usepackage{mathtools} % for using mathematical symbols
+\usepackage[justification=centering]{caption} % for centering captions
+\usepackage{stfloats}
+\usepackage{lcd}
+\usepackage{subcaption}
 
 % Some very useful LaTeX packages include:
 % (uncomment the ones you want to load)
@@ -381,7 +386,7 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-  The abstract goes here.
+  Current senior emergency button systems on the market are serve a very specific user base, immediately escalating any request for assistance to emergency services (police, fire, EMS) and requiring a reoccurring cost to maintain connectivity to staffed call centers to handle these requests. There is a need for a cheap, single upfront cost device that simply calls your friends/neighbors to help you in times of non-critical emergencies. This project aimed to build such a system, composed of a series of button wearables and base stations, to be deployed and tested in the De Anza Santa Cruz retirement community.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -411,7 +416,7 @@
 One of the primary principles driving this project is cost.  It needs be affordable and without subscription fees.  As a result, the hardware has been chosen primarily to comply with this cost constraint, which in turn required a sizable portion of Winter quarter to be dedicated in researching different hardware platforms.
 
 \subsection{Objectives}
-The fundamental idea behind the Home Assistance Help Alert System is to provide an affordable means of protecting the health, welfare, and safety of elderly people through an active ad-hoc wireless network estimated to have a working range of 300 feet, specifically for residents of the De Anza Santa Cruz Mobile Home Park.  The final design should consider environmental conditions of the location (interference, transmission range) and consist of parts which can be obtained or reproduced by a third party at scale.  The final design must also be affordable and have a form factor satisfactory to the end user.  A detailed design document shall be made publicly available for non-profit entities who would like to expand upon the project.
+The fundamental idea behind the Home Assistance Help Alert System is to provide an affordable means of protecting the health, welfare, and safety of elderly people through an active ad-hoc wireless network estimated to have a working range of 300 feet, specifically for residents of the De Anza Santa Cruz Senior Citizen Community.  The final design should consider environmental conditions of the location (interference, transmission range) and consist of parts which can be obtained or reproduced by a third party at scale.  The final design must also be affordable and have a form factor satisfactory to the end user.  A detailed design document shall be made publicly available for non-profit entities who would like to expand upon the project.
 
 \section{Hardware Selection}
 
@@ -440,7 +445,7 @@ TODO: Missing figure
 
 \subsubsection{Base Station Interconnect}
 
-Wireless interconnection is a crucial component governing the performance of our system.  A communication link between the button and the base station allows for a help alert signal to be transmitted locally in a small home environment, while the link(s) between multiple base stations allows the signal to propagate further through a larger neighborhood.
+Wireless interconnection is a critical component governing the performance of our system.  A communication link between the button and the base station allows for a help alert signal to be transmitted locally within a small home environment, while the link between multiple base stations allows the signal to propagate further throughout a larger neighborhood.
 
 \begin{table*}[t]
   \centering
@@ -508,7 +513,7 @@ The main design requirement of the button is fairly simple: to allow a user to p
 
 \subsubsection{Microcontroller}
 
-Due to our desires to use Bluetooth Low Energy (BLE) and to accurately communicate ‘HELP’/’CANCEL’ signals between button and base-station, we selected a microcontroller that would optimize our size used, cost, and power efficiency.
+Due to our desires to use Bluetooth Low Energy (BLE) and to accurately communicate ‘HELP’/’CANCEL’ signals between button and base-station, we selected a microcontroller which would optimize the size, cost, and power efficiency.
 
 \begin{table*}[t]
   \centering
@@ -671,7 +676,7 @@ TI LM8330 Keypad IC
 
 This power budget is derived for a typical use case of the base station.  Each component is detailed with its individual power consumption, and in combination with the estimated on-time in an hour’s time, we estimate the total energy consumed by the system in one hour.  The peripherals needed for user interface can be seen as the most power hungry elements on the base station.  However, since our system is designed as a safety product that should hopefully go off no more than once every 6 months, the audio speaker should contribute minimally to the power usage in the grand scheme of things.  The LCD display will most likely be used more often then other peripherals, as it will display more useful information, such as status updates and neighbor information.  Beyond the initial setup, the LCD should also not be in use for most of the time.
 
-Given the on-time percentage depicted in the table, the system uses about 112.93 mWh of energy in one hour. Assuming a 700 mAh rechargeable NiMH backup battery, the base station can last about 23.3(Correct this!!!!!) hours without wall power. Because our percentages are generously estimated and software functionality has not yet been optimized for maximum power savings, an even better battery life could be achieved in future revisions.
+Given the on-time percentage depicted in the table, the system uses about 112.93 mWh of energy in one hour. Assuming a 700 mAh rechargeable NiMH backup battery, the base station can last about 23 hours without wall power. Because our percentages are generously estimated and software functionality has not yet been optimized for maximum power savings, an even better battery life could be achieved in future revisions.
 
 \begin{table*}[t]
   \centering
@@ -720,7 +725,21 @@ The base station and button will be separate hardware devices which facilitate t
 The software design portion of the product will utilize the C-programming language.
 
 \subsubsection{User Interfaces}
-The base station is equipped with an LCD display, which will facilitate user interaction with the device, in addition to showing critical information during emergency situations. Configuration of the device shall be done using a series of menus displayed on the LCD display. The base station is also equipped with directional buttons, to allow the user to navigate these menus. Specialized switches/buttons control the contrast of the display, reset device power, and trigger the help request functionality.
+The base station is equipped with an LCD display, which will facilitate user interaction with the device, in addition to showing critical information during emergency situations. Configuration of the device shall be done using a series of menus displayed on the LCD display. The exception to this are several dedicated switches/buttons that control the contrast of the display, reset device power, and trigger the help request functionality. The rest of the device functionality shall be accessed through the menu system, and facilitating this is a set of four directional buttons, as shown in Figure \ref{dev buttons}. These buttons shall have the following functionality:
+
+\begin{LaTeXdescription}
+	\item[Up] Scroll up in the list of choices
+    \item[Down] Scroll down in the list of choices
+    \item[Left] Move back/cancel, exiting a submenu
+    \item[Right] Select, selecting the current item (that which is listed at the top of the screeu) or open the corresponding submenu
+\end{LaTeXdescription}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.48\textwidth]{dev_buttons.jpg}
+    \caption{Directional Buttons on the Development Board}
+    \label{dev buttons}
+\end{figure}
 
 The base station also allows an external device (such as a lamp) to be plugged directly into it. This device will be toggled on and off during emergency situations.
 
@@ -902,7 +921,127 @@ The user interface of the base station is composed of a tree of menu items, a da
     \item[Right] Selects the current item, calling it's \lstinline[columns=fixed]{onClick()} method. By default, this sets the cursor to the child of the current item, if it exists.
 \end{LaTeXdescription}
 
+Referenced above, each menu item also has two function callbacks assigned to it, which are referred to as the \lstinline[columns=fixed]{onView()} and \lstinline[columns=fixed]{onClick()} methods. These functions are called throughout the menu navigation process, and are what allow the menu to dynamically alter both itself and the other software modules of the base station. 
+
+The \lstinline[columns=fixed]{onView()} method is called whenever a menu is viewed. By default, this takes form of printing the current menu item's string \lstinline[columns=fixed]{value} on the top line of the LCD screen, with it's next siblings shown on the following lines, as seen in Figure \ref{menu view default}. This gives the user context as to what they are currently selecting, and what is available to be selected should the user choose to move up/down. However, there are some cases where this is not ideal, such as in the User Info submenu. Because some fields of user information typically span more than one line (the address field specifically is a good example of this), each child of the User Info menu item has a custom \lstinline[columns=fixed]{onView()} callback, which takes up the entire screen. Pressing up and down for this submenu still navigates between items, but overwrites the entire screen, like shown in Figure \ref{menu view user info}. In addition, the second line of the LCD screen is populated with user info taken from a datastructure defined in another software module. Another custom \lstinline[columns=fixed]{onView()} method is used in the text input feature, which will be discussed in greater detail later.
+
+\begin{figure}
+  \begin{subfigure}{0.48\textwidth}
+  	\centering
+    \LCD{4}{16} |Friends List   >|
+                |User Info       |
+                |Device Settings |
+                |                |
+    \caption{Default View}
+    \label{menu view default}
+  \end{subfigure}
+  \begin{subfigure}{0.48\textwidth}
+    \centering
+    \LCD{4}{16} |USER ADDRESS:   |
+                |1157 High St. Sa|
+                |nta Cruz, CA    |
+                |vMore      Edit>|
+    \caption{User Info Custom View}
+    \label{menu view user info}
+  \end{subfigure}
+  \caption{\lstinline[columns=fixed]{onView()} methods}
+\end{figure}
+
+As mentioned in the table, by default, the \lstinline[columns=fixed]{onClick()} method of a menu item should navigate to it's corresponding submenu (it's first child). However, there are some situations where it is necessary to do more. For example, every time the Friends List menu item is clicked, it's children are regenerated based on the current state of the software friend list. The end result is the same (the cursor being set as the first friend in the list, which is the first child of the Friends List menu item), but because other actions are going on in the background to produce these children, the \lstinline[columns=fixed]{onClick()} method had to be overwritten. Another good example is again the User Info items mentioned previously. Selecting them starts the text input feature, which creates a large subtree below the current item.
+
+The Help Request and Friend Request features use a combination of the \lstinline[columns=fixed]{onView()} and \lstinline[columns=fixed]{onClick()} methods to provide a cohesive message. When a request is received over the network, the cursor is forcibly set to the menu item Help Response, with the view method producing a screen like that shown on Figure \ref{menu view help}. This method, similar to the User Info menu item, takes in a name (this time from a network packet) and displays it on the screen. The resultant menu tree after this process is completed looks like this:
+
+\begin{itemize}
+	\item Help Response Root
+    \begin{LaTeXdescription}
+        \item[child] Help Response Deny
+        	\begin{LaTeXdescription}
+                \item[onClick] NULL
+                \item[onView] Send "Cannot help you" packet, set current to root
+                \item[child] Help Response
+                    \begin{LaTeXdescription}
+                        \item[onClick] Send "Help is on the way" packet, set current to root
+                        \item[onView] Show information on the person who needs help (see Figure \ref{menu view help})
+    				\end{LaTeXdescription}
+            \end{LaTeXdescription}
+    \end{LaTeXdescription}
+\end{itemize}
+
+\begin{figure}
+  \begin{subfigure}{0.48\textwidth}
+  \centering
+  \LCD{4}{16} |! HELP REQUEST !|
+              |Donald Wiberg   |
+              |                |
+              |<BACK   RESPOND>|
+  \caption{Help Request Text}
+  \end{subfigure}
+  \begin{subfigure}{0.48\textwidth}
+  	\centering
+  	\includegraphics[width=\textwidth]{device_help_request.jpg}
+    \caption{Help Request on Physical Device}
+  \end{subfigure}
+  \caption{Help Request View}
+  \label{menu view help}
+\end{figure}
+
+Thus, when the user presses right, the click method of Help Response is called, and the affirmative packet is sent. Likewise, if the user presses left, then the menu transitions to the Help Response Deny (which is the parent of the Help Response menu item), and it's view method is called. This causes the negative packet to be sent. In either case, the user is immediately transitioned back to the root menu item, which is the default startup screen.
+
+\textbf{Text Input}
+
+The base station facilitates text input much the same way as a networked printer or old school arcade game would. Up (Figure \ref{menu input up}) and down (Figure \ref{menu input down}) changes the current letter at the cursor, left (Figure \ref{menu input left}) deletes a character, and right (Figure \ref{menu input right}) selects the current character displayed. Depending on the context of the text input, the characters available may differ. For instance, names support upper case and lower case letters, in addition to spaces, which when scrolling through the list of letters is represented by an underscore. Likewise, addresses support only upper case letters to limit complexity, but also include spaces, numbers, and periods. Lastly, phone numbers only support numbers. In all cases, when scrolling through the list of characters, there is the addition of a special character, the right arrow ($\rightarrow$). This represents the enter key, and signifies that the user is finished with the string they are editing and would like to save. Deleting the entire string, and then continuing to press left exits the editor, discarding changes.
+
+\begin{figure}
+  \begin{subfigure}{0.48\textwidth}
+  	\centering
+    \LCD{4}{16} |Editing Name:  >|
+                |STEPHEN PETERS  |
+                |                |
+                |                |
+    \caption{Initial State}
+    \label{menu input start}
+  \end{subfigure}
+  \begin{subfigure}{0.48\textwidth}
+  	\centering
+    \LCD{4}{16} |Editing Name:  >|
+                |STEPHEN PETERR  |
+                |                |
+                |                |
+    \caption{Up Press (prev letter)}
+    \label{menu input up}
+  \end{subfigure}
+  \begin{subfigure}{0.48\textwidth}
+  	\centering
+    \LCD{4}{16} |Editing Name:  >|
+                |STEPHEN PETERT  |
+                |                |
+                |                |
+    \caption{Down Press (next letter)}
+    \label{menu input down}
+  \end{subfigure}
+  \begin{subfigure}{0.48\textwidth}
+  	\centering
+    \LCD{4}{16} |Editing Name:  >|
+                |STEPHEN PETE_   |
+                |                |
+                |                |
+    \caption{Left Press (delete letter)}
+    \label{menu input left}
+  \end{subfigure}
+  \begin{subfigure}{0.48\textwidth}
+  	\centering
+    \LCD{4}{16} |Editing Name:  >|
+                |STEPHEN PETERS_ |
+                |                |
+                |                |
+    \caption{Right Press (confim letter)}
+    \label{menu input right}
+  \end{subfigure}
+  \caption{Text Input States}
+\end{figure}
+
 \begin{comment}
+
 \textbf{User Interface}
 
 The base station design was motivated by two primary goals: (1) to be easy and intuitive for elderly people to operate in emergency situations, and (2) to be composed of inexpensive components to support wide adoption by the community.  These goals were somewhat contradictory: inexpensive components are often the most difficult to work with, while better components are more expensive which will drive up the overall cost of the system.  Our sponsor, Professor Emeritus Donald Wiberg, gave us a soft limit of approximately \$50 for the entire system’s components (not including packaging), which greatly limited which components were feasible for our project.
@@ -924,7 +1063,8 @@ The LCD screen displays a list of menu items for the current view, in standard o
 
 \subsection{Network Application Layer}
 
-The Application Layer between base station communications has several different commands which can be transmitted.  Most of these events are triggered by the user but since multiple users can contact any station at any time, we need a robust way to handle each request.
+The Application Layer between base station communications has several different commands which can be transmitted.  Most of these events are triggered by the user but since multiple users can contact any station at any time, we need a robust way to handle each request. 
+Each station will have a packet queue where it can send packets and expect to receive packets from the destinations in which they were sent.  These queues will have timeouts to protect the integrity of the device as well as allowing communication between devices.
 
 \subsubsection{Network Adaptation Layer}
 
@@ -976,9 +1116,7 @@ This modular design approach was utilized during the development of this project
 \label{Packet Table}
 \end{sidewaystable*}
 
-In Table \ref{Packet Table} is the packet structure for the base-to-base communications.  It is setup to take under 100 Bytes to transmit the entire payload for each packet type, which is the maximum payload of a ZigBee transmission using our transceiver.  Any size greater will cause fragmentation of the packet in which we would have to reassemble the packets at the destination.
-
-Each station will have a packet queue where it can send packets and expect to receive packets from the destinations in which they were sent.  These queues will have timeouts to protect the integrity of the device as well as allowing communication between devices.
+Table \ref{Packet Table} lists the entire packet structure for the base-to-base communications.  It is set up to take under 100 Bytes to transmit the entire payload for each packet type, which is the maximum payload of a ZigBee transmission using our transceiver. Any size greater will cause packet fragmentation, in which we would have to reassemble the packets at the destination. An in-depth description of all of the packets can be seen in Appendix \ref{Packet Descriptions}.
 
 The packets which allow users to connect to one another include the FIND\_NEIGHBORS\_REQUEST, which polls the area for contacts.  This will allow the user to locate their individual friends who are nearby as well as individually connect to people who are not within range, providing they are on the same network.
 
@@ -989,12 +1127,7 @@ The main packet driving the system's purpose is the HELP\_REQUEST packet.  If tw
 The HELP\_FROM\_ANYONE Request, which in conjunction with the FIND\_HOPS packet types, allows the base station to request help based on proximity to the station.  This is only used if no friends can answer the original alert request.
 
 \subsubsection{Basecomm}
-!MORE VERBOSE\newline
-The base communication file is the packet conversion tool which converts data from the network into packets, as well as packets into data which can be sent on the network. Each converting function prepares all of the required fields based on the packet type, and a helper function copies all of the necessary fields into the application packet. This was originally developed during the Linux testing phase, where we used a different networking protocol, TCP/IP, to send these packets over the network.
-
-\subsubsection{Packet} 
-!MORE VERBOSE\newline
-The packet file is used to handle all of the incoming packets, as well as having functions to send packets, which may be called by the user interface, packets, or as a timer event. All of the messaging state processing is handled in this file. The handlers are registered in a function pointer array, and then processed into application packets via a packet converter, which parses the raw packet data from the network layer into an application packet.
+The base communication file is the packet conversion tool which converts data from the network into packets, as well as packets into data which can be sent on the network. Each converting function prepares all of the required fields based on the packet type, and a helper function copies all of the necessary fields into the application packet. This was originally developed during the Linux testing phase, where we used a different networking protocol, TCP/IP, to send these packets over the network. This was somewhat successful in the Linux Version, as the Network Adaptation Layer to simulate a Zigbee-like network was written only worked on a specific Ubuntu virtual machine. This however proved the concept of the Network Adaptation Layer, which we used in the final build of the system, using the actual hardware rather than a Linux simulation.
 
 \begin{figure}[ht] 	% There are several different modifiers that can be used in [].
 \centering
@@ -1004,31 +1137,27 @@ The packet file is used to handle all of the incoming packets, as well as having
 \end{figure}
 
 \subsubsection{Message Queue} 
-!MORE VERBOSE\newline
-Test Figure \ref{Message Queue Flowchart}
-The goal of the message queue system was so messages sent throughout the network to different stations would be validated before being processed. This means that anyone that connects to the network, including malicious or disruptive users, would have their data validated, and minimize the effects of said malfunctioning devices or malicious users.
-
+The goal of the message queue system was so messages sent throughout the network to different stations would be validated before being processed. This means that anyone that connects to the network, including malicious or disruptive users, would have their data validated, and minimize the effects of said malfunctioning devices or malicious users. As shown in Figure \ref{Message Queue Flowchart}, it can be seen that the receive queue of the Message Queue system first inspects the packet for any network issues. If the packet was destined for the device, and the device is expecting the packet, it leads into the Packet Processor. The packet processor has the ability to process as well as send out packets, as well as take input from the user or timer events to refresh old data and test connections between other stations. These items are then sent to the send queue, which will then send it out to the network to other base stations. Though not all of the functions in messagequeue we envisioned ended up being fully implemented, it was a good way to access the packet flow of the system, and to make it less likely to have unnecessary complications later down the road. The main function that was not implemented in the message queue system was the reloading of the system packet responses upon a crash or reboot, which I explain later in the storage section.
+\subsubsection{Packet} 
+The packet file is used to handle all of the incoming packets, as well as having functions to send packets, which may be called by the user interface, packets, or as a timer event. All of the messaging state processing is handled in this file. The handlers are registered in a function pointer array, and then processed into application packets via a packet converter, which parses the raw packet data from the network layer into an application packet.\newline
+Each handler is given the packet, which contains the packet information, as well as an identification number for the network information from which the packet was received from. Some of this data is the time to live on the packet, the source address and destination address. The time to live can be used to determine the number of hops, or physical network devices it took for the packet to arrive at the station, which is what we use it for.
 \subsubsection{Neighborlist} 
-!MORE VERBOSE\newline
-The purpose of the neighbor list module is to allow for the device to populate a list of nearby base stations, also known as neighbors, which would allow for the user to become friends with those different stations, and thus their users. This list is displayed on the graphical user interface after the neighbors are polled using the find neighbors packet types. 
-
+The purpose of the neighbor list module is to allow for the device to populate a list of nearby base stations, also known as neighbors, which would allow for the user to become friends with those different stations, and thus their users. This list is displayed on the graphical user interface after the neighbors are polled using the find neighbors packet types. To connect to their neighbors, they would go to the add friend menu, which would populate the list with all stations on the network. The user can then send friend requests to these users. This system can also be used to probe the network for the purposes of minimizing large overly large numbers of broadcasts, to keep any broadcasts as physically local to the station, to improve network stability as well as reduce excessive alarms in the help from anyone request, which has the potential to reach a large amount of people.
 \subsubsection{Friendlist} 
-!MORE VERBOSE\newline
-The friend list is used to send friend requests to other stations. This is a list of friends that will be contacted upon a help request, and it will send it to them one at a time, in order of the priority that the user assigns them to. The uses of the friends list can be expandable in the future, such as sending private messages to your friends. For now though it is limited to sending help requests.
-
+The friend list is used to create a contact list so that the user can send friend requests to other stations. This is a list of friends that will be contacted upon a help request, and it will send it to them one at a time, in order of the priority that the user assigns them to. The uses of the friends list can be expandable in the future, such as sending private messages to your friends. For now though it is limited to sending help requests. This file also contains code which to creates the local user list. This list is for people that are connected directly to this base station. For instance, if a couple both had their own button, they could have it connected to the same base station, and still have their own name being displayed in events such as a help request. The local user is an extension of the friend struct, both of which can be seen in Appendix \ref{Friend Data Structure} and Appendix  \ref{LocalUser Data Structure}. The other data that is stored besides their own “Friend” data is related to their phone number and home address, which is sent over the network on a help request. The reasoning behind sending these addresses only when they request for help is a privacy concern. By only sending it when it is absolutely necessary, they can avoid the guest of other neighbors snooping through their contacts list to get mailing addresses of their friends, or through network sniffing. This limits this interaction to only when the person actually needs help, where it is more important that they can get the help they need when they need it.
 \subsubsection{Storage} 
-!MORE VERBOSE\newline
-In the event of a device reset, whether it be from events such as software crashes and power fluctuations, it would be possible to restore the friend status and important pending packet events, such as help requests and friend requests.
-
+In the event of a device reset, whether it be from events such as software crashes and power fluctuations, it would be possible to restore the friend status and important pending packet events, such as help requests and friend requests. This system would store response flags in the friendlist, which would determine what current packets are being expected, such as a help request that has been sent to them. The framework for this system is in the code, but it was never implemented, as we didn’t have a way to store the data, as we were getting low on available hardware pins to drive the other peripherals. This means that in its current form, it will not save user preferences or the fail-safe data, which will need to be rectified in a future revision, with the addition of non-volatile memory.
 \subsubsection{Alarm}
-!MORE VERBOSE\newline
-The purpose of the alarm module is to physically alert the user using the sound and lighting peripherals. I setup the software for the alarm to be able to support multiple alarm priorities, which will allow for higher priority messages such as help requests to override any standard lighting such as the passive on/off light configuration that you would expect from a normal table light.
+The purpose of the alarm module is to physically alert the user using the sound and lighting peripherals. I setup the software for the alarm to be able to support multiple alarm priorities, which will allow for higher priority messages such as help requests to override lower priority items. For instance, if the user was using the lighting component as a desk lamp, it would switch over to the higher priority flashing mode upon receiving a help request, which you can see in Figure \ref{Alarm Priorities}
 \begin{figure}[ht] 	% There are several different modifiers that can be used in [].
 \centering
 \includegraphics[width=0.4\textwidth]{AlarmPriority.png}
 \caption{ \space Potential lighting states based on priority.}
-\label{Alarm Priorties}
+\label{Alarm Priorities}
 \end{figure}
+
+\subsection{Application Layer (Linux Base-to-Base Emulation)}
+Our intentions in creating the Linux base-to-base emulation of our system was due to not having access to the hardware in a timely fashion.  The application layer was divided into different files for simplicity and organizational purposes.  It emulates the menu items displayed on the screen (as would be seen by a user) and it emulates a network in which a device is connected.  This Linux version of the system simulates sending a help packet to the contacts listed in a user’s friends list.  A packet will be sent to the first contact on the list, it will timeout if the help request is not acknowledged as received, at which time it will be sent to the next contact on the list.
 
 \subsection{Hardware}
 
@@ -1078,15 +1207,73 @@ TODO: Missing Figure
 Parts List
 \begin{itemize}
   \item 1 x Atmel SAMB11 microcontroller
-  \item 1 x ZigBee-Pro 915 MHz module
+  \item 1 x XBee-Pro 915 MHz module
   \item 1 x 26 MHz crystal
   \item 1 x 32.768 kHz crystal
-  \item 1 x SMA female jack
   \item male/female pin headers
-  \item Assorted surface-mount resistors/capacitors/inductors
+  \item Assorted surface-mount resistors and capacitors
 \end{itemize}
 
 \textbf {Layout}
+
+The base station unit is the other crucial component to this decentralized ad hoc neighbor system. Each household contains a single base station unit that pairs with its own unique button. When the button signals a help request, the corresponding base station receives the signal and broadcasts the help request to nearby friendly base stations in search of a response. The help signal is recursively rebroadcasted by the receiving base stations to any immediate base stations within their broadcast range, allowing for a theoretical unlimited search range. This work-around allows the system to get past the limited radiation power set under the FCC Part 15 regulations for unlicensed low-power transmitters.
+
+The base station consists of a bottom-up stack of PCBs. The bottom board contains the power supply, battery backup, as well as the amplifier and switching circuit for the speaker and light. The microcontroller sits on the board just above with both the 2.4GHz and 900MHz antennas. Female pin headers are extended from this board to allow placement of 16x4 character LCD display PCB just above.
+
+\begin{figure}[ht] 	% There are several different modifiers that can be used in [].
+\centering
+\includegraphics[width=0.4\textwidth]{base-schematic-uc.png}
+\caption{ \space Base Station Schematic: Microcontroller}
+\label{base-sch-uc}
+\end{figure}
+
+The Atmel SAMB11 system-on-chip is the base station's microcontroller. It features a quad-flat-no-lead (QFN) packaging with 48 pins and a pitch of 0.4mm distance between pins on a single side. The microcontroller provides an on-chip Bluetooth Low Energy module that allows easy access to the 2.4GHz radio band. The microcontroller operates with two external crystal oscillators: a 32.768kHz real time clock and a 26MHz normal operation clock. The SAMB11 operates on a +3.3V voltage rail for its digital core, but it also contains an internal DC-DC converter to +1.2V for radio operations.
+
+The microcontroller has a total of 27 GPIO pins, where 4 pins have mixed-signal capabilites and the rest are standard digital. The SAMB11 has an onboard analog-to-digital converter (ADC) accessible by these mixed-signal GPIOS, but our system does not have use of this. Instead, these GPIOs are used as typical digital pins. All onbaord GPIOs have internal resistors, whose pull orientation can be programmed.
+
+The onboard Bluetooth module is accessed via the RFIO pin, which handles both the receiving and transmitting radio ends. Our system provides a patch antenna tuned to 2.4GHz operation with a matching network of transmission lines. Unlike the button, the base station is not limited to be as small as possible. Therefore, instead of using a more compact, electrically-short chip antenna that has limited performance, the system takes advantage of the extra real estate with a higher-performance patch antenna.
+
+The controller is programmed via serial wire debug (SWD), which requires 5 signals for operation: voltage reference, IO, clock, reset, and ground. The IO and clock is connected directly to the corresponding pins on the microcontroller, while the reference voltage and ground is connected to the digital core voltage of +3.3V and the microcontroller ground, respectively. The SWD reset pin connects to the microcontroller's CHIP\_EN, which is required to stay high for normal operations. The debugger momentarily pulls CHIP\_EN low to restart the system. While the GPIOs have internal pull up/down resistors, an external pull up resistor must be placed by CHIP\_EN to ensure an operational chip in the absence of the SWD debugger.
+\begin{figure}[ht] 	% There are several different modifiers that can be used in [].
+\centering
+\includegraphics[width=0.4\textwidth]{base-schematic-xbee.png}
+\caption{ \space Base Station Schematic: XBee Transceiver}
+\label{base-sch-xbee}
+\end{figure}
+
+The Digi XBee radio module is the choice of transceiver to communicate on the 900MHz band. An external antenna can be connected through its onboard SMA receptacle. The XBee communicates with the microcontroller via UART with 4 pins: receiving data (RX), transmitting data (TX), clear-to-send (CTS), and request-to-send (RTS).
+
+\begin{figure}[ht] 	% There are several different modifiers that can be used in [].
+\centering
+\includegraphics[width=0.4\textwidth]{base-schematic-lcd.png}
+\caption{ \space Base Station Schematic: Display}
+\label{base-sch-lcd}
+\end{figure}
+
+A 16x4 character LCD display is chosen for user interface to the base station system. It provides a larger space for viewable data than its 16x2 character counterpart, while remaining relatively inexpensive in comparison to other larger display screens. The LCD is the only device on the board that operates on a +5V rail as opposed the microcontroller's +3.3V rail. The register select (RS), read/write, and enable pins control the data flow set by the 8 data pins of the LCD. To conserve on limited GPIO resource, the LCD was set to half-byte operation, reducing the necessary data pins down to 4. The ability to view the LCD depends on its character contrast and the backlight brightness. A trimpot resistor allows for contrast tuning based on the user's viewing angle, while the LCD backlight is controlled via a PWM signal from the the microcontroller to a power MOSFET.
+
+\begin{figure}[ht] 	% There are several different modifiers that can be used in [].
+\centering
+\includegraphics[width=0.4\textwidth]{base-layout-uc.PNG}
+\caption{ \space Base Station Layout: Microcontroller}
+\label{base-lay-uc}
+\end{figure}
+Layout of the microcontroller on the base station demands careful consideration due to the tiny nature of the chosen components, which are sized in the sub-centimeter range. The biggest factor concern is due to noisy nature of any electromagnetic interference (EMI). This interference can be found everywhere, but on a PCB, the main sources can be found in crystal oscillators, power supplies, and antennas. The high frequency components found within these elements is the origin to this noisy behavior.
+
+As such, crystal placement is of utmost importance. While the crystal can inflict noise onto nearby signal traces, the oscillator itself is also very prone to noise. The microcontroller requires a clean oscillating signal to operate properly with its clocking signal. Placing the crystals as close as possible to the microcontroller allows for short connecting traces and reduce the possibility of defect in the oscillating signal. In addition, the 26MHz crystal has a ground pad, which must have a low impedance short return path to the microcontroller. By low impedance, we mean a minimally-disrupted wide path that allows current to flow relatively undisrupted. This low impedance short path reduces the ground loop in which current flows.
+\begin{figure}[ht] 	% There are several different modifiers that can be used in [].
+\centering
+\includegraphics[width=0.4\textwidth]{base-layout-full.PNG}
+\caption{ \space Base Station Layout: Radio and Display}
+\label{base-lay-full}
+\end{figure}
+
+\begin{figure}[ht] 	% There are several different modifiers that can be used in [].
+\centering
+\includegraphics[width=0.4\textwidth]{base-layout-interface.PNG}
+\caption{ \space Base Station Layout: Interface}
+\label{base-lay-btn}
+\end{figure}
 
 The base station layout requires careful consideration due to the number of components packed into a smaller sized board.  The first board revision for the base station adopts a mother-daughter format as an attempt to reuse many of the tiny expensive components, primarily from the SAMB11 microcontroller.  Analog signal and power components must be placed close to the microcontroller on the daughterboard.  Plated drill holes placed around this section will allow for the daughterboard to be shared and reused.  Future revisions will only include the motherboard, with circuitry outside the microcontroller and its closest components, whereas the older revision using the daughterboard can be mounted directly on the plated drill holes through pin headers.
 
@@ -1103,7 +1290,7 @@ Another significant source of noise comes from the crystal oscillator.  The SAMB
 \label{Psupply}
 \end{figure}
 
-The power supply for the base station requires three different output voltages to power the main components. The three output voltages are 12V, 5V, and 3.3V as we can see from the base station power budget. The base station pulls a maximum current of 394.6mA, and a maximum total power of 1.82W. The high-level block diagram below simplifies the whole design of the power supply and peripherals. First of all, the base station is powered by a regular 120VAC power outlet that can be found in any home with electricity. A 12V 12W AC/DC external wall mount adapter from Qualtek is used to convert 120VAC to 12VDC. The 12V output from the wall mount adapter is fed to an audio amplifier circuit using a LM368 IC. The output from the wall mount adapter is stepped down to 5V using a linear voltage regulator. The 5V output from the linear regulator is fed to the LCD display as shown in the block diagram. Additionally, the 12V output is stepped down to 3.3V using a Buck Converter to feed the SAMB11 microcontroller, the X-bee pro, and the keypad. 
+The power supply for the base station requires three different output voltages to power the main components. The three output voltages are 12V, 5V, and 3.3V as we can see from the base station power budget. The base station pulls a maximum current of 394.6mA, and a maximum power of 1.82W. The high-level block diagram below illustrates the whole design of the power supply and peripherals. First of all, the base station is powered by a regular 120VAC power outlet that can be found in any home with electricity. A 12V 12W AC/DC external wall mount adapter from Qualtek is used to convert 120VAC to 12VDC. The 12V output from the wall mount adapter is fed to an audio amplifier circuit using a LM368 IC. The output from the wall mount adapter is stepped down to 5V using a linear voltage regulator. The 5V output from the linear regulator is fed to the LCD display as shown in the block diagram. Additionally, the 12V output is stepped down to 3.3V using a Buck Converter to feed the SAMB11 microcontroller, the X-bee pro, and the keypad. 
 
 The power supply also has a 120VAC output that is controlled using a triac. The purpose of the triac is to let us change the output from 120VAC to 0V at any given time. The backup power consists of a 4.8V 700mAh NiMH rechargeable battery. A boost converter is used to step up the 4.8V from the battery to 12V. This allow us to feed 12V to the system like the wall mount adapter so that we can repeat the whole process to power the components in backup battery mode.
 
@@ -1116,7 +1303,7 @@ The power supply also has a 120VAC output that is controlled using a triac. The 
 \label{Paudio}
 \end{figure}
 
-The 12V output from the wall mount adapter is fed to a LM386 audio amplifier as shown in the circuit diagram above. This means that the output audio signal can swing from 0V to 12V. A 12-Volt Zener diode (D8) is used as a voltage reference to make sure the input voltage rail does not exceed 12V, since it can damage the LM386 IC. However, a 1k-ohm (R11) resistor was added to act as a load in case that the rail exceeds 12V to limit the current looping through the Zener diode. The input signal for the audio amplifier is regulated with a potentiometer using a voltage divider. In this case the gain of the amplifier was set to 200, which is the maximum gain possible. The gain can be reduced by adding a resistor in series with the 10uF capacitor (C5) between pin 1 and 8. Lastly, the output signal goes through a DC coupling capacitor to get rid of any DC components. 
+The 12V output from the wall mount adapter is fed to a LM386 audio amplifier as shown in the circuit diagram above. This means that the output audio signal can swing from 0V to 12V. A 12-Volt Zener diode (D8) is used as a voltage reference to make sure the input voltage rail does not exceed 12V, since it can damage the LM386 IC. However, a 1k$\Omega$ (R11) resistor was added to act as a load in case that the rail exceeds 12V to limit the current looping through the Zener diode. The input signal for the audio amplifier is regulated with a potentiometer using a voltage divider. In this case the gain of the amplifier was set to 200, which is the maximum gain possible. The gain can be reduced by adding a resistor in series with the 10uF capacitor (C5) between pin 1 and 8. Lastly, the output signal goes through a DC coupling capacitor to get rid of any DC components. 
 
 
 \textbf {5-Volt Output: LCD Display}
@@ -1128,20 +1315,19 @@ The 12V output from the wall mount adapter is fed to a LM386 audio amplifier as 
 \label{Pdisplay}
 \end{figure}
 
-The LCD display requires a 5-volt input voltage and the data sheet suggests a 5-volt steady input signal to avoid any damages.  An adjustable LM317K linear regulator was used to step the voltage down to 5V.  The output of the linear regulator is given by Vout~= 1.25(1+R3/R4), the datasheet suggests keeping R4 at 240\Omega but vary R3 to obtain the desired output voltage.  In this case, R3 is 750\Omega, which sets the output voltage to 5.15V.  The capacitor C15 is recommended to prevent any amplification of the output voltage ripple.  The Schottky diode D5 provides a low-impedance path for C15 to discharge so it won’t discharge at the output of the LM317.  A 5-volt Zener diode was included at the output of the LM317 to establish a voltage reference so it would not permit the output to exceed 5V in case of a malfunction.
+The LCD display requires a 5-volt input voltage and the data sheet suggests a 5-volt steady input signal to avoid any damages.  An adjustable LM317 linear regulator was used to step the voltage down to 5V.  The output of the linear regulator is given by Vout~= 1.25(1+R3/R4)V, the datasheet suggests keeping R4 at 240$\Omega$ but vary R3 to obtain the desired output voltage.  In this case, R3 is 750$\Omega$, which sets the output voltage to 5.15V.  The capacitor C15 is recommended to prevent any amplification of the output voltage ripple.  The Schottky diode D5 provides a low-impedance path for C15 to discharge so it won’t discharge at the output of the LM317.  A 5-volt Zener diode was included at the output of the LM317 to establish a voltage reference so it would not permit the output to exceed 5V in case of a malfunction.
 
 
-\textbf {3.3-Volt Output: Microcontroller SAMB11, Keypad, and XBee-Pro
-}
+\textbf {3.3-Volt Output: Microcontroller SAMB11, Keypad, and XBee-Pro}
 
 \begin{figure}[ht]	% There are several different modifiers that can be used in [].
 \centering
 \includegraphics[width=0.4\textwidth]{Buck.png}
-\caption{ BuckConverter 3.3V Output }
+\caption{ Buck Converter 3.3V Output }
 \label{PConverter}
 \end{figure}
 
-The microcontroller and the XBee-Pro are the most expensive and sensitive devices in the base station. For this reason, a 3.3-volt fixed buck converter LM2574 IC was used instead of a standard adjustable buck converter.  The values of L1 and CP were chosen carefully so that the switching power supply is in continuous-conduction-mode.  A 3.3-volt Zener diode was added to set up a voltage reference at the output of the buck converter to double-protect the microcontroller and XBee module.  A 500mA fuse was included in case of any short circuits in either the microcontroller or the XBee.  A switch was then included before the input of the buck converter to control the three output voltages, which is not clear from the circuit diagram above.
+The microcontroller and the XBee-Pro are the most expensive and sensitive devices in the base station. For this reason, a 3.3-volt fixed buck converter LM2574 IC was used, instead of a standard adjustable buck converter.  The values of L1 and CP were chosen carefully so that the switching power supply is in continuous-conduction-mode.  A 3.3-volt Zener diode was added to set up a voltage reference at the output of the buck converter to double-protect the microcontroller and XBee module.  A 500mA fuse was included in case of any short circuits in either the microcontroller or the XBee.  A switch was then included before the input of the buck converter to control the three output voltages, which is not clear from the circuit diagram shown above.
 
 \textbf {120VAC Output: External Light controlled with a Triac}
 
@@ -1152,7 +1338,7 @@ The microcontroller and the XBee-Pro are the most expensive and sensitive device
 \label{PTriac}
 \end{figure}
 
-The circuit in Fig. \ref{PTriac} allows the 120VAC output to change to 0V by sending a signal from the SAMB11 microcontroller.  The output is 120VAC when the microcontroller sends a high signal and 0V when the signal is low.  The triac blocks AC electricity when the its gate senses no current.  To trigger the triac, the gate must sense a current of at least 25mA.  Unfortunately, the microcontroller could not output 25mA to trigger the gate.  To solve this, a MOC3043M optoisolator was included in the design, which can be activated with a minimum current of 5mA.  The optoisolator also completely isolates any AC currents from the microcontroller, which is essential, since AC currents and voltages can damage the microcontroller and the XBee-Pro.  The purpose of this circuit is to allow the user to plug any AC lamp into the base station to use as an alert, flashing in case of an emergency.  Note that this circuit will not operate in backup power mode.
+The circuit in Fig. \ref{PTriac} allows the 120VAC output to change to 0V by sending a signal from the SAMB11 microcontroller.  The output is 120VAC when the microcontroller sends a high signal and 0V when the signal is low.  The triac blocks AC electricity when its gate senses no current.  To trigger the triac, the gate must sense a current of at least 25mA.  Unfortunately, the microcontroller could not output 25mA to trigger the gate.  To solve this, a MOC3043M optoisolator was included in the design, which can be activated with a minimum current of 5mA.  The optoisolator also completely isolates any AC currents from the microcontroller, which is essential, since AC currents and voltages can damage the microcontroller and the XBee-Pro.  The purpose of this circuit is to allow the user to plug any AC lamp into the base station to use as an alert, flashing in case of an emergency.  Note that this circuit will not operate in backup power mode.
 
 
 \textbf {Backup Battery}
@@ -1164,24 +1350,26 @@ The circuit in Fig. \ref{PTriac} allows the 120VAC output to change to 0V by sen
 \label{Pboost}
 \end{figure}
 
-The options for backup battery were extremely limited by size, cost, capacity, and safety.  A 4.8V 700mAh NiMH battery met the criteria, however the output voltage of the battery is not compatible to the 12V main power rail. A boost converter was used to step up the voltage from 4.8V to 12V. This allow us to redo the same process of stepping down voltages as the wall mount adapter, which reduces complexity in the system. The boost converter used is a MC33063A adjustable IC, the output voltage is given by V\textsubscript{out=1.25(1+R10/R9)}. R9 was set to 1kOhms and R10 to 10kOhms. This means that the output of the boost converter is 13.75V when the battery is fully charged. However, the voltage of the battery drops as it discharges so it is convenient that the output of the boost converter in greater than 12V most of the time as it discharges. Also, the Schottky diodes D2, D12, and D4 are included to only let current flow one way to avoid any unwanted currents going to the boost converter or the battery. 
+The options for backup battery were limited by size, cost, capacity, and safety.  A 4.8V 700mAh NiMH battery met the criteria, however the output voltage of the battery is not compatible with the 12-volt main power rail.  A boost converter was used to step the voltage up from 4.8V to 12V.  This allowed the reuse of the wall-mount adapter step-down voltage process, which reduced complexity in the system.  The boost converter used is a MC33063A adjustable IC, the output voltage is given by Vout=1.25(1+R10/R9).  R9 was set to 1k$\Omega$ and R10 to 10k$\Omega$.  Thus, the output of the boost converter is 13.75V when the battery is fully charged.  However, the voltage of the battery drops when discharging so it is convenient that the output of the boost converter is greater than 12V much of the time during discharging.  The Schottky diodes D2, D12, and D4 are included to allow current flow in one direction to avoid any unwanted currents going to the boost converter or the battery.
 
 
-\textbf {Future Revisions of Power Supply
-}
+\textbf {Future Revisions of Power Supply}
 
-Bay Area Circuits sent the last revision of printed circuit boards to us in June 7th. I discovered some of my output voltages were not the exact values required. For example, the 5-Volt output for the display was 3.7V and the output of the boost converter was not 12V. To correct this, I simply have to try experimentally different resistances until I obtain a desired output. Also, one of the main concerns is to design a charging system for the backup battery. The charging system has to be well designed to optimize the life of the battery and the safety of the user, since batteries can be really unstable at high temperatures. Lastly, I have to design a noise filter for the audio amplifier because the output audio signal is really noisy and you can also hear static even without an audio input signal. 
+It was discovered with the final revision that output voltages were not the required values.  For example, the output for the display was 3.7V instead of 5V, and the output of the boost converter is not 12V.  To correct this, different resistances must be tested experimentally until the desired output is achieved.  One of the primary concerns is a charging system design for the backup battery.  This charging system must be well designed to optimize the battery life and for the safety of the user, since batteries can be unstable at hot temperatures.  Finally, a noise filter must be designed for the audio amplifier because the output audio signal contains too much noise so static is audible without an audio input signal.
 
 
-\textbf {Antennas}
+\subsubsection {Antennas}
 
 \textbf {Button}
 
 The antenna for the button needed to operate in the chosen frequency band of 2.4 GHz and it was required to be compact so it can be contained within the button, which is to be worn as either a for a necklace or a bracelet pendant.  This size constraint required careful consideration to produce the optimum performance, which was a primary motivating factor to use this high-frequency band.  The minimum transmission range for the button is the approximate length of our customers’ homes at 50 feet and it must communicate with the base station in the home environment.  This means the button antenna needs to communicate through walls and despite other types of interference such as microwaves.
 
-Nine different PCB antenna layouts were initially created based on proven engineering models, utilizing appnotes and datasheets as guides for the designs.  Subsequent revisions were designed to tune the antennas.  For lab testing, a high-frequency network analyzer was used to measure impedances with the base-level impedances measured first. The SimSmith Smith chart simulation software was then used as a guide for designing impedance matching networks for optimum power transfer between the antennas and the button circuit at 50 Ohms.  A high-frequency spectrum analyzer was used to test the far-field performance of each antenna, which is when the radiation.  We will make the appropriate improvements and once we have the second button antenna revisions, we will then be able to actually test them in the field at the De Anza Santa Cruz Senior Citizen Community.
+Nine different PCB antenna layouts were initially designed based on proven engineering models, utilizing appnotes and datasheets as guides.  Subsequent revisions were created to properly tune the antennas.  Antenna testing is a time consuming and meticulous process.  For lab testing, a high-frequency network analyzer was used to measure impedances with the baseline impedances measured first.  The SimSmith Smith chart simulation software was then used as a guide for designing impedance matching networks for optimum power transfer between the antennas and button circuit at the ideal impedance of 50$\Omega$ with no reactants.  A radio-frequency link was created in the lab and a high-frequency spectrum analyzer was used to measure the far field performance of each antenna.  The far field is where the electromagnetic waves are free to radiate without the influence of the moving charges which produced them, once the waves have traveled far enough away from those charges.  In contrast, the near field is where these radiating waves are close to the charges and the current which created them.
 
-\begin{table*}[t]
+Proper testing requires the environment to remain identical for each test.  Each antenna also needed to be tested in a variety of positions relative to the transmitted ground plane reference signal.  This means everything in the lab would ideally be in the same exact location for each test.  The far field lab testing measured the link loss of each antenna to determine which designs had the best performances relative to one another.   These antennas not only needed to radiate up to 50 feet but they needed to work properly in any position and behind obstacles.  The initial testing used a radio-frequency link distance of 2 meters.  Then based on these results, it was determined that the small MIFA and chip corner-mounted designs performed best relative to the other designs.  They had better baseline impedances and less link loss.  These two antennas were then tuned with the appropriate impedance matching networks in the next revisions.  Finally, the antenna chosen for the button was the small MIFA since it performed approximately as well as the chip antenna and was smaller, making it a better fit for use in the button device.
+
+
+\begin{table*}[H]
   \centering
   \begin{tabular}{>{\bfseries}l|l l l l}
   \hline
@@ -1195,16 +1383,17 @@ Nine different PCB antenna layouts were initially created based on proven engine
     IFA (Right Turn) & \multicolumn{1}{|r|}{33.9 + j27.9, 1.86 pH} & \multicolumn{1}{|r|}{32.8 + j37.5, 2.46 pH} & \multicolumn{1}{|r|}{43.5 + j49.3, 3.19 pH} & \multicolumn{1}{|r|}{83.2 + j47.9, 3.01 pH} \\
     Patch & \multicolumn{1}{|r|}{157 + j540, 36.7 nH} & \multicolumn{1}{|r|}{723 + j463, 29.2 nH} & \multicolumn{1}{|r|}{716 - j37.0, 2.1 pF} & \multicolumn{1}{|r|}{420 - j196, 332 fF} \\
     RUFA (Antenova) w/out impedance matching & \multicolumn{1}{|r|}{107.1 - j46.8, 1.2 pF} & \multicolumn{1}{|r|}{76.1 - j60.8, 1.07 pF} & \multicolumn{1}{|r|}{58.4 - j58.6, 1.1 pF} & \multicolumn{1}{|r|}{44.6 - j53.1, 1.2 pF} \\
-    Chip (Johanson) w/out impedance matching & \multicolumn{1}{|r|}{32.6 - j43.2, 1.53 pF} & \multicolumn{1}{|r|}{31.2 - j39.6, 1.65 pF} & \multicolumn{1}{|r|}{30.2 - j37.2, 1.73 pF} & \multicolumn{1}{|r|}{28.6 - j34.7, 1.83 pF} \\ \hline
-  \end{tabular} \linebreak
-  \caption{2.4 GHz Bluetooth Antenna Impedance Results}
+    Chip corner-mount  w/out impedance matching & \multicolumn{1}{|r|}{32.6 - j43.2, 1.53 pF} & \multicolumn{1}{|r|}{31.2 - j39.6, 1.65 pF} & \multicolumn{1}{|r|}{30.2 - j37.2, 1.73 pF} & \multicolumn{1}{|r|}{28.6 - j34.7, 1.83 pF} \\ \hline
+  \end{tabular} \newline
+  \caption{Bluetooth 2.4 GHz Antenna Impedance Results}
 \end{table*}
+
+
 
 \textbf {Base Station}
 
-The base station antenna will operate in the 900 MHz frequency band primarily since it must be able to communicate over a longer range of at least 300 feet, from one user’s base station to another.  This lower frequency band is more suitable for long distance radio links since the attenuation suffered by radio waves through free space decreases along with the operating frequency.  The base station antenna must also be capable of handling atmospheric loss due to gases and be able to navigate through outdoor environments, such as trees and other obstructions.  One of the biggest advantages of this frequency band is that it’s “Near Line of Sight”, meaning better range can be achieved in this band than other ISM bands given the same obstructions.  Since there isn’t as much of a size constraint as with the button antenna, the base station antenna can be larger and external.  At this point we have created two different PCB base station antenna layouts and have a proven whip antenna as a reference, and we will have those soon for testing.
+The base station antenna operates in the 900 MHz frequency band to facilitate communication over a longer range of at least 300 feet, from one user’s base station to another.  This lower frequency band is more suitable for long distance radio links since the attenuation suffered by radio waves through free space decreases along with the operating frequency.  The base station antenna must also be capable of handling atmospheric loss due to gases and be able to navigate through outdoor environments, such as trees and other obstructions.  One of the biggest advantages of this frequency band is that it’s “Near Line of Sight”, meaning better range can be achieved in this band than other ISM bands given the same obstructions.  Since there isn’t as much of a size constraint as with the button antenna, the base station antenna can be larger and external.  At this point we have created two different PCB base station antenna layouts and have a proven whip antenna as a reference, and we will have those soon for testing.
 
-TODO: Missing table
 
 \subsection{Button to Base Application}
 
@@ -1214,10 +1403,12 @@ The Atmel SAMB11’s GAP layer must also be initialized, which is accomplished u
 
 The Security Manager authenticates the connection between the Master and Slave devices by exchanging the 128-bit Long-term-keys (LTK) generated by the AES algorithm. Unfortunately, because the advertising button does not have a display to enter a passkey, the encryption method used is the "Just Works" pairing method for both devices. This means that the connection is exposed to Man-In-The-Middle (MITM) attacks. An argument could be made that not much security is needed since all that would be transmitted between these two devices is "Help Request" packets and battery voltage levels. On the press of a button the BlueNRG-1 sends a connection request to the SAMB11. When the SAMB11 responds an exchange of LTKs are then exchanged to pair both devices together.  When both devices finish exchanging the LTKs, pairing is complete and the device's transition from the GAP layer to the GATT layer. When entering the GATT layer the roles implicitly change from Master\textbackslash Slave to Server\textbackslash Client.
 
-The Server is the device that has updated data to send and the Client is the device that stores and processes this information. In this case the BlueNRG-1 is implicitly the Server and the SAMB11 is the Client. The BlueNRG-1 is the server because it has the voltage level that the base station needs to worry about and it is the device that sends the "Help Request" data the base station needs to process. Before the BlueNRG-1 enters the GATT layer it already has configured a table shown in Fig. \ref{BT Access}. This table is used to reference the characteristic, which then points  type of access rights one device has to the other.
+The Server is the device that has updated data to send and the Client is the device that stores and processes this information. In this case the BlueNRG-1 is implicitly the Server and the SAMB11 is the Client. The BlueNRG-1 is the server because it has the voltage level that the base station needs to worry about and it is the device that sends the "Help Request" data the base station needs to process. Before the BlueNRG-1 enters the GATT layer it already has configured a table shown in Table \ref{BT Access}. 
 
-\begin{figure}
-  \begin{tabular}{|l|c|c|c|}
+\begin{table}[H]
+\centering
+\caption{Bluetooth Profile Table}
+  \begin{tabular}{|l|c|c|c|c|}
       \hline
       Description         &Handle& UUID              & Value\\
       \hline
@@ -1225,31 +1416,33 @@ The Server is the device that has updated data to send and the Client is the dev
       \hline
       TX Characteristic   & 0x0D & 0xD973F2E1...66   & \\
       \hline
-      Value Handle	      & 0x0E & 				     & uint8*\\
+      Notif Handle	      & 0x0E & 				     & uint8*\\
       \hline
-      Notif Handle        & 0x0F & 			         & \{0, 1\}\\
+      CCCD                & 0x0F & 			         & \{0, 1\}\\
       \hline
       RX Characteristic   & 0x10 & 0xD973F2E2...66   & \\
       \hline
-      Value Handle		  & 0x11 &					 & uint8*\\
+      Write Handle		  & 0x11 &					 & uint8*\\
       \hline
       Battery 		      &		 &					 & \\
       Characteristic	  & 0x12 & 0xD973F2E3...66   & \\
       \hline
-      Value Handle		  & 0x13 & 					 & uint8*\\
+      Read Handle		  & 0x13 & 					 & uint8*\\
       \hline
   \end{tabular}
-  \caption{Bluetooth Access Rights}
   \label{BT Access}
+\end{table}
+A Bluetooth Profile may consist of the many services, characteristics, and attributes. In the profile created for the button to base communication only one service is created that contains three characteristics.  The handles give order to the table in organization of service, characteristic, and attribute order. Each characteristic has a description of itself and it identifies itself through the UUID. The UUIDs in the button to base profile are all custom characteristics therefore, they all must be 128-bits.  Generic characteristics are 16-bits. Each characteristic must also have a property that gives both devices the ability to send and receive data that modifies their respective attribute values.\\
+
+Now in the GATT layer, to be able to chat back and forth between the BlueNRG-1 and SAMB11 the "TX Characteristic" and "RX Characteristic" were made. These are just names of course to what actually allows the transactions of data to take place. The BlueNRG-1 exposes the characteristics shown in Table 8. The SAMB11 then goes through the discovery process of these characteristics. Once discovered, both devices have the same characteristics with the same handles stored. The SAMB11 will discover that the TX characteristic contains the Client Characteristic Configuration Descriptor (CCCD) that comes when the notification property is initiated by the Server. The CCCD attribute value will only take a 0 or 1. The Client will write a 1 to the Server to enable Notifications from the Server. Writing a value of 0 disables Notifications from the Server. When the Client enables Notifications the Server will now be able to send data to the Client through its attribute handle without the need for acknowledgement from the Client. The Client will discover the RX Characteristic, which comes with the Write Property, the handle, and the attribute value. Once discovered the Client would then be able to write to this handle and the Server would then receive the data sent. Lastly, the Client discovers the "Battery Characteristic" along with its Read Property, its handle, and attribute value. The Client could now on command inquire to the Server for some information designated by the Server. In this projects case it would be the battery voltage level being inquired about. Fig. \ref{ble} will help with the visualization of the sequence of events between the Master\textbackslash Slave and the Server\textbackslash Client.
+\begin{figure}[ht] 	% There are several different modifiers that can be used in [].
+\centering
+\includegraphics[width=0.4\textwidth]{Bluetooth.png}
+\caption{ \space Bluetooth LE sequence of events}
+\label{ble}
 \end{figure}
 
-To do this repeatedly, the call is placed in a forever loop where it sends a packet every time it is scanned, which occurs on channels 37, 38, and 39.  At the same time the BlueNRG-1 is advertising, the device is set to ADV\_IND enabling other devices to receive the data packet if desired.  Setting the device using ADV\_IND indicates it is generally in discoverable mode and any central device can connect to it.  When the BlueNRG-1 is not advertising it is listening for a connection request, but for now no connection request is needed to just advertise a press of a button. To summarize the BlueNRG-1’s role has been set to peripheral, it is discoverable and any central device can connect to it.  With this configuration, it is now possible to send packets through the link layer.
-
-To send two different packets, a GPIO tied to a button on the BlueNRG-1 development board is set to be triggered on an interrupt, which occurs when the button is pressed enabling it to send a help request advertising packet.  Since the advertising function is set in a forever loop, once the button is no longer pressed, the program resumes sending the original packet in the queue.  There is a difference between the packet sent when the button is pressed versus when the button is not being pressed.  The difference is in the Manufacturer’s Specific Data sent in the packet.  Changing this data is allowed since no necessary information such as flags or data types are being changed in the process.  The Atmel SAMB11 must then distinguish between the two different packets sent by the BlueNRG-1.
-
-\subsection{Application Layer (Linux Base-to-Base Emulation)}
-Our intentions in creating the Linux base-to-base emulation of our system was due to not having access to the hardware in a timely fashion.  The application layer was divided into different files for simplicity and organizational purposes.  It emulates the menu items displayed on the screen (as would be seen by a user) and it emulates a network in which a device is connected.  This Linux version of the system simulates sending a help packet to the contacts listed in a user’s friends list.  A packet will be sent to the first contact on the list, it will timeout if the help request is not acknowledged as received, at which time it will be sent to the next contact on the list.
-
+Another concern was the power consumption of both the BlueNRG-1 and the SAMB11. To alleviate the radio from being constantly ON. The BlueNRG-1 would be put into sleep mode and wake up every 10 seconds so as not to go into Deep Sleep. In this application the BlueNRG-1 would consume less than 1 $\mu$A and while connected it would consume almost 5 mA. To alleviate the power consumption of the SAMB-11 scanning it would be best reduce the scanning window. So the SAMB-11 would be scanning half the time ON and the other time OFF. It was found that in this application it would consume about 3 mA.
 \subsection{Packaging}
 Packaging was done using a 3-dimensional modeling software. There were various software that could have been used, but there were tradeoffs between the amount of time to learn one and have a finished packaged product by the end. Various testing and research done on which to use and to name a few there was Solidworks, FreeCAD, and Fusion 360. The most intuitive one to learn in a quick amount of time was Fusion 360 to design the encasements for the base station and the button device. 
 
@@ -1350,8 +1543,10 @@ Before actually obtaining the software rough sketches were made for the base sta
 % \fnbelowfloat command of the stfloats package.
 
 \section{Conclusion}
-% <more>
-We did not meet our design goal of less than a \$100 product cost. Discussions regarding how to reduce the cost have been focused on replacing the Digi XBee module with a less expensive alternative or using an available off-the-shelf system on a chip (SOC) device.
+
+Although the design goal of less than a \$100 product cost was not met, substantial progress was achieved with a \$150 product cost. Discussions regarding how to reduce the cost have been focused on replacing the Digi XBee module with a less expensive alternative or using an available off-the-shelf system on a chip (SOC) device.
+
+After the design decisions about the new system are complete, a study at the DeAnza elderly community will occur. This study will test the system and it's design, particularly <TODO!! complete>
 
 %
 % if have a single appendix:
@@ -1368,7 +1563,162 @@ We did not meet our design goal of less than a \$100 product cost. Discussions r
 % starts a section numbered zero.)
 %
 \appendices
-\section{Menu Item Data Structure}
+
+\section{Packet Descriptions}
+\label{Packet Descriptions}
+\begin{LaTeXdescription}
+  \item[PING REQUEST]
+  The Ping Request message will request the destination to send a return packet to identify that it is still on the network. For a successful request, the source must know the destination UID and transmit it to that node.
+  ACK should be set to 0.
+  \item[ACK PING REQUEST]
+  The ACK Ping Request message will return a packet to the source. It will also return the responders UID and Name.
+  ACK flag set to 1.
+  \item[HELP REQUEST]
+  The Help Request message will be used to request help from a previously friended node. When sending the initial message, the IMM flag may be used if the user wants the friend to request immediate assistance from emergency services.
+  After the initial message, the CANCEL flag may be used to cancel any requests that have been made previously. The Home Address and Phone data packets should not be transmitted in this case.
+  Set the ACK flag to 0 for all requests.
+  \item[ACK HELP REQUEST]
+  On the receiving end, the request will be acknowledged. This will tell the requester that the message has been received. The CANCEL and IMM flag should be transmitted the same as was received. The responders UID is also transmitted in the process.
+  Set the ACK flag to 1.
+  \item[HELP RESPONSE]
+  The responder will either set the ACCEPT flag to 1 to accept a request or reject it by setting it to 0. It will also return the responder UID. 
+  Set the ACK flag to 0.
+  \item[ACK HELP RESPONSE]
+  The requester will acknowledge the help response by sending back the packet with the same ACCEPT flag and the ACK flag set to 1.
+  \item[HELP FROM ANYONE REQUEST (Broadcast)]
+  The Help ALL Request message will be used to request help from any nearby node. When sending the initial message, the IMM flag may be used if the user wants the friend to request immediate assistance from emergency services.
+  After the initial message, the CANCEL flag may be used to cancel any requests that have been made previously. The NAME data packet should not be transmitted in this case.
+  This message does not need to be ACKnowledged.
+  While the TTL is still greater than 0, this same packet is rebroadcast with the TTL decremented. The TTL should also be signalled to the network layer where it will be implemented.
+  \item[HELP FROM ANYONE RESPONSE]
+  The help all response is to be used to accept the HELP ALL REQUEST broadcast message. The ACCEPT flag will be set based on if the responder accepts or rejects the request. 
+  The ACK flag should be set to 0.
+  \item[ACK HELP FROM ANYONE RESPONSE]
+  The help all response ACK is used to acknowledge the response. If the response was accepted, the home address and phone number will be transmitted. Otherwise, they will not be transmitted. 
+  The ACK flag should be set to 1.
+  \item[FIND HOPS REQUEST (Broadcast)]
+  This message is for polling nearby hops to be checked for. 
+  The ACK flag should be set to 0.
+  While the TTL is still greater than 0, this same packet is sent with the TTL decremented. The TTL should also be signalled to the network layer where it will be implemented.
+  \item[FIND HOPS RESPONSE]
+  This message is to respond to the poll of nearby hops.
+  The ACK flag should be set to 0.
+  The TTL should be sent back for configuration purposes.
+  It is expected that the network layer can identify the source of the broadcast from the hops request.
+  \item[ACK FIND HOPS RESPONSE]
+  This message is to ACK the response to the poll of nearby hops.
+  The ACK flag should be set to 1.
+  \item[FIND NEIGHBORS REQUEST (Broadcast)]
+  This message is for polling nearby neighbors to be listed as potential friends.
+  While the TTL is still greater than 0, this same packet is sent with the TTL decremented. The TTL should also be signalled to the network layer where it will be implemented.
+  \item[FIND NEIGHBORS RESPONSE]
+  This message is to respond to the poll of nearby neighbors to be listed as potential friends. 
+  The ACK flag should be set to 0. 
+  The TTL should be sent back for configuration purposes.
+  It is expected that the network layer can identify the source of the broadcast from the neighbors request.
+  \item[ACK FIND NEIGHBORS RESPONSE]
+  This message is to ACK the response to the poll of nearby neighbors to be listed as potential friends. 
+  The ACK flag should be set to 1.
+  \item[FRIEND REQUEST]
+  This message is used to request the other user to be a friend.
+  The ACK flag should be set to 0.
+  \item[ACK FRIEND REQUEST]
+  This message is used to ACK the request the other user to be a friend.
+  The ACK flag should be set to 1.
+  \item[FRIEND RESPONSE]
+  This message is the response to the request from the original user.
+  The ACK flag should be set to 0.
+  \item[ACK FRIEND RESPONSE]
+  This message is used to ACK the other user response to be a friend.
+  The ACK flag should be set to 1.
+  \item[UNFRIEND REQUEST]
+  This message is to indicate that they intend to remove them from the friend list.
+  The ACK flag is set to 0.
+  \item[ACK UNFRIEND REQUEST]
+  This message is to respond that they understand that they are removed from the list.
+  The ACK flag is set to 1.
+\end{LaTeXdescription}
+
+\section{Application Layer Data Structures}
+\subsection{Message Queue Code}
+\label{Message Queue Code}
+\begin{lstlisting}
+typedef struct Message {
+  opcode opcode; //Expected Packet Response
+  uint8_t id; //Internal Friend ID
+  bool permanent; //Do not check expiration
+  bool broadcast; //Do not check address
+  uint32_t expiration; //Expiration time
+  char srcAddr[MAXNETADDR]; //Source
+  uint16_t srcid;
+  uint8_t numUses; //Max. Packets to accept
+} Message;
+\end{lstlisting}
+
+\subsection{Message Queue Event Data Structure}
+\label{Message Queue Event Data Structure}
+\begin{lstlisting}
+typedef struct {
+  char srcAddr[MAXNETADDR];
+  uint16_t srcid;
+  uint8_t qnum;
+} Event;
+\end{lstlisting}
+
+\subsection{Friend Data Structure}
+\label{Friend Data Structure}
+\begin{lstlisting}
+typedef struct {
+  uint8_t id; //Internal ID in Friendlist
+  uint8_t priority; //Call order
+  char firstname[MAXFIRSTNAME];
+  char lastname[MAXLASTNAME];
+  char networkaddr[MAXNETADDR];
+  uint16_t port; //Network port
+  uint32_t lastresponse; //Timer
+  uint16_t responseflag; //16 flags
+} Friend;
+\end{lstlisting}
+
+\subsection{Packet Data Structure}
+\label{Packet Data Structure}
+\begin{lstlisting}
+typedef struct {
+	Friend friend;
+	char homeaddr[MAXHOMEADDR];
+	char phoneaddr[MAXPHONE];
+} LocalUser;
+\end{lstlisting}
+
+\subsection{LocalUser Data Structure}
+\label{LocalUser Data Structure}
+\begin{lstlisting}
+typedef struct {
+	Friend friend;
+	char homeaddr[MAXHOMEADDR];
+	char phoneaddr[MAXPHONE];
+} LocalUser;
+\end{lstlisting}
+
+\section{User Interface Data Structures}
+
+\subsection{Menu Data Structure}
+\begin{lstlisting}
+typedef struct Menu {
+  MenuItem* root;    // Root of menu tree
+  MenuItem* current; // Cursor
+  // Return value of last callback function
+  void* onViewRet;
+  void* onClickRet;
+  // Buffers for text input
+  char** inputBuffer;
+  char** outputBuffer;
+  // Buffer for network to communicate with menu
+  char txtSrc1[10]; 
+} Menu;
+\end{lstlisting}
+
+\subsection{MenuItem Data Structure}
 \label{MenuItem Code}
 \begin{lstlisting}
 typedef struct MenuItem {
@@ -1385,17 +1735,11 @@ typedef struct MenuItem {
 } MenuItem;
 \end{lstlisting}
 
-% you can choose not to have a title for an appendix
-% if you want by leaving the argument blank
-\section{}
-Appendix two text goes here.
-
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
 
-
-The authors would like to thank...
+The authors would like to thank... TODO
 
 
 % Can use something like this to put references on a page
@@ -1453,35 +1797,38 @@ The authors would like to thank...
 
 % if you will not have a photo at all:
 \begin{IEEEbiography}{Marco~Carmona}
-  Biography text here.
+  Computer Engineering student at UC Santa Cruz.
 \end{IEEEbiography}
 
-\begin{IEEEbiography}{Conrad~Christensen}
-  Student at UC Santa Cruz.
+\begin{IEEEbiography}
+[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{profile/clchristensen.JPG}}]{Conrad~Christensen}
+  Electrical Engineering student at UC Santa Cruz.
 \end{IEEEbiography}
 
 \begin{IEEEbiography}{Jake~Lee}
-  Student at UC Santa Cruz.
+  Electrical Engineering student at UC Santa Cruz.
 \end{IEEEbiography}
 
-\begin{IEEEbiography}{Kevin~Lee}
-  Student at UC Santa Cruz.
+\begin{IEEEbiography}
+[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{profile/kevinlee.jpg}}]{Kevin~Lee}
+  Computer Engineering (Networking) student at UC Santa Cruz. Lead developer tasked with designing and implementing the Network Application Layer and associated protocols.
 \end{IEEEbiography}
 
 \begin{IEEEbiography}{Brian~Nichols}
-  Student at UC Santa Cruz.
+  Computer Engineering student at UC Santa Cruz.
 \end{IEEEbiography}
 
-\begin{IEEEbiography}{Jesus~Soto}
-  Student at UC Santa Cruz.
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{profile/jsoto.jpeg}}]{Jesus~Soto}
+  Electrical Engineering student at UC Santa Cruz. Power Supply and peripheral designer on the hardware team. 
 \end{IEEEbiography}
 
-\begin{IEEEbiography}{August~Valera}
-  Student at UC Santa Cruz.
+\begin{IEEEbiography}
+[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{profile/avalera.jpg}}]{August~Valera}
+  Computer Engineering (Systems Programming) and Computer Science student at UC Santa Cruz. Lead UI/UX developer on the software team. Enjoys long walks on the beach.
 \end{IEEEbiography}
 
 \begin{IEEEbiography}{Jeffrey~Zheng}
-  Student at UC Santa Cruz.
+  Electrical Engineering student at UC Santa Cruz.
 \end{IEEEbiography}
 
 % You can push biographies down or up by placing
@@ -1495,7 +1842,6 @@ The authors would like to thank...
 % Can be used to pull up biographies so that the bottom of the last one
 % is flush with the other column.
 %\enlargethispage{-5in}
-
 
 
 % that's all folks
