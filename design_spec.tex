@@ -328,8 +328,12 @@
 %
 
 \author{Jamielynne~Batugo, Marco~Carmona, Conrad~Christensen, Jake~Lee, Kevin~Lee, Brian~Nichols, Jesus~Soto, August~Valera, and Jeffrey~Zheng% <-this % stops a space
-  \thanks{Jamielynne~Batugo, Marco~Carmona, Conrad~Christensen, Jake~Lee, Kevin~Lee, Brian~Nichols, Jesus~Soto, August~Valera, and Jeffrey~Zheng were students at the University of California, Santa Cruz}% <-this % stops a space
-  \thanks{Ali Adabi, Patrick Mantey, Stephen Petersen, and Anujan Varma were professors and mentors at the University of California, Santa Cruz}% <-this % stops a space
+
+\begin{comment}
+\thanks{Jamielynne~Batugo, Marco~Carmona, Conrad~Christensen, Jake~Lee, Kevin~Lee, Brian~Nichols, Jesus~Soto, August~Valera, and Jeffrey~Zheng were students at the University of California, Santa Cruz}% <-this % stops a space
+\thanks{Ali Adabi, Patrick Mantey, Stephen Petersen, and Anujan Varma were professors and mentors at the University of California, Santa Cruz}% <-this % stops a space
+\end{comment}
+\thanks{The full source of this project is released under the BSD 2-Clause Licence.}
 \thanks{Manuscript received \today}}
 
 % note the % following the last \IEEEmembership and also \thanks -
@@ -386,12 +390,12 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-  Current senior emergency button systems on the market are serve a very specific user base, immediately escalating any request for assistance to emergency services (police, fire, EMS) and requiring a reoccurring cost to maintain connectivity to staffed call centers to handle these requests. There is a need for a cheap, single upfront cost device that simply calls your friends/neighbors to help you in times of non-critical emergencies. This project aimed to build such a system, composed of a series of button wearables and base stations, to be deployed and tested in the De Anza Santa Cruz retirement community.
+  Current senior emergency button systems on the market serve a very specific user base, immediately escalating any request for assistance to emergency services (police, fire, EMS), and require a reoccurring cost to maintain connectivity to staffed call centers to handle these requests. There is a need for a cheap, single upfront cost device that simply calls your friends/neighbors to help you in times of non-critical emergencies. This project aims to build such a system, composed of a series of button wearables and base stations, to be deployed and tested within the De Anza Santa Cruz retirement community.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-  IEEE, IEEEtran, journal, \LaTeX, paper, template.
+  assistance, bluetooth, button, elderly, emergency, seniors, Xbee,
 \end{IEEEkeywords}
 
 
@@ -1039,7 +1043,6 @@ The base station facilitates text input much the same way as a networked printer
   \end{subfigure}
   \caption{Text Input States}
 \end{figure}
-
 \begin{comment}
 
 \textbf{User Interface}
@@ -1234,6 +1237,7 @@ The microcontroller has a total of 27 GPIO pins, where 4 pins have mixed-signal 
 The onboard Bluetooth module is accessed via the RFIO pin, which handles both the receiving and transmitting radio ends. Our system provides a patch antenna tuned to 2.4GHz operation with a matching network of transmission lines. Unlike the button, the base station is not limited to be as small as possible. Therefore, instead of using a more compact, electrically-short chip antenna that has limited performance, the system takes advantage of the extra real estate with a higher-performance patch antenna.
 
 The controller is programmed via serial wire debug (SWD), which requires 5 signals for operation: voltage reference, IO, clock, reset, and ground. The IO and clock is connected directly to the corresponding pins on the microcontroller, while the reference voltage and ground is connected to the digital core voltage of +3.3V and the microcontroller ground, respectively. The SWD reset pin connects to the microcontroller's CHIP\_EN, which is required to stay high for normal operations. The debugger momentarily pulls CHIP\_EN low to restart the system. While the GPIOs have internal pull up/down resistors, an external pull up resistor must be placed by CHIP\_EN to ensure an operational chip in the absence of the SWD debugger.
+
 \begin{figure}[ht] 	% There are several different modifiers that can be used in [].
 \centering
 \includegraphics[width=0.4\textwidth]{base-schematic-xbee.png}
@@ -1258,15 +1262,20 @@ A 16x4 character LCD display is chosen for user interface to the base station sy
 \caption{ \space Base Station Layout: Microcontroller}
 \label{base-lay-uc}
 \end{figure}
-Layout of the microcontroller on the base station demands careful consideration due to the tiny nature of the chosen components, which are sized in the sub-centimeter range. The biggest  concern is due to noisy nature of any electromagnetic interference (EMI). This interference can be found everywhere, but on a PCB, the main sources can be found in crystal oscillators, power supplies, and antennas. The high frequency components found within these elements is the origin to this noisy behavior.
 
-As such, crystal placement is of utmost importance. While the crystal can inflict noise onto nearby signal traces, the oscillator itself is also very prone to noise. The microcontroller requires a clean oscillating signal to operate properly with its clocking signal. Placing the crystals as close as possible to the microcontroller allows for short connecting traces and reduce the possibility of defect in the oscillating signal. In addition, the 26MHz crystal has a ground pad, which must have a low impedance short return path to the microcontroller. By low impedance, we mean a minimally-disrupted wide path that allows current to flow relatively undisrupted. This low impedance short path reduces the ground loop in which current flows.
+Layout of the microcontroller on the base station demands careful consideration due to the tiny nature of the chosen components, which are sized in the sub-centimeter range. The biggest concern is the noisy nature of any electromagnetic interference (EMI). This interference can be found everywhere, but on a PCB, the main sources can be found in crystal oscillators, power supplies, and antennas. The high frequency components found within these elements is the origin to this noisy behavior.
+
+As such, crystal placement is of utmost importance. While the crystal can inflict noise onto nearby signal traces, the oscillator itself is also very prone to noise. The microcontroller requires a clean oscillating signal to operate properly with its clocking signal. Placing the crystals as close as possible to the microcontroller allows for short connecting traces and reduces the possibility of defect in the oscillating signal. In addition, the 26MHz crystal has a ground pad, which must have a low impedance short return path to the microcontroller. By low impedance, we mean a minimally-disrupted wide path that allows current to flow relatively freely. This low impedance short path reduces the ground loop in which current flows, lowering the noisy effect on nearby traces. To further reduce any noise coupling, signal traces should avoid as best as possible the immediate vicinity of the crystals.
+
+The analog signal through RFIO is the Bluetooth data signal that is handled by our onboard patch antenna. The feedline trace for the antenna is relatively isolated from any components in the same reason traces avoid areas near the crystals. Nearby components will always carry some sort of EMI from the stray capacitance and inductance. This semi-isolation tactic reduces the chance of noise but also creates a clean analog ground return to the microcontroller.
+
 \begin{figure}[ht] 	% There are several different modifiers that can be used in [].
 \centering
 \includegraphics[width=0.4\textwidth]{base-layout-full.PNG}
 \caption{ \space Base Station Layout: Radio and Display}
 \label{base-lay-full}
 \end{figure}
+
 
 \begin{figure}[ht] 	% There are several different modifiers that can be used in [].
 \centering
@@ -1739,7 +1748,9 @@ typedef struct MenuItem {
 % use section* for acknowledgment
 \section*{Acknowledgment}
 
-The authors would like to thank... TODO
+The authors would like to thank Professors Ali Adabi, Patrick Mantey, Stephen Petersen, and Anujan Varma for serving as advisors and mentors throughout the development of the project.
+
+The authors would especially like to thank Donald Wiberg, Professor Emeritus at University of California, Santa Cruz, and sponsor of this senior design project.
 
 
 % Can use something like this to put references on a page
